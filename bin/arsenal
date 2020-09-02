@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -L $0 ] ; then
+    DIR=$(dirname $(readlink -f $0)) ;
+else
+    DIR=$(dirname $0) ;
+fi ;
+
+exec python3 ${DIR}/../arsenal/app.py "$@"
+
