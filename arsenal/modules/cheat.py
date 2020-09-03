@@ -28,7 +28,7 @@ class Cheat:
         return self.name != "" and self.command != "" and not self.command_capture
 
     def inline_cheat(self):
-        return f'{self.tags}{self.name}{self.command}'
+        return "{}{}{}".format({self.tags},{self.name},{self.command})
 
 
 class Cheats:

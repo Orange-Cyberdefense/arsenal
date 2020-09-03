@@ -86,19 +86,19 @@ class CheatslistMenu:
 
         if selected:
             win.addstr(prompt, curses.color_pair(Gui.CURSOR_COLOR_SELECT))
-            win.addstr(f'{Gui.draw_string(title, first_col_size):{first_col_size}}',
+            win.addstr("{:{}s}".format(Gui.draw_string(title, first_col_size), first_col_size),
                        curses.color_pair(Gui.COL1_COLOR_SELECT))
-            win.addstr(f'{Gui.draw_string(cheat.name, sec_col_size):{sec_col_size}}',
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, sec_col_size), sec_col_size),
                        curses.color_pair(Gui.COL2_COLOR_SELECT))
-            win.addstr(f'{Gui.draw_string(cheat.printable_command, third_col_size):{third_col_size}}',
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, third_col_size), third_col_size),
                        curses.color_pair(Gui.COL3_COLOR_SELECT))
             win.addstr("\n")
         else:
             win.addstr(' ' * len(prompt), curses.color_pair(Gui.BASIC_COLOR))
-            win.addstr(f'{Gui.draw_string(title, first_col_size):{first_col_size}}',
+            win.addstr("{:{}s}".format(Gui.draw_string(title, first_col_size), first_col_size),
                        curses.color_pair(Gui.COL1_COLOR))
-            win.addstr(f'{Gui.draw_string(cheat.name, sec_col_size):{sec_col_size}}', curses.color_pair(Gui.COL2_COLOR))
-            win.addstr(f'{Gui.draw_string(cheat.printable_command, third_col_size):{third_col_size}}',
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, sec_col_size), sec_col_size), curses.color_pair(Gui.COL2_COLOR))
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, third_col_size), third_col_size),
                        curses.color_pair(Gui.COL3_COLOR))
             win.addstr("\n")
 
