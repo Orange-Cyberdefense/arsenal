@@ -23,9 +23,11 @@ class App:
         arsenal --print
         
         You can manage global variables with:
-        ^set GLOBALVAR1=<value>
-        ^show
-        ^clear
+        >set GLOBALVAR1=<value>
+        >show
+        >clear
+
+        (cmd starting with '>' are internals cmd)
         '''
 
         parser = argparse.ArgumentParser(
@@ -35,23 +37,12 @@ class App:
             formatter_class=argparse.RawTextHelpFormatter
         )
 
-        # group_auth = parser.add_argument_group('authentication')
-        # group_auth.add_argument('-u', '--username', action='store', help='Username')
-        # group_auth.add_argument('-p', '--password', action='store', help='Plaintext password')
-        # group_auth.add_argument('-d', '--domain', default="", action='store', help='Domain name')
-        # group_auth.add_argument('-H', '--hashes', action='store', help='[LM:]NT hash')
-        # parser.add_argument('-v', action='count', default=0, help='Verbosity level (-v or -vv)')
-
         group_out = parser.add_argument_group('output [default = prefill]')
         group_out.add_argument('-p', '--print', action='store_true', help='Print the result')
         group_out.add_argument('-o', '--outfile', action='store', help='Output to file')
         group_out.add_argument('-c', '--copy', action='store_true', help='Output to clipboard')
         group_out.add_argument('--exec', action='store_true', help='Execute cmd')
         parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(self.version))
-
-        # if len(sys.argv) == 1:
-        #     parser.print_help()
-        #     sys.exit(config.messages_error_missing_arguments)
 
         return parser.parse_args()
 
@@ -73,18 +64,24 @@ class App:
                 if cmd.cmdline == ">exit":
                     break
                 elif cmd.cmdline == ">show":
-                    with open(config.savevarfile,'r') as f:
-                        arsenalGlobalVars = json.load(f)
-                        for k,v in arsenalGlobalVars.items():
-                            print(k+"="+v)
+                    if (os.path.exists(config.savevarfile)):
+                        with open(config.savevarfile,'r') as f:
+                            arsenalGlobalVars = json.load(f)
+                            for k,v in arsenalGlobalVars.items():
+                                print(k+"="+v)
                     break
                 elif cmd.cmdline == ">clear":
                     with open(config.savevarfile,"w") as f:
                         f.write(json.dumps({}))
                     self.run()
                 elif re.match("^\>set( [^= ]+=[^= ]+)+$", cmd.cmdline):
-                    with open(config.savevarfile,'r') as f:
-                        arsenalGlobalVars = json.load(f)
+                    # Load previous global var
+                    if (os.path.exists(config.savevarfile)):
+                        with open(config.savevarfile,'r') as f:
+                            arsenalGlobalVars = json.load(f)
+                    else:
+                        arsenalGlobalVars = {}
+                    # Add new glovar var
                     varlist = re.findall("([^= ]+)=([^= ]+)", cmd.cmdline)
                     for v in varlist:
                         arsenalGlobalVars[v[0]] = v[1]
