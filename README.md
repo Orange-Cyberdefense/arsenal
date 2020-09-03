@@ -44,43 +44,50 @@ export TERM='xterm-256color'
 ## TODO cheatsheets 
 
 ### reverse shell
-- [x] msfvenom
-- [x] php
-- [x] python
-- [x] perl
-- ...
+- [X] msfvenom
+- [X] php
+- [X] python
+- [X] perl
+- [X] powershell
+- [X] java
+- [X] ruby
+
+### whitebox analysis grep regex
+- [X] php
+- [X] nodejs
+- [X] hash
 
 ### Tools
 
 #### smb
-- [x] enum4linux 
-- [x] smbmap
+- [X] enum4linux 
+- [X] smbmap
 - [ ] smbget     
-- [x] rpcclient
+- [X] rpcclient
 - [ ] rpcinfo
-- [x] nbtscan
-- [x] impacket
+- [X] nbtscan
+- [X] impacket
 
 #### kerberos & AD
-- [x] impacket
+- [X] impacket
 
 ### bruteforce & pass cracking
-- [x] hydra
-- [x] hashcat
+- [X] hydra
+- [X] hashcat
 - [ ] john
 
 #### scan
-- [x] nmap
+- [X] nmap
 
 #### fuzz    
-- [x] gobuster
-- [x] ffuf
-- [x] wfuzz
+- [X] gobuster
+- [X] ffuf
+- [X] wfuzz
 
 #### DNS
-- [x] dig
-
-#### host
+- [X] dig
+- [X] dnsrecon
+- [X] dnsenum
 - [ ] sublist3r
 - [ ] subbrute
 
@@ -88,12 +95,12 @@ export TERM='xterm-256color'
 - [ ] rpcbind
 
 #### netbios-ssn
-- [ ] snmpwalk
+- [X] snmpwalk
 - [ ] snmp-check
-- [ ] onesixtyone
+- [X] onesixtyone
 
 #### sql
-- [x] sqlmap 
+- [X] sqlmap 
 
 #### oracle
 - [ ] oscanner
@@ -101,14 +108,14 @@ export TERM='xterm-256color'
 - [ ] tnscmd10g
 
 #### mysql
-- [x] mysql
+- [X] mysql
 
 #### nfs
 - [ ] showmount
 
 #### rdp
-- [x] xfreerdp
-- [x] rdesktop
+- [X] xfreerdp
+- [X] rdesktop
 - [ ] ncrack
 
 #### mssql
@@ -116,7 +123,7 @@ export TERM='xterm-256color'
 - [ ] sqsh
 
 #### winrm
-- [x] evilwinrm
+- [X] evilwinrm
 
 #### redis
 - [ ] redis-cli
@@ -135,7 +142,7 @@ export TERM='xterm-256color'
 
 
 #### ldap
-- [x] ldapsearch
+- [X] ldapsearch
 
 #### https
 - [ ] sslscan
@@ -146,5 +153,5 @@ export TERM='xterm-256color'
 - [ ] tplmap
 
 #### app web
-- [ ] drupwn
-- [x] wpscan
+- [X] drupwn
+- [X] wpscan
