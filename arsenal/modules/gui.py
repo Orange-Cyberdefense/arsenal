@@ -79,9 +79,12 @@ class CheatslistMenu:
         first_col_size = math.floor(max_width * 20 / 100)
         sec_col_size = math.floor(max_width * 30 / 100)
         third_col_size = math.floor(max_width * 50 / 100)
+        
+        title = cheat.tags if cheat.tags != '' else cheat.str_title
+
         if selected:
             win.addstr(prompt, curses.color_pair(Gui.CURSOR_COLOR_SELECT))
-            win.addstr(f'{Gui.draw_string(cheat.str_title, first_col_size):{first_col_size}}',
+            win.addstr(f'{Gui.draw_string(title, first_col_size):{first_col_size}}',
                        curses.color_pair(Gui.COL1_COLOR_SELECT))
             win.addstr(f'{Gui.draw_string(cheat.name, sec_col_size):{sec_col_size}}',
                        curses.color_pair(Gui.COL2_COLOR_SELECT))
@@ -90,7 +93,7 @@ class CheatslistMenu:
             win.addstr("\n")
         else:
             win.addstr(' ' * len(prompt), curses.color_pair(Gui.BASIC_COLOR))
-            win.addstr(f'{Gui.draw_string(cheat.str_title, first_col_size):{first_col_size}}',
+            win.addstr(f'{Gui.draw_string(title, first_col_size):{first_col_size}}',
                        curses.color_pair(Gui.COL1_COLOR))
             win.addstr(f'{Gui.draw_string(cheat.name, sec_col_size):{sec_col_size}}', curses.color_pair(Gui.COL2_COLOR))
             win.addstr(f'{Gui.draw_string(cheat.printable_command, third_col_size):{third_col_size}}',

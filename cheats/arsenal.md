@@ -19,7 +19,7 @@
 
 ## Set ip global variable
 ```
->set ip=<IP>
+>set ip=<ip>
 ```
 
 ## Set custom global variable
