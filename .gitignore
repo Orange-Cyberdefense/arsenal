@@ -1,3 +1,4 @@
+.venv/
 .idea/
 arsenal.egg-info/
 arsenal/__pycache__/

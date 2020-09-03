@@ -2,13 +2,15 @@ import argparse
 import sys
 import json
 import os
-import arsenal.config as config
-from arsenal.modules import cheat
-from arsenal.modules import gui
-import pyperclip
+#import pyperclip
 import fcntl
 import termios
 import re
+
+# arsenal
+from modules import config
+from modules import cheat
+from modules import gui
 
 class App:
     version = '1.0.0'
@@ -40,7 +42,7 @@ class App:
         group_out = parser.add_argument_group('output [default = prefill]')
         group_out.add_argument('-p', '--print', action='store_true', help='Print the result')
         group_out.add_argument('-o', '--outfile', action='store', help='Output to file')
-        group_out.add_argument('-c', '--copy', action='store_true', help='Output to clipboard')
+        #group_out.add_argument('-c', '--copy', action='store_true', help='Output to clipboard')
         group_out.add_argument('--exec', action='store_true', help='Execute cmd')
         parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(self.version))
 
@@ -92,9 +94,9 @@ class App:
                     break
 
             # OPT: Copy CMD to clipboard
-            elif args.copy:
-                pyperclip.copy(cmd.cmdline)
-                break
+            #elif args.copy:
+            #    pyperclip.copy(cmd.cmdline)
+            #    break
 
             # OPT: Only print CMD
             elif args.print:
@@ -131,6 +133,7 @@ class App:
                 # restore TTY attribute for stdin
                 termios.tcsetattr(stdin, termios.TCSADRAIN, oldattr)
                 break
+
 
 if __name__ == "__main__":
     try:

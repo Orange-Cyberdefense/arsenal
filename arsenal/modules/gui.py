@@ -3,10 +3,12 @@ import curses
 import math
 import re
 import json
-import arsenal.config as config
 from curses import wrapper
-from arsenal.modules import command
 from os.path import commonprefix, exists
+
+# local
+from . import config
+from . import command
 
 class CheatslistMenu:
     globalcheats = []    # all cheats

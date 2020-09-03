@@ -3,7 +3,7 @@
 Arsenal is just a quick inventory, reminder and launcher for pentest commands.
 <br>This project written by pentesters for pentesters simplify the use of all the hard-to-remember commands
 
-![](arsenal.gif)
+![](img/arsenal.gif)
 
 In arsenal you can search for a command, select one and it's prefilled directly in your terminal. This functionality is independent of the shell used. Indeed arsenal emulates real user input (with TTY arguments and IOCTL) so arsenal works with all shells and your commands will be in the history.
 
@@ -21,18 +21,24 @@ Authors:
 
 This project is inspired by navi (<https://github.com/denisidoro/navi>) because the original version was in bash and too hard to understand to add features
 
+## Launch
+```
+git clone https://github.com/Orange-Cyberdefense/arsenal.git
+cd arsenal
+./run
+```
 
-## Install
+Inside your .bashrc or .zshrc add the path to `launch.sh` to help you do that you could launch the addalias.sh script
+```
+./addalias.sh
+```
+
+## Install package (not necessary)
 
 ```
 git clone https://github.com/Orange-Cyberdefense/arsenal.git
 cd arsenal
-python3 setup.py develop --user
-```
-
-Inside your .bashrc or .zshrc add the path to `arsenal/arsenal/app.py`
-```
-alias a='python3 $HOME/git/arsenal/arsenal/app.py'
+python3 setup.py install
 ```
 
 ## Troubleshooting
