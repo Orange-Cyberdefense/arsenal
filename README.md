@@ -133,7 +133,7 @@ export TERM='xterm-256color'
 - [ ] redis-cli
 
 #### postgres
-- [ ] psql
+- [X] psql
 - [ ] pgdump
 
 #### vnc
