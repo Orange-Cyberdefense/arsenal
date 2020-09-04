@@ -94,8 +94,7 @@ export TERM='xterm-256color'
 - [X] dig
 - [X] dnsrecon
 - [X] dnsenum
-- [ ] sublist3r
-- [ ] subbrute
+- [X] sublist3r
 
 #### rpc
 - [ ] rpcbind
@@ -117,7 +116,7 @@ export TERM='xterm-256color'
 - [X] mysql
 
 #### nfs
-- [ ] showmount
+- [X] showmount
 
 #### rdp
 - [X] xfreerdp
@@ -125,8 +124,7 @@ export TERM='xterm-256color'
 - [ ] ncrack
 
 #### mssql
-- [ ] tsql
-- [ ] sqsh
+- [X] sqsh
 
 #### winrm
 - [X] evilwinrm
