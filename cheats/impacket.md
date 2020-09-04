@@ -1,6 +1,6 @@
 # Impacket
 
-% impacket, windows, smb
+% impacket, windows, smb, 445
 
 ## smbclient - connect to smb on the target
 ```

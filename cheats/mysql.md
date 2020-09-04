@@ -1,6 +1,6 @@
 # Mysql
 
-% mysql, database, db
+% mysql, database, db, 3306
 
 ## connect
 ```

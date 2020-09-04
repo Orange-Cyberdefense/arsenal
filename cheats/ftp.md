@@ -1,6 +1,6 @@
 # FTP
 
-% ftp
+% ftp, 21
 
 ## ftp - download all 
 ```

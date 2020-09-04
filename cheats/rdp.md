@@ -1,6 +1,6 @@
 # windows rdp
 
-%rdp, windows
+% rdp, windows, 3389
 
 ## enable RDP
 ```
