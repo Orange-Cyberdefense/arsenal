@@ -119,7 +119,10 @@ msfconsole -x "use auxiliary/gather/enum_dns; set domain <domain>; set ns <dns_s
 
 ## dns sublist3r - subdomain enumeration
 ```
-python sublist3r.py -d <domain> -v
+sublist3r -d <domain> -v
 ```
 
-
+## dns sublist3r - subdomain enumeration with bruteforce module enabled
+```
+sublist3r -b -d <domain>
+```
