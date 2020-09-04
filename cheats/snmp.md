@@ -2,9 +2,14 @@
 
 % snmp, 161
 
-## nmap, snmap scan
+## nmap, snmp scan
 ```
-nmap -sU --open -p 161 <ip_raange> -oG <file.txt>
+nmap -sU --open -p 161 -sC -sV <ip>
+```
+
+## nmap, snmp brute
+```
+nmap -sU --open -p 161 --script=snmp-brute <ip> --script-args snmp-brute.communitiesdb=<snmp_community_strings_file>
 ```
 
 ## onesixtyone
