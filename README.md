@@ -140,9 +140,9 @@ export TERM='xterm-256color'
 - [ ] vncviewer
 
 #### x11
-- [ ] xspy
-- [ ] xwd
-- [ ] xwininfo
+- [X] xspy
+- [X] xwd
+- [X] xwininfo
 
 
 #### ldap
