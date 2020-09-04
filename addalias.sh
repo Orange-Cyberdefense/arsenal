@@ -5,6 +5,6 @@ echo "# To permentally add arsenal as the command 'a' add this to your ~/.bashr
 echo "alias a='${DIR}/run'"
 
 echo "Examples :"
-echo "echo \"alias a='${DIR}/run'\" >> ~/.bash_aliases && source ~/.bashrc"
-echo "echo \"alias a='${DIR}/run'\" >> ~/.zshrc && source ~/.zshrc"
-echo "echo \"alias a='${DIR}/run'\" >> ~/.bashrc && source ~/.bashrc"
+echo "echo \"alias a='${DIR}/run'\" >> ~/.bash_aliases"
+echo "echo \"alias a='${DIR}/run'\" >> ~/.zshrc"
+echo "echo \"alias a='${DIR}/run'\" >> ~/.bashrc"

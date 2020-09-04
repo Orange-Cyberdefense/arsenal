@@ -28,7 +28,7 @@ cd arsenal
 ./run
 ```
 
-Inside your .bashrc or .zshrc add the path to `launch.sh` to help you do that you could launch the addalias.sh script
+Inside your .bashrc or .zshrc add the path to `run` to help you do that you could launch the addalias.sh script
 ```
 ./addalias.sh
 ```

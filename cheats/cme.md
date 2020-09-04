@@ -1,8 +1,8 @@
 # crackmapexec
 
-% windows, smb, enumeration, cme
+% windows, smb, enumeration, cme, 445
 
-## crackmapexec - enumerate hosts
+## crackmapexec - enumerate hosts, network
 
 Exemple : cme smb 192.168.1.0/24
 

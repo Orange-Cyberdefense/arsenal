@@ -39,6 +39,16 @@ dig axfr <domain_name> @<name_server>
 dig +short <domain_name> @resolver1.opendns.com
 ```
 
+## dig, find domains file ip addresse value
+```
+dig -f <domains.txt> +noall +answer
+```
+
+## dig, find domains file MX ip record
+```
+dig -f <domains.txt> MX +noall +answer
+```
+
 % dns, dnsrecon, 53
 
 ## dnsrecon standard enum on domain
@@ -104,3 +114,12 @@ nmap -sSU -p53 --script dns-nsec-enum --script-args dns-nsec-enum.domains=<domai
 ```
 msfconsole -x "use auxiliary/gather/enum_dns; set domain <domain>; set ns <dns_server>; exploit"
 ```
+
+% dns, sublist3r , 53
+
+## dns sublist3r - subdomain enumeration
+```
+python sublist3r.py -d <domain> -v
+```
+
+
