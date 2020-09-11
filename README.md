@@ -146,7 +146,7 @@ export TERM='xterm-256color'
 - [ ] pgdump
 
 #### vnc
-- [ ] vncviewer
+- [X] vncviewer
 
 #### x11
 - [X] xspy
