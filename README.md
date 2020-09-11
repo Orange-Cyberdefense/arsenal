@@ -21,7 +21,7 @@ Authors:
 
 This project is inspired by navi (<https://github.com/denisidoro/navi>) because the original version was in bash and too hard to understand to add features
 
-## Launch
+## Launch
 ```
 git clone https://github.com/Orange-Cyberdefense/arsenal.git
 cd arsenal
@@ -41,7 +41,7 @@ cd arsenal
 python3 setup.py install
 ```
 
-## Troubleshooting
+## Troubleshooting
 If you got on error on color init try : 
 ```
 export TERM='xterm-256color'
@@ -76,6 +76,15 @@ export TERM='xterm-256color'
 
 #### kerberos & AD
 - [X] impacket
+- [X] bloodhound
+
+#### MITM
+- [X] mitm6
+- [X] responder
+
+#### Unserialize
+- [X] ysoserial
+- [ ] ysoserial.net
 
 ### bruteforce & pass cracking
 - [X] hydra
