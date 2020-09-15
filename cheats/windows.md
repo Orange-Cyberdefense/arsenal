@@ -352,3 +352,28 @@ net use x: \\<ip>\<share_name>
 ```
 net share
 ```
+
+% windows, file, download
+## windows download file with windows defender
+```
+"c:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2008.9-0\mpcmdrun.exe" -DownloadFile -url <url> -path <result_file>
+```
+
+## windows download file with windows defender
+```
+mpcmdrun.exe -DownloadFile -url <url> -path <result_file>
+```
+
+% windows, active directory, dns
+
+## find AD IP - show domain name and dns
+```
+nmcli dev show <interface>
+```
+
+## nslookup AD - domain
+```
+nslookup -type=SRV _ldap._tcp.dc._msdcs.//<domain>/
+```
+
+= interface: eth0

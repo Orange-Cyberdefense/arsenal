@@ -12,6 +12,16 @@ nbtscan -r <ip_range>
 smbmap -H <ip> -u "<user>%<pass>"
 ```
 
+## smbmap - null access
+```
+smbmap -u "" -p "" -P 445 -H <ip>
+```
+
+## smbmap - guest access
+```
+smbmap -u "guest" -p "" -P 445 -H <ip>
+```
+
 ## smbclient with username and password
 ```
 smbclient \\\\<ip>\\<share> -U "<user>%<pass>"
@@ -25,4 +35,9 @@ smbclient \\\\<ip>\\<share> -U "<user>%"
 ## smbclient null session
 ```
 smbclient \\\\<ip>\\<share> -U "%"
+```
+
+## smb - find not signed  smb
+```
+nmap -Pn -sS -T4 --open --script smb-security-mode -p445 <ip>
 ```
