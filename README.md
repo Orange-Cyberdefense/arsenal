@@ -49,7 +49,7 @@ export TERM='xterm-256color'
 
 ## Mindmap
 - Active directory mindmap
-![](./mindmap/pentest_ad_0.2.png)
+![](./mindmap/pentest_ad.png)
 
 ## TODO cheatsheets 
 
