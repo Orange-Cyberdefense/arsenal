@@ -12,6 +12,11 @@ rpcclient <ip> -U "<user>%<pass>" -c "enumdomusers;quit"
 rpcclient <ip> -U "<user>%<pass>" -c "srvinfo;quit"
 ```
 
+## rpcclient - get user sid
+```
+rpcclient <ip> -c "lookupnales <name>; wmic useraccount get name,sid; quit"
+```
+
 ## rpcclient - querydominfo
 ```
 rpcclient <ip> -U "<user>%<pass>" -c "querydominfo;quit"

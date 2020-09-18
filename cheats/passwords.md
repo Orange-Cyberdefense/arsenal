@@ -35,9 +35,24 @@ crunch 8 8 -t ,@@@%%%^ -o <output.txt>
 
 % passwords, brute force, jhon
 
+## john lm
+```
+john --wordlist=<wordlist> --format=lm hash.txt
+```
+
+## john nt
+```
+john --wordlist=<wordlist> --format=nt hash.txt
+```
+
+## john ntlmv1
+```
+john --wordlist=<wordlist> --format=netntlm hash.txt
+```
+
 ## john ntlmv2
 ```
-john --format=netntlmv2 hash.txt
+john --wordlist=<wordlist> --format=netntlmv2 hash.txt
 ```
 
 # hashcat

