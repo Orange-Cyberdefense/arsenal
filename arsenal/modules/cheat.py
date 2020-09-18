@@ -30,7 +30,6 @@ class Cheat:
     def inline_cheat(self):
         return "{}{}{}".format({self.tags},{self.name},{self.command})
 
-
 class Cheats:
     current_cheat = Cheat()
     cheatsheets = dict()
@@ -176,11 +175,15 @@ class Cheats:
                     else:
                         self.current_cheat.description += '\n' + line.rstrip()
 
-        # File parsing done
-        # add the last command if done
-        if self.current_cheat.is_done():
-            self.end_cheat()
+            # add the last command if done
+            if self.current_cheat.is_done():
+                self.end_cheat()
+            elif self.current_cheat.command == "" and self.current_cheat.description != "":
+                self.current_cheat.command = self.current_cheat.description.replace('\n',';\\\n')
+                self.current_cheat.description = ""
+                self.end_cheat()
         
+        # File parsing done
         # set constants variables
         for varname, varval in self.filevars.items():
             for cheat in self.cheatlist:
