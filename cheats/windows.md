@@ -38,7 +38,7 @@ set
 
 ## dns request for DC
 ```
-nslookup %LOGONSERVER%.%USERDNSDOMAIN%
+nslookup -type=any <userdnsdomain>.
 ```
 
 ## show mounted disks
@@ -388,7 +388,7 @@ nmcli dev show <interface>
 
 ## nslookup AD - domain
 ```
-nslookup -type=SRV _ldap._tcp.dc._msdcs.//<domain>/
+nslookup -type=SRV _ldap._tcp.dc._msdcs.<domain_name>
 ```
 
 % windows, cve

