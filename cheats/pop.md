@@ -4,5 +4,5 @@
 
 ## nmap - pop3 infos
 ```
-nmap --scripts "pop3-capabilities or pop3-ntlm-info" -sV -port <port> <ip>
+nmap --script "pop3-capabilities or pop3-ntlm-info" -sV -port <port> <ip>
 ```
