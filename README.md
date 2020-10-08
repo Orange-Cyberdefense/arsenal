@@ -51,6 +51,9 @@ export TERM='xterm-256color'
 - Active directory mindmap
 ![](./mindmap/pentest_ad.png)
 
+- Exchange Mindmap (thx to @snovvcrash)
+![](./mindmap/Pentesting_MS_Exchange_Server_on_the_Perimeter.png)
+
 ## TODO cheatsheets 
 
 ### reverse shell
