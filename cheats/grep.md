@@ -126,4 +126,9 @@ grep -i "pwd\|passw" <file>
 grep -i "user\|invalid\|authentication\|login" <file>
 ```
 
+## Extract HTTP URLS
+```
+grep -i http | grep -shoP 'http.*?[" >]' <file> > http-urls.txt
+```
+
 = file: file.txt
