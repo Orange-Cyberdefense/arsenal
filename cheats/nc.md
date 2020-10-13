@@ -51,3 +51,8 @@ ncat --exec cmd.exe --allow <allowed_ip> -vnl <port> --ssl
 ncat -v <ip> <port> --ssl
 ```
 
+## ncat HTTP WEB proxy
+```
+ncat --listen --proxy-type http <port>
+```
+
