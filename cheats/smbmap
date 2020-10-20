@@ -1,0 +1,16 @@
+# smbmap
+
+% samba, smb, enumeration, share
+
+
+## smbmap - list root of all shares
+```
+smbmap -H <ip> -u <user> -p <password> -d <domain> -r
+```
+
+## smbmap - recursively list dirs, and files
+```
+smbmap -H <ip> -u <user> -p <password> -d <domain> -R <path> --depth 1
+```
+
+= ip: 192.168.1.0/24
