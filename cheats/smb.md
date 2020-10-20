@@ -7,21 +7,6 @@
 nbtscan -r <ip_range>
 ```
 
-## smbmap
-```
-smbmap -H <ip> -u "<user>%<pass>"
-```
-
-## smbmap - null access
-```
-smbmap -u "" -p "" -P 445 -H <ip>
-```
-
-## smbmap - guest access
-```
-smbmap -u "guest" -p "" -P 445 -H <ip>
-```
-
 ## smbclient with username and password
 ```
 smbclient \\\\<ip>\\<share> -U "<user>%<pass>"
