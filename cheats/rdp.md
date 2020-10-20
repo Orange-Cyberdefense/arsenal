@@ -38,3 +38,8 @@ xfreerdp /u:<user> /p:<pass> /d:<domain> /v:<ip> /size:1800x924
 ```
 xfreerdp /u:<user> /p:<pass> /d:<domain> /v:<ip> /size:1800x924 /drive:share,<share>
 ```
+
+## xfreerdp - pass the hash
+```
+xfreerdp /u:<user> /pth:<hash> /d:<domain> /v:<ip>
+```

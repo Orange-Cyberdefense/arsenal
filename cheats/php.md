@@ -76,3 +76,8 @@ grep -rni --include "*.php" -e "\(where\|query\).*\\$"
 ```
 for f in *.php; do grep "/include/auth.php" $f || echo $f; done |grep -v include | grep -v require
 ```
+
+## php wrapper lfi
+```
+php://filter/read=convert.base64-encode/resource=lfi.php
+```
