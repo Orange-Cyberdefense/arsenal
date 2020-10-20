@@ -150,7 +150,10 @@ class Cheats:
                             self.current_cheat.command = line.rstrip()
                         else:
                             # multi lines cmd
-                            self.current_cheat.command += ";\\\n"+line.rstrip()
+                            if self.current_cheat.command[-1] == ';':
+                                self.current_cheat.command += "\\\n"+line.rstrip()
+                            else:
+                                self.current_cheat.command += ";\\\n"+line.rstrip()
                     else:
                         raise Exception('Error parsing (CMD) markdown file ' + filename)
 

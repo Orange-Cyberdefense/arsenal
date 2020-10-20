@@ -388,12 +388,47 @@ class ArgslistMenu:
         Returns the number of preview lines
         :return:
         """
-        nb = len(Gui.cmd.pcmdline)
-        nb += sum(len(a[1]) for a in Gui.cmd.args)
-        for arg_name,arg_val in Gui.cmd.args:
-            if arg_val != "":
-                nb -= (len(arg_name) + 2)
-        return (nb -1) // self.max_preview_size
+        next_arg = 0
+        nblines = 0
+        multiline = '\n' in Gui.cmd.cmdline
+        firstline = True
+        regex = ''.join( '<'+arg[0]+'>|' for arg in Gui.cmd.args)[:-1]
+        # in case of multiline cmd process each line separately
+        # for each line we have to count each char and deduce the
+        # number of lines needed to print it
+        for line in Gui.cmd.cmdline.split('\n'):
+            parts = re.split(regex,line)
+            nb_args_todo = len(parts) - 1
+            nbchar = 0
+
+            # for all lines except the first one we have ' >' in addition
+            if multiline and (not firstline):
+                nbchar = 2
+            else:
+                firstline = False
+
+            # extract len of args in the current line
+            i = 0
+            for arg_name,arg_val in Gui.cmd.args:
+                if i == next_arg and nb_args_todo > 0:
+                    if arg_val != "":
+                        # use value len if not empty
+                        nbchar += len(arg_val)
+                    else:
+                        # else use name len + 2 for '<' and '>'
+                        nbchar += (len(arg_name) + 2)
+                    next_arg += 1
+                    nb_args_todo -= 1
+                i+=1
+
+            # len of the cmd body
+            for p in parts:
+                nbchar += len(p)
+
+            nblines += 1 + ((nbchar -1) // self.max_preview_size)
+
+        return nblines-1
+
 
 
     def next_arg(self):
@@ -435,7 +470,11 @@ class ArgslistMenu:
         :param color: color used to draw the text
         """
         for c in text:
-            if self.prev_lastline_len < self.max_preview_size:
+            if c == "\n":
+                # multi line cmd -> new line
+                self.prev_lastline_len = 2
+                win.addstr("\n    > ", color)
+            elif self.prev_lastline_len < self.max_preview_size:
                 # size ok -> print the char 
                 self.prev_lastline_len += 1
                 win.addstr(c, color)
@@ -486,7 +525,7 @@ class ArgslistMenu:
         ncols, nlines = self.width-2*self.AB_SIDE, 5 + Gui.cmd.nb_args + nbpreviewnewlines
         # split cmdline
         regex = ''.join( '<'+arg[0]+'>|' for arg in Gui.cmd.args)[:-1]
-        cmdparts = re.split(regex,Gui.cmd.pcmdline)
+        cmdparts = re.split(regex,Gui.cmd.cmdline)
         # build preview 
         argprev = curses.newwin(nlines, ncols, y, x)
         argprev.addstr("\n  $ ", curses.color_pair(Gui.BASIC_COLOR))

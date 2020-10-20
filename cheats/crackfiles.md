@@ -9,7 +9,8 @@ fcrackzip -u -D -p <wordlist> <file>.zip
 
 ## ZIP - john
 ```
-zip2john <file>.zip > zip.john; john zip.john
+zip2john <file>.zip > zip.john;
+john zip.john
 ```
 
 ## 7z - 7za
@@ -19,7 +20,8 @@ cat <wordlist> | 7za t <file>.7z
 
 ## 7z - john
 ```
-./7z2john.pl <file>.7z > 7zhash.john; john 7zhash.john
+./7z2john.pl <file>.7z > 7zhash.john;
+john 7zhash.john
 ```
 
 ## PDF - pdfcrack

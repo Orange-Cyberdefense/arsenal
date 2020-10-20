@@ -3,13 +3,11 @@ import curses
 
 class Command:
     cmdline = ""
-    pcmdline = ""
     args = []
     nb_args = 0
 
     def __init__(self,cheat,gvars):
         self.cmdline = cheat.command
-        self.pcmdline = cheat.command.replace('\\\n','  ')
         self.get_args(cheat,gvars)
         self.nb_args = len(self.args)
 
