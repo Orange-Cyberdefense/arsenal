@@ -133,7 +133,7 @@ class App:
                         pane = window.split_window(attach=False)
                         time.sleep(0.3)
                     else:
-                        pane = panes[1]
+                        pane = panes[-1]
                     # send command to other pane and switch pane
                     if args.exec:
                         pane.send_keys(cmd.cmdline)
