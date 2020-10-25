@@ -641,7 +641,6 @@ class ArgslistMenu:
                 self.xcursor += 1
 
 
-
 class Gui:
     # result CMD
     cmd = None 
@@ -660,7 +659,11 @@ class Gui:
     INFO_NAME_COLOR = 5
     INFO_CMD_COLOR = 3
     ARG_NAME_COLOR = 5
-    
+    loaded_menu = False
+
+    def __init__(self):
+        self.cheats_menu = None
+
     @staticmethod
     def init_colors():
         """ Init curses colors """
@@ -668,7 +671,6 @@ class Gui:
         curses.use_default_colors()
         for i in range(0, 255):
             curses.init_pair(i + 1, i, -1)
-
 
     @staticmethod
     def draw_string(str_value, max_size):
@@ -683,19 +685,21 @@ class Gui:
             result_string = str_value[:max_size - 4] + '...'
         return result_string
 
-
     def run(self, cheatsheets):
         """
         Gui entry point
         :param cheatsheets: cheatsheets dictionnary
         """
-        cheats_menu = CheatslistMenu()
-        for value in cheatsheets.values():
-            cheats_menu.globalcheats.append(value)
+        if self.cheats_menu is None:
+            # Load cheatList if not already done
+            self.cheats_menu = CheatslistMenu()
+            for value in cheatsheets.values():
+                self.cheats_menu.globalcheats.append(value)
+
         # if global var save exists load it
         if exists(Gui.savefile):
-            with open(Gui.savefile,'r') as f:
+            with open(Gui.savefile, 'r') as f:
                 Gui.arsenalGlobalVars = json.load(f)
 
-        wrapper(cheats_menu.run)
+        wrapper(self.cheats_menu.run)
         return Gui.cmd

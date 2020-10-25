@@ -2,15 +2,17 @@ import argparse
 import sys
 import json
 import os
-#import pyperclip
+# import pyperclip
 import fcntl
 import termios
 import re
+import time
 
 # arsenal
 from modules import config
 from modules import cheat
-from modules import gui
+from modules import gui as arsenal_gui
+
 
 class App:
     version = '1.0.0'
@@ -42,8 +44,9 @@ class App:
         group_out = parser.add_argument_group('output [default = prefill]')
         group_out.add_argument('-p', '--print', action='store_true', help='Print the result')
         group_out.add_argument('-o', '--outfile', action='store', help='Output to file')
-        #group_out.add_argument('-c', '--copy', action='store_true', help='Output to clipboard')
-        group_out.add_argument('--exec', action='store_true', help='Execute cmd')
+        # group_out.add_argument('-c', '--copy', action='store_true', help='Output to clipboard')
+        group_out.add_argument('-e', '--exec', action='store_true', help='Execute cmd')
+        group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
         parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(self.version))
 
         return parser.parse_args()
@@ -51,12 +54,17 @@ class App:
     def run(self):
         args = self.get_args()
 
+        # load tmux only if needed
+        if args.tmux:
+            import libtmux
+
         # load cheatsheets
         cheatsheets = cheat.Cheats().read_files(config.cheats_paths)
-        
+        # create gui object
+        gui = arsenal_gui.Gui()
         while True:
             # launch gui
-            cmd = gui.Gui().run(cheatsheets)
+            cmd = gui.run(cheatsheets)
 
             if cmd == None:
                 exit(0)
@@ -67,19 +75,19 @@ class App:
                     break
                 elif cmd.cmdline == ">show":
                     if (os.path.exists(config.savevarfile)):
-                        with open(config.savevarfile,'r') as f:
+                        with open(config.savevarfile, 'r') as f:
                             arsenalGlobalVars = json.load(f)
-                            for k,v in arsenalGlobalVars.items():
-                                print(k+"="+v)
+                            for k, v in arsenalGlobalVars.items():
+                                print(k + "=" + v)
                     break
                 elif cmd.cmdline == ">clear":
-                    with open(config.savevarfile,"w") as f:
+                    with open(config.savevarfile, "w") as f:
                         f.write(json.dumps({}))
                     self.run()
                 elif re.match("^\>set( [^= ]+=[^= ]+)+$", cmd.cmdline):
                     # Load previous global var
                     if (os.path.exists(config.savevarfile)):
-                        with open(config.savevarfile,'r') as f:
+                        with open(config.savevarfile, 'r') as f:
                             arsenalGlobalVars = json.load(f)
                     else:
                         arsenalGlobalVars = {}
@@ -87,14 +95,14 @@ class App:
                     varlist = re.findall("([^= ]+)=([^= ]+)", cmd.cmdline)
                     for v in varlist:
                         arsenalGlobalVars[v[0]] = v[1]
-                    with open(config.savevarfile,"w") as f:
+                    with open(config.savevarfile, "w") as f:
                         f.write(json.dumps(arsenalGlobalVars))
-                else :
+                else:
                     print("Arsenal: invalid internal command..")
                     break
 
             # OPT: Copy CMD to clipboard
-            #elif args.copy:
+            # elif args.copy:
             #    pyperclip.copy(cmd.cmdline)
             #    break
 
@@ -105,34 +113,59 @@ class App:
 
             # OPT: Write in file
             elif args.outfile:
-                with open(args.outfile,'w') as f:
+                with open(args.outfile, 'w') as f:
                     f.write(cmd.cmdline)
                 break
 
             # OPT: Exec
-            elif args.exec:
+            elif args.exec and not args.tmux:
                 os.system(cmd.cmdline)
                 break
 
+            elif args.tmux:
+                try:
+                    server = libtmux.Server()
+                    session = server.list_sessions()[0]
+                    window = session.attached_window
+                    panes = window.panes
+                    if len(panes) == 1:
+                        # split window to get more pane
+                        pane = window.split_window(attach=False)
+                        time.sleep(0.3)
+                    else:
+                        pane = panes[1]
+                    # send command to other pane and switch pane
+                    if args.exec:
+                        pane.send_keys(cmd.cmdline)
+                    else:
+                        pane.send_keys(cmd.cmdline, enter=False)
+                        pane.select_pane()
+                except libtmux.exc.LibTmuxException:
+                    self.prefil_shell_cmd(cmd)
+                    break
+
             # DEFAULT: Prefill Shell CMD
             else:
-                stdin = 0
-                # save TTY attribute for stdin
-                oldattr = termios.tcgetattr(stdin)
-                # create new attributes to fake input
-                newattr = termios.tcgetattr(stdin)
-                # disable echo in stdin -> only inject cmd in stdin queue (with TIOCSTI)
-                newattr[3] &= ~termios.ECHO
-                # enable non canonical mode -> ignore special editing characters
-                newattr[3] &= ~termios.ICANON
-                # use the new attributes
-                termios.tcsetattr(stdin, termios.TCSANOW, newattr)
-                # write the selected command in stdin queue
-                for c in cmd.cmdline:
-                    fcntl.ioctl(stdin, termios.TIOCSTI, c)
-                # restore TTY attribute for stdin
-                termios.tcsetattr(stdin, termios.TCSADRAIN, oldattr)
+                self.prefil_shell_cmd(cmd)
                 break
+
+    def prefil_shell_cmd(self, cmd):
+        stdin = 0
+        # save TTY attribute for stdin
+        oldattr = termios.tcgetattr(stdin)
+        # create new attributes to fake input
+        newattr = termios.tcgetattr(stdin)
+        # disable echo in stdin -> only inject cmd in stdin queue (with TIOCSTI)
+        newattr[3] &= ~termios.ECHO
+        # enable non canonical mode -> ignore special editing characters
+        newattr[3] &= ~termios.ICANON
+        # use the new attributes
+        termios.tcsetattr(stdin, termios.TCSANOW, newattr)
+        # write the selected command in stdin queue
+        for c in cmd.cmdline:
+            fcntl.ioctl(stdin, termios.TIOCSTI, c)
+        # restore TTY attribute for stdin
+        termios.tcsetattr(stdin, termios.TCSADRAIN, oldattr)
 
 
 if __name__ == "__main__":

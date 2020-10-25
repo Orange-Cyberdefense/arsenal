@@ -28,17 +28,26 @@ cd arsenal
 ./run
 ```
 
+if you use the tmux mode please install requirements first as we use the libtmux lib:
+```
+pip install -r requirements.txt
+```
+or 
+```
+/usr/bin/python3 -m pip install -r requirements.txt
+```
+
 Inside your .bashrc or .zshrc add the path to `run` to help you do that you could launch the addalias.sh script
 ```
 ./addalias.sh
 ```
 
-## Install package (not necessary)
+## Launch in tmux mode
 
 ```
-git clone https://github.com/Orange-Cyberdefense/arsenal.git
-cd arsenal
-python3 setup.py install
+./run -t # if you launch arsenal in a tmux window with one pane, it will split the window and send the command to the otherpane without quiting arsenal
+         # if the window his already splited the command will be send to the other pane without quiting arsenal
+./run -t -e # just like the -t mode but with direct execution in the other pane without quitting arsenal
 ```
 
 ## Troubleshooting
