@@ -87,6 +87,8 @@ export TERM='xterm-256color'
 #### kerberos & AD
 - [X] impacket
 - [X] bloodhound
+- [X] rubeus
+- [ ] powerview
 
 #### MITM
 - [X] mitm6
