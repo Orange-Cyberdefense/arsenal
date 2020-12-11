@@ -59,7 +59,8 @@ class App:
             import libtmux
 
         # load cheatsheets
-        cheatsheets = cheat.Cheats().read_files(config.cheats_paths)
+        cheatsheets = cheat.Cheats().read_files(config.CHEATS_PATHS, config.FORMATS,
+                                                config.EXCLUDE_LIST)
         # create gui object
         gui = arsenal_gui.Gui()
         while True:

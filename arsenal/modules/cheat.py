@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 from pathlib import Path
 
+from docutils.parsers import rst
+from docutils.utils import new_document
+from docutils.frontend import OptionParser
+from docutils import nodes
 
 class bcolors:
     HEADER = '\033[95m'
@@ -30,21 +34,72 @@ class Cheat:
     def inline_cheat(self):
         return "{}{}{}".format({self.tags},{self.name},{self.command})
 
+class ArsenalRstVisitor(nodes.GenericNodeVisitor):
+    def __init__(self, document, cheats):
+        self.cheats = cheats
+        super().__init__(document)
+    def default_visit(self, node):
+        # Previous cheat completed ? -> Create a new one
+        if self.cheats.current_cheat.is_done():
+            self.cheats.end_cheat()
+            self.cheats.new_cheat()
+
+    def visit_section(self, node):
+        """Cheats and titles"""
+        # if no cmd but description use description as the command
+        if self.cheats.current_cheat.command == "" and \
+           self.cheats.current_cheat.description != "":
+            self.cheats.current_cheat.command = self.cheats.current_cheat.description.replace('\n',';\\\n')
+            self.cheats.current_cheat.description = ""
+            self.cheats.end_cheat()
+            self.cheats.new_cheat()
+        # Parsing is based on sections (delimited by titles)
+        current = " ".join(node.get('ids'))
+        niv = 0
+        if isinstance(node.parent, nodes.document):
+            self.cheats.firsttitle = current
+            self.cheats.titles = [current]
+        else:
+            parent = " ".join(node.parent.get('ids'))
+            niv = self.cheats.titles.index(parent)+1
+            self.cheats.titles = self.cheats.titles[:niv] + [current]
+        self.cheats.new_cheat()
+        # Set default tag to all titles tree
+        self.cheats.current_tags = ", ".join(self.cheats.titles)
+
+    def visit_comment(self, node):
+        """Tags"""
+        self.cheats.current_tags = node.astext()
+
+    def visit_literal_block(self, node):
+        """Commands"""
+        self.cheats.current_cheat.command = node.astext().replace("\n", " \\\n")
+
+    def visit_paragraph(self, node):
+        """Descriptions, constants and variables"""
+        para = node.astext()
+        descr = [] # Using mutable objects for string concat
+        for line in para.split("\n"):
+            # Constants and variables
+            if line.startswith("=") or line.startswith("$") and ":" in line:
+                varname, varval = [x.strip() for x in line[1:].split(":")]
+                if line.startswith("$"):
+                    varval = "$({0})".format(varval)
+                self.cheats.filevars[varname] = varval
+            elif line.endswith(":"): # Name
+                self.cheats.current_cheat.name = line[:-1]
+            else: # Description
+                descr += [line]
+        # If description list is not empty, convert it to string as description
+        # Here we only do this if command has been filled to avoid junk text
+        if len(descr) and len(self.cheats.current_cheat.command):
+            self.cheats.current_cheat.description = "\n".join(descr)
+            # For me descriptions are in paragraphs not title so I use the descr as a name
+            self.cheats.current_cheat.name = " ".join(descr)
+
 class Cheats:
     current_cheat = Cheat()
     cheatsheets = dict()
-
-
-    def parse_title(self, title):
-        c = title[0]
-        niv = 0
-        while c == '#':
-            niv += 1
-            title = title[1:]
-            c = title[0]
-        title = title.lstrip()
-        return niv,title
-
 
     def new_cheat(self):
         self.current_cheat = Cheat()
@@ -68,8 +123,63 @@ class Cheats:
             self.current_cheat.str_title = self.firsttitle
         self.cheatlist.append(self.current_cheat)
 
+#-----------------------------------------------------------------------------#
+# RestructuredText                                                            #
+#-----------------------------------------------------------------------------#
+
+    def parse_restructuredtext(self, filename):
+        self.firsttitle = ""
+        self.current_tags = ""
+        self.filevars = {}
+        self.titles = []
+        self.cheatlist = []
+        self.new_cheat()
+
+        parser = rst.Parser()
+        with open(filename, "r") as fd:
+            text = fd.read()
+            settings = OptionParser(components=(rst.Parser,)).get_default_values()
+            document = new_document(filename + ".tmp", settings)
+            parser.parse(text, document)
+            visitor = ArsenalRstVisitor(document, self)
+            document.walk(visitor)
+
+            # add the last command if done
+            if self.current_cheat.is_done():
+                self.end_cheat()
+            elif self.current_cheat.command == "" and self.current_cheat.description != "":
+                self.current_cheat.command = self.current_cheat.description.replace('\n',';\\\n')
+                self.current_cheat.description = ""
+                self.end_cheat()
+
+        # File parsing done
+        # set constants variables
+        for varname, varval in self.filevars.items():
+            for cheat in self.cheatlist:
+                cheat.variables[varname] = varval
+
+        # add all file's cheats 
+        for cheat in self.cheatlist:
+            cheat.filename = filename
+            cheat.printable_command = cheat.command.replace('\\\n','')
+            self.cheatsheets[cheat.str_title+cheat.name] = cheat
+
+#-----------------------------------------------------------------------------#
+# Markdown                                                                    #
+#-----------------------------------------------------------------------------#
 
     def parse_markdown(self, filename):
+
+        # Nested markdown stuff
+        def parse_title(title):
+            c = title[0]
+            niv = 0
+            while c == '#':
+                niv += 1
+                title = title[1:]
+                c = title[0]
+                title = title.lstrip()
+                return niv,title
         
         self.firsttitle = ''
         self.cheatlist = []
@@ -108,7 +218,7 @@ class Cheats:
                         self.new_cheat()
 
                     # New title found !
-                    niv,title = self.parse_title(line)
+                    niv,title = parse_title(line)
 
                     # Save first title (incase only niv1 title are used)
                     if self.firsttitle == "":
@@ -198,9 +308,15 @@ class Cheats:
             cheat.printable_command = cheat.command.replace('\\\n','')
             self.cheatsheets[cheat.str_title+cheat.name] = cheat
 
-    def read_files(self, paths):
+    def read_files(self, paths, file_formats, exclude_list):
+        parsers = {
+            "md": self.parse_markdown,
+            "rst": self.parse_restructuredtext
+        }
+        paths = [paths] if isinstance(paths, str) else paths
         for path in paths:
-            for entry in Path(path).rglob('*.md'):
-                if entry.name != 'README.md':
-                    self.parse_markdown(str(entry.absolute()))
+            for file_format in file_formats:
+                for entry in Path(path).rglob('*.{0}'.format(file_format)):
+                    if entry.name not in exclude_list and file_format in parsers.keys():
+                        parsers[file_format](str(entry.absolute()))
         return self.cheatsheets
