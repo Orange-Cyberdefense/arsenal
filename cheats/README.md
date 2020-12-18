@@ -2,7 +2,7 @@
 
 % tag1, tag2
 
-Tags represents are used to categorize the cheat sheet
+Tags are used to categorize the cheat sheet
 
 
 ## Command description
@@ -35,6 +35,3 @@ command <arg1> <arg2>
 ```
 
 Additional description
-
-
-

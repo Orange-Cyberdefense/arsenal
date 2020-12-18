@@ -5,14 +5,13 @@ from os.path import dirname, abspath, expanduser, join
 BASEPATH = dirname(dirname(dirname(abspath(__file__))))
 HOMEPATH = expanduser("~")
 FORMATS = ["md", "rst"]
-EXCLUDE_LIST = ["README.md", "index.rst"]
+EXCLUDE_LIST = ["README.md", "README.rst", "index.rst"]
 
 CHEATS_PATHS = [
     join(BASEPATH, "cheats") # DEFAULT
-    ### Additional paths below ###
-    # join(BASEPATH, "tests")
+    # Additional paths below, add comma to line above
+    # join(HOMEPATH, "my_cheats")
 ]
-
 
 messages_error_missing_arguments = 'Error missing arguments'
 

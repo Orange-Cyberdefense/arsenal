@@ -50,6 +50,20 @@ Inside your .bashrc or .zshrc add the path to `run` to help you do that you coul
 ./run -t -e # just like the -t mode but with direct execution in the other pane without quitting arsenal
 ```
 
+## Add external cheatsheets
+
+Add additional paths to the file `<arsenal_home>/arsenal/modules/config.py`,
+arsenal reads `.md` (MarkDown) and `.rst` (RestructuredText).
+
+```
+CHEATS_PATHS = [
+    join(BASEPATH, "cheats"), # DEFAULT
+    join(HOMEPATH, "docs/my_cheats")
+]
+```
+
+Cheatsheets examples are in `<arsenal_home>/cheats`: `README.md` and `README.rst`
+
 ## Troubleshooting
 If you got on error on color init try : 
 ```
