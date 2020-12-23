@@ -20,7 +20,13 @@ class Command:
         # Use a list of tuples here insted of dict in case
         # the cmd has multiple args with the same name..
         for arg_name in re.findall(r'<([^ <>:/]+)>', cheat.command):
-            if arg_name in gvars:
+            if "|" in arg_name: # Format <name|default_value>
+                name, var = arg_name.split("|")[:2]
+                self.args.append([name, var])
+                # Variable has been added to cheat variables before, remove it
+                cheat.command = cheat.command.replace(arg_name, name)
+                self.cmdline = cheat.command
+            elif arg_name in gvars:
                 self.args.append([arg_name, gvars[arg_name]])
             elif arg_name in cheat.variables:
                 self.args.append([arg_name, cheat.variables[arg_name]])
