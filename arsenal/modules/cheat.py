@@ -6,6 +6,7 @@ from docutils.utils import new_document
 from docutils.frontend import OptionParser
 from docutils import nodes
 
+
 class bcolors:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
@@ -32,12 +33,14 @@ class Cheat:
         return self.name != "" and self.command != "" and not self.command_capture
 
     def inline_cheat(self):
-        return "{}{}{}".format({self.tags},{self.name},{self.command})
+        return "{}{}{}".format({self.tags}, {self.name}, {self.command})
+
 
 class ArsenalRstVisitor(nodes.GenericNodeVisitor):
     def __init__(self, document, cheats):
         self.cheats = cheats
         super().__init__(document)
+
     def default_visit(self, node):
         # Previous cheat completed ? -> Create a new one
         if self.cheats.current_cheat.is_done():
@@ -48,8 +51,8 @@ class ArsenalRstVisitor(nodes.GenericNodeVisitor):
         """Cheats and titles"""
         # if no cmd but description use description as the command
         if self.cheats.current_cheat.command == "" and \
-           self.cheats.current_cheat.description != "":
-            self.cheats.current_cheat.command = self.cheats.current_cheat.description.replace('\n',';\\\n')
+                self.cheats.current_cheat.description != "":
+            self.cheats.current_cheat.command = self.cheats.current_cheat.description.replace('\n', ';\\\n')
             self.cheats.current_cheat.description = ""
             self.cheats.end_cheat()
             self.cheats.new_cheat()
@@ -61,7 +64,7 @@ class ArsenalRstVisitor(nodes.GenericNodeVisitor):
             self.cheats.titles = [current]
         else:
             parent = " ".join(node.parent.get('ids'))
-            niv = self.cheats.titles.index(parent)+1
+            niv = self.cheats.titles.index(parent) + 1
             self.cheats.titles = self.cheats.titles[:niv] + [current]
         self.cheats.new_cheat()
         # Set default tag to all titles tree
@@ -78,7 +81,7 @@ class ArsenalRstVisitor(nodes.GenericNodeVisitor):
     def visit_paragraph(self, node):
         """Descriptions, constants and variables"""
         para = node.astext()
-        descr = [] # Using mutable objects for string concat
+        descr = []  # Using mutable objects for string concat
         for line in para.split("\n"):
             # Constants and variables
             if line.startswith("=") or line.startswith("$") and ":" in line:
@@ -86,9 +89,9 @@ class ArsenalRstVisitor(nodes.GenericNodeVisitor):
                 if line.startswith("$"):
                     varval = "$({0})".format(varval)
                 self.cheats.filevars[varname] = varval
-            elif line.endswith(":"): # Name
+            elif line.endswith(":"):  # Name
                 self.cheats.current_cheat.name = line[:-1]
-            else: # Description
+            else:  # Description
                 descr += [line]
         # If description list is not empty, convert it to string as description
         # Here we only do this if command has been filled to avoid junk text
@@ -96,6 +99,7 @@ class ArsenalRstVisitor(nodes.GenericNodeVisitor):
             self.cheats.current_cheat.description = "\n".join(descr)
             # For me descriptions are in paragraphs not title so I use the descr as a name
             self.cheats.current_cheat.name = " ".join(descr)
+
 
 class Cheats:
     current_cheat = Cheat()
@@ -107,14 +111,13 @@ class Cheats:
         self.current_cheat.description = ''
         if self.titles == []:
             self.current_cheat.titles = ""
-            self.current_cheat.name = "" 
+            self.current_cheat.name = ""
         elif len(self.titles) == 1:
             self.current_cheat.titles = ""
             self.current_cheat.name = self.titles[-1]
         else:
             self.current_cheat.titles = "".join(self.titles[:-1])
             self.current_cheat.name = self.titles[-1]
-
 
     def end_cheat(self):
         self.current_cheat.tags = self.current_tags
@@ -123,9 +126,9 @@ class Cheats:
             self.current_cheat.str_title = self.firsttitle
         self.cheatlist.append(self.current_cheat)
 
-#-----------------------------------------------------------------------------#
-# RestructuredText                                                            #
-#-----------------------------------------------------------------------------#
+    # -----------------------------------------------------------------------------#
+    # RestructuredText                                                            #
+    # -----------------------------------------------------------------------------#
 
     def parse_restructuredtext(self, filename):
         self.firsttitle = ""
@@ -148,7 +151,7 @@ class Cheats:
             if self.current_cheat.is_done():
                 self.end_cheat()
             elif self.current_cheat.command == "" and self.current_cheat.description != "":
-                self.current_cheat.command = self.current_cheat.description.replace('\n',';\\\n')
+                self.current_cheat.command = self.current_cheat.description.replace('\n', ';\\\n')
                 self.current_cheat.description = ""
                 self.end_cheat()
 
@@ -161,12 +164,12 @@ class Cheats:
         # add all file's cheats 
         for cheat in self.cheatlist:
             cheat.filename = filename
-            cheat.printable_command = cheat.command.replace('\\\n','')
-            self.cheatsheets[cheat.str_title+cheat.name] = cheat
+            cheat.printable_command = cheat.command.replace('\\\n', '')
+            self.cheatsheets[cheat.str_title + cheat.name] = cheat
 
-#-----------------------------------------------------------------------------#
-# Markdown                                                                    #
-#-----------------------------------------------------------------------------#
+    # -----------------------------------------------------------------------------#
+    # Markdown                                                                    #
+    # -----------------------------------------------------------------------------#
 
     def parse_markdown(self, filename):
 
@@ -179,8 +182,8 @@ class Cheats:
                 title = title[1:]
                 c = title[0]
                 title = title.lstrip()
-            return niv,title
-        
+            return niv, title
+
         self.firsttitle = ''
         self.cheatlist = []
         self.current_tags = ''
@@ -193,7 +196,7 @@ class Cheats:
             for entry in f.readlines():
                 line = entry.strip('\n')
                 nb += 1
-                
+
                 # Previous cheat completed ? -> Create a new one
                 if self.current_cheat.is_done():
                     self.end_cheat()
@@ -209,23 +212,23 @@ class Cheats:
                 if line.startswith('#'):
 
                     if self.current_cheat.command_capture:
-                        raise Exception('Error parsing (Title) markdown file '+filename+' line: '+str(nb))
+                        raise Exception('Error parsing (Title) markdown file ' + filename + ' line: ' + str(nb))
                     # if no cmd but description use description as the command
                     if self.current_cheat.command == "" and self.current_cheat.description != "":
-                        self.current_cheat.command = self.current_cheat.description.replace('\n',';\\\n')
+                        self.current_cheat.command = self.current_cheat.description.replace('\n', ';\\\n')
                         self.current_cheat.description = ""
                         self.end_cheat()
                         self.new_cheat()
 
                     # New title found !
-                    niv,title = parse_title(line)
+                    niv, title = parse_title(line)
 
                     # Save first title (incase only niv1 title are used)
                     if self.firsttitle == "":
                         self.firsttitle = title
 
                     # Title hierarchy verification
-                    if (niv == (len(self.titles)+1)):
+                    if (niv == (len(self.titles) + 1)):
                         # new sub title
                         self.titles.append(title)
 
@@ -235,14 +238,13 @@ class Cheats:
 
                     elif (niv < len(self.titles)):
                         # New parent title
-                        self.titles = self.titles[:niv-1]
+                        self.titles = self.titles[:niv - 1]
                         self.titles.append(title)
 
-                    else: 
-                        raise Exception('Error parsing (Title Skip) markdown file '+filename+' line: '+str(nb))
+                    else:
+                        raise Exception('Error parsing (Title Skip) markdown file ' + filename + ' line: ' + str(nb))
                     self.new_cheat()
                     continue
-                
 
                 # CMD Start/End
                 if line.startswith('```'):
@@ -251,7 +253,7 @@ class Cheats:
                     else:
                         raise Exception('Error parsing (CMD Start/End) markdown file ' + filename)
                     continue
-                
+
                 # CMD
                 if line.strip() != '' and self.current_cheat.command_capture:
                     if self.current_cheat.name != "":
@@ -261,9 +263,9 @@ class Cheats:
                         else:
                             # multi lines cmd
                             if self.current_cheat.command[-1] == ';':
-                                self.current_cheat.command += "\\\n"+line.rstrip()
+                                self.current_cheat.command += "\\\n" + line.rstrip()
                             else:
-                                self.current_cheat.command += ";\\\n"+line.rstrip()
+                                self.current_cheat.command += ";\\\n" + line.rstrip()
                     else:
                         raise Exception('Error parsing (CMD) markdown file ' + filename)
 
@@ -292,21 +294,21 @@ class Cheats:
             if self.current_cheat.is_done():
                 self.end_cheat()
             elif self.current_cheat.command == "" and self.current_cheat.description != "":
-                self.current_cheat.command = self.current_cheat.description.replace('\n',';\\\n')
+                self.current_cheat.command = self.current_cheat.description.replace('\n', ';\\\n')
                 self.current_cheat.description = ""
                 self.end_cheat()
-        
+
         # File parsing done
         # set constants variables
         for varname, varval in self.filevars.items():
             for cheat in self.cheatlist:
-                cheat.variables[varname] = varval 
+                cheat.variables[varname] = varval
 
-        # add all file's cheats 
+                # add all file's cheats
         for cheat in self.cheatlist:
             cheat.filename = filename
-            cheat.printable_command = cheat.command.replace('\\\n','')
-            self.cheatsheets[cheat.str_title+cheat.name] = cheat
+            cheat.printable_command = cheat.command.replace('\\\n', '')
+            self.cheatsheets[cheat.str_title + cheat.name] = cheat
 
     def read_files(self, paths, file_formats, exclude_list):
         parsers = {

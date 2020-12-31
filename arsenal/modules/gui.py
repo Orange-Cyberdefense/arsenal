@@ -6,18 +6,19 @@ import json
 from curses import wrapper
 from os.path import commonprefix, exists
 
-# local
+#  local
 from . import config
 from . import command
 
+
 class CheatslistMenu:
-    globalcheats = []    # all cheats
-    cheats = []          # cheats after search
+    globalcheats = []  # all cheats
+    cheats = []  # cheats after search
     max_visible_cheats = 0
     input_buffer = ''
     position = 0
     page_position = 0
-    
+
     xcursor = None
     x_init = None
     y_init = None
@@ -40,7 +41,6 @@ class CheatslistMenu:
         promptwin.refresh()
         return promptwin
 
-
     def draw_infobox(self):
         """
         Draw the top infobox (4 lines / width from param)
@@ -51,12 +51,13 @@ class CheatslistMenu:
         infowin = curses.newwin(nlines, ncols, y, x)
         selected_cheat = self.selected_cheat()
         if selected_cheat is not None:
-            infowin.addstr(y + 1, x + 2, Gui.draw_string(selected_cheat.name,self.width-3), curses.color_pair(Gui.INFO_NAME_COLOR))
-            infowin.addstr(y + 2, x + 2, Gui.draw_string(selected_cheat.printable_command,self.width-3), curses.color_pair(Gui.INFO_CMD_COLOR))
+            infowin.addstr(y + 1, x + 2, Gui.draw_string(selected_cheat.name, self.width - 3),
+                           curses.color_pair(Gui.INFO_NAME_COLOR))
+            infowin.addstr(y + 2, x + 2, Gui.draw_string(selected_cheat.printable_command, self.width - 3),
+                           curses.color_pair(Gui.INFO_CMD_COLOR))
         infowin.border()
         infowin.refresh()
         return infowin
-
 
     def draw_editbox(self):
         """
@@ -68,7 +69,6 @@ class CheatslistMenu:
         editwin.addstr(self.input_buffer, curses.color_pair(Gui.BASIC_COLOR))
         editwin.refresh()
         return editwin
-
 
     @staticmethod
     def draw_cheat(win, cheat, selected):
@@ -84,7 +84,7 @@ class CheatslistMenu:
         first_col_size = math.floor(max_width * 20 / 100)
         sec_col_size = math.floor(max_width * 30 / 100)
         third_col_size = math.floor(max_width * 50 / 100)
-        
+
         title = cheat.tags if cheat.tags != '' else cheat.str_title
 
         if selected:
@@ -100,11 +100,11 @@ class CheatslistMenu:
             win.addstr(' ' * len(prompt), curses.color_pair(Gui.BASIC_COLOR))
             win.addstr("{:{}s}".format(Gui.draw_string(title, first_col_size), first_col_size),
                        curses.color_pair(Gui.COL1_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, sec_col_size), sec_col_size), curses.color_pair(Gui.COL2_COLOR))
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, sec_col_size), sec_col_size),
+                       curses.color_pair(Gui.COL2_COLOR))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, third_col_size), third_col_size),
                        curses.color_pair(Gui.COL3_COLOR))
             win.addstr("\n")
-
 
     def draw_cheatslistbox(self):
         """
@@ -114,15 +114,14 @@ class CheatslistMenu:
         ncols, nlines = self.width, self.height - 6
         listwin = curses.newwin(nlines, ncols, y, x)
 
-        visible_cheats = self.cheats[self.page_position:self.max_visible_cheats+self.page_position]
-        counter = self.page_position 
-        
+        visible_cheats = self.cheats[self.page_position:self.max_visible_cheats + self.page_position]
+        counter = self.page_position
+
         for cheat in visible_cheats:
             self.draw_cheat(listwin, cheat, counter == self.position)
             counter += 1
 
         listwin.refresh()
-
 
     def draw_footbox(self, info):
         """
@@ -131,7 +130,7 @@ class CheatslistMenu:
         """
         y, x = self.height - 1, 0
         ncols, nlines = self.width, 1
-        
+
         # print nb cmd info (bottom left)
         nbinfowin = curses.newwin(nlines, ncols, y, x)
         nbinfowin.addstr(info, curses.color_pair(Gui.BASIC_COLOR))
@@ -143,12 +142,11 @@ class CheatslistMenu:
 
             # protection in case screen to small or name too long        
             if (len(cheat_file) > self.width - 16):
-                cheat_file = cheat_file[0:self.width - 17]+".."
+                cheat_file = cheat_file[0:self.width - 17] + ".."
 
             fileinfowin = curses.newwin(nlines, ncols, y, self.width - (len(cheat_file) + 3))
             fileinfowin.addstr(cheat_file, curses.color_pair(Gui.BASIC_COLOR))
             fileinfowin.refresh()
-
 
     def match(self, cheat):
         """
@@ -160,18 +158,17 @@ class CheatslistMenu:
 
         # if search begin with '>' print only internal CMD
         if self.input_buffer != '' and self.input_buffer[0] == '>':
-            match = cheat.command[0] == '>'  
+            match = cheat.command[0] == '>'
 
         for value in self.input_buffer.lower().split(' '):
-            if value in cheat.str_title.lower()\
-            or value in cheat.name.lower()\
-            or value in cheat.tags.lower()\
-            or value in cheat.command.lower():
+            if value in cheat.str_title.lower() \
+                    or value in cheat.name.lower() \
+                    or value in cheat.tags.lower() \
+                    or value in cheat.command.lower():
                 match = True and match
             else:
                 match = False
         return match
-
 
     def search(self):
         """
@@ -184,7 +181,6 @@ class CheatslistMenu:
             list_cheat = self.globalcheats
         return list_cheat
 
-
     def selected_cheat(self):
         """
         Return the selected cheat in the list
@@ -193,7 +189,6 @@ class CheatslistMenu:
         if len(self.cheats) == 0:
             return None
         return self.cheats[self.position % len(self.cheats)]
-
 
     def draw(self, stdscr):
         """
@@ -209,18 +204,17 @@ class CheatslistMenu:
         # create cheatslist box
         self.draw_cheatslistbox()
         # draw footer
-        info = "> %d / %d " % (self.position+1, len(self.cheats))
+        info = "> %d / %d " % (self.position + 1, len(self.cheats))
         self.draw_footbox(info)
         # create edit windows
         self.draw_editbox()
         # init cursor postion (if first draw)
         if self.x_init == None or self.y_init == None or self.xcursor == None:
-            self.y_init,self.x_init = curses.getsyx()
+            self.y_init, self.x_init = curses.getsyx()
             self.xcursor = self.x_init
         # set cursor position
-        curses.setsyx(self.y_init,self.xcursor)
+        curses.setsyx(self.y_init, self.xcursor)
         curses.doupdate()
-
 
     def move_position(self, step):
         """
@@ -242,16 +236,15 @@ class CheatslistMenu:
 
         # clean position
         if self.position < 0: self.position = 0
-        if self.position >= len(self.cheats) -1: self.position = len(self.cheats) -1 
-        
+        if self.position >= len(self.cheats) - 1: self.position = len(self.cheats) - 1
+
         # move page view UP
         if self.page_position > self.position:
-            self.page_position -= (self.page_position - self.position) 
-        
-        # move page view DOWN 
-        if self.position >= (self.page_position + self.max_visible_cheats):
-            self.page_position += 1 + (self.position - (self.page_position + self.max_visible_cheats)) 
+            self.page_position -= (self.page_position - self.position)
 
+            # move page view DOWN
+        if self.position >= (self.page_position + self.max_visible_cheats):
+            self.page_position += 1 + (self.position - (self.page_position + self.max_visible_cheats))
 
     def move_page(self, step):
         """
@@ -259,20 +252,18 @@ class CheatslistMenu:
         """
         # only move if it is possible
         if len(self.cheats) > self.max_visible_cheats:
-            new_pos = self.page_position + step*self.max_visible_cheats
+            new_pos = self.page_position + step * self.max_visible_cheats
             # clean position
             if new_pos >= (len(self.cheats) + 1 - self.max_visible_cheats):
-                self.position = len(self.cheats) -1
+                self.position = len(self.cheats) - 1
                 self.page_position = len(self.cheats) - self.max_visible_cheats
             elif new_pos < 0:
                 self.position = self.page_position = 0
             else:
                 self.position = self.page_position = new_pos
 
-
-    def check_move_cursor(self,n):
+    def check_move_cursor(self, n):
         return self.x_init <= (self.xcursor + n) < self.x_init + len(self.input_buffer) + 1
-
 
     def run(self, stdscr):
         """
@@ -294,7 +285,7 @@ class CheatslistMenu:
             if c == curses.KEY_ENTER or c == 10 or c == 13:
                 # Process selected command (if not empty)
                 if self.selected_cheat() != None:
-                    Gui.cmd = command.Command(self.selected_cheat(),Gui.arsenalGlobalVars)
+                    Gui.cmd = command.Command(self.selected_cheat(), Gui.arsenalGlobalVars)
                     # check if arguments are needed
                     if len(Gui.cmd.args) != 0:
                         # args needed -> ask
@@ -305,7 +296,7 @@ class CheatslistMenu:
                     break
             elif c == curses.KEY_F10 or c == 27:
                 Gui.cmd = None
-                break # Exit the while loop
+                break  # Exit the while loop
             elif c == 339 or c == curses.KEY_PPAGE:
                 # Page UP
                 self.move_page(-1)
@@ -321,15 +312,15 @@ class CheatslistMenu:
             elif c == curses.KEY_BACKSPACE or c == 127:
                 if self.check_move_cursor(-1):
                     i = self.xcursor - self.x_init - 1
-                    self.input_buffer = self.input_buffer[:i] + self.input_buffer[i+1:]
-                    self.xcursor -= 1 
+                    self.input_buffer = self.input_buffer[:i] + self.input_buffer[i + 1:]
+                    self.xcursor -= 1
                     # new search -> reset position
                     self.position = 0
                     self.page_position = 0
             elif c == curses.KEY_DC or c == 127:
                 if self.check_move_cursor(1):
                     i = self.xcursor - self.x_init - 1
-                    self.input_buffer = self.input_buffer[:i+1] + self.input_buffer[i+2:]
+                    self.input_buffer = self.input_buffer[:i + 1] + self.input_buffer[i + 2:]
                     # new search -> reset position
                     self.position = 0
                     self.page_position = 0
@@ -352,13 +343,13 @@ class CheatslistMenu:
                     for cheat in self.cheats:
                         if cheat.command.startswith(self.input_buffer):
                             predictions.append(cheat.command)
-                    if len(predictions)!=0:
+                    if len(predictions) != 0:
                         self.input_buffer = commonprefix(predictions)
                         self.xcursor = self.x_init + len(self.input_buffer)
                         self.position = 0
                         self.page_position = 0
             elif c >= 20 and c < 127:
-                i = self.xcursor - self.x_init 
+                i = self.xcursor - self.x_init
                 self.input_buffer = self.input_buffer[:i] + chr(c) + self.input_buffer[i:]
                 self.xcursor += 1
                 # new search -> reset position
@@ -367,24 +358,21 @@ class CheatslistMenu:
         curses.endwin()
 
 
-
-
 class ArgslistMenu:
     current_arg = 0
     max_preview_size = 0
     prev_lastline_len = 0
 
     # init arg box margins
-    AB_TOP = 0 
+    AB_TOP = 0
     AB_SIDE = 0
-    
+
     xcursor = None
     x_init = None
     y_init = None
 
-    def __init__(self,prev):
+    def __init__(self, prev):
         self.previous_menu = prev
-
 
     def get_nb_preview_new_lines(self):
         """
@@ -395,12 +383,12 @@ class ArgslistMenu:
         nblines = 0
         multiline = '\n' in Gui.cmd.cmdline
         firstline = True
-        regex = ''.join( '<'+arg[0]+'>|' for arg in Gui.cmd.args)[:-1]
+        regex = ''.join('<' + arg[0] + '>|' for arg in Gui.cmd.args)[:-1]
         # in case of multiline cmd process each line separately
         # for each line we have to count each char and deduce the
         # number of lines needed to print it
         for line in Gui.cmd.cmdline.split('\n'):
-            parts = re.split(regex,line)
+            parts = re.split(regex, line)
             nb_args_todo = len(parts) - 1
             nbchar = 0
 
@@ -412,7 +400,7 @@ class ArgslistMenu:
 
             # extract len of args in the current line
             i = 0
-            for arg_name,arg_val in Gui.cmd.args:
+            for arg_name, arg_val in Gui.cmd.args:
                 if i == next_arg and nb_args_todo > 0:
                     if arg_val != "":
                         # use value len if not empty
@@ -422,17 +410,15 @@ class ArgslistMenu:
                         nbchar += (len(arg_name) + 2)
                     next_arg += 1
                     nb_args_todo -= 1
-                i+=1
+                i += 1
 
             # len of the cmd body
             for p in parts:
                 nbchar += len(p)
 
-            nblines += 1 + ((nbchar -1) // self.max_preview_size)
+            nblines += 1 + ((nbchar - 1) // self.max_preview_size)
 
-        return nblines-1
-
-
+        return nblines - 1
 
     def next_arg(self):
         """
@@ -443,11 +429,10 @@ class ArgslistMenu:
         self.x_init = None
         self.y_init = None
         # change selected arg
-        if self.current_arg < Gui.cmd.nb_args-1:
+        if self.current_arg < Gui.cmd.nb_args - 1:
             self.current_arg += 1
         else:
             self.current_arg = 0
-
 
     def previous_arg(self):
         """
@@ -461,8 +446,7 @@ class ArgslistMenu:
         if self.current_arg > 0:
             self.current_arg -= 1
         else:
-            self.current_arg = Gui.cmd.nb_args-1 
-
+            self.current_arg = Gui.cmd.nb_args - 1
 
     def draw_preview_part(self, win, text, color):
         """
@@ -485,36 +469,33 @@ class ArgslistMenu:
                 # last line too long -> new line
                 self.prev_lastline_len = 1
                 win.addstr("\n    " + c, color)
-    
 
     def draw_selected_arg(self):
         """
         Draw the selected argument line in the argument menu
         """
         y, x = self.AB_TOP + 3 + self.current_arg, self.AB_SIDE + 1
-        ncols, nlines = self.width - 2*(self.AB_SIDE+1), 1
+        ncols, nlines = self.width - 2 * (self.AB_SIDE + 1), 1
         arg = Gui.cmd.args[self.current_arg]
         max_size = self.max_preview_size - 4 - len(arg[0])
         selectedargline = curses.newwin(nlines, ncols, y, x)
         selectedargline.addstr("   > ", curses.color_pair(Gui.BASIC_COLOR))
         selectedargline.addstr(arg[0], curses.color_pair(Gui.ARG_NAME_COLOR))
-        selectedargline.addstr(" = "+Gui.draw_string(arg[1],max_size), curses.color_pair(Gui.BASIC_COLOR))
+        selectedargline.addstr(" = " + Gui.draw_string(arg[1], max_size), curses.color_pair(Gui.BASIC_COLOR))
         selectedargline.refresh()
-
 
     def draw_args_list(self):
         """
         Draw the asked arguments list in the argument menu
         """
         y, x = self.AB_TOP + 3, self.AB_SIDE + 1
-        ncols, nlines = self.width - 2*(self.AB_SIDE+1), Gui.cmd.nb_args + 1
+        ncols, nlines = self.width - 2 * (self.AB_SIDE + 1), Gui.cmd.nb_args + 1
         argwin = curses.newwin(nlines, ncols, y, x)
         for arg in Gui.cmd.args:
             max_size = self.max_preview_size + 4
-            argline = Gui.draw_string("     {} = {}".format(*arg),max_size) + "\n"
+            argline = Gui.draw_string("     {} = {}".format(*arg), max_size) + "\n"
             argwin.addstr(argline, curses.color_pair(Gui.BASIC_COLOR))
         argwin.refresh()
-
 
     def draw_args_preview(self):
         """
@@ -524,31 +505,31 @@ class ArgslistMenu:
         # init vars
         self.prev_lastline_len = 0
         nbpreviewnewlines = self.get_nb_preview_new_lines()
-        y, x = self.AB_TOP - nbpreviewnewlines,self.AB_SIDE 
-        ncols, nlines = self.width-2*self.AB_SIDE, 5 + Gui.cmd.nb_args + nbpreviewnewlines
+        y, x = self.AB_TOP - nbpreviewnewlines, self.AB_SIDE
+        ncols, nlines = self.width - 2 * self.AB_SIDE, 5 + Gui.cmd.nb_args + nbpreviewnewlines
         # split cmdline
-        regex = ''.join( '<'+arg[0]+'>|' for arg in Gui.cmd.args)[:-1]
-        cmdparts = re.split(regex,Gui.cmd.cmdline)
+        regex = ''.join('<' + arg[0] + '>|' for arg in Gui.cmd.args)[:-1]
+        cmdparts = re.split(regex, Gui.cmd.cmdline)
         # build preview 
         argprev = curses.newwin(nlines, ncols, y, x)
         argprev.addstr("\n  $ ", curses.color_pair(Gui.BASIC_COLOR))
 
         # draw preview cmdline 
-        for i in range(len(cmdparts)+Gui.cmd.nb_args):
-            if i%2==0 :
+        for i in range(len(cmdparts) + Gui.cmd.nb_args):
+            if i % 2 == 0:
                 # draw cmd parts in white
-                self.draw_preview_part(argprev, cmdparts[i//2], curses.color_pair(Gui.BASIC_COLOR))
+                self.draw_preview_part(argprev, cmdparts[i // 2], curses.color_pair(Gui.BASIC_COLOR))
             else:
                 # get argument value
-                if Gui.cmd.args[(i-1)//2][1] == "":
+                if Gui.cmd.args[(i - 1) // 2][1] == "":
                     # if arg empty use its name
-                    arg = '<' + Gui.cmd.args[(i-1)//2][0] + '>'
+                    arg = '<' + Gui.cmd.args[(i - 1) // 2][0] + '>'
                 else:
                     # else its value
-                    arg = Gui.cmd.args[(i-1)//2][1]
+                    arg = Gui.cmd.args[(i - 1) // 2][1]
 
                 # draw argument
-                if (i-1)//2 == self.current_arg:
+                if (i - 1) // 2 == self.current_arg:
                     # if arg is selected print in blue
                     self.draw_preview_part(argprev, arg, curses.color_pair(Gui.ARG_NAME_COLOR))
                 else:
@@ -556,7 +537,6 @@ class ArgslistMenu:
                     self.draw_preview_part(argprev, arg, curses.color_pair(Gui.BASIC_COLOR))
         argprev.border()
         argprev.refresh()
-
 
     def draw(self, stdscr):
         """
@@ -576,18 +556,16 @@ class ArgslistMenu:
         self.draw_selected_arg()
         # init cursor postion (if first draw)
         if self.x_init == None or self.y_init == None or self.xcursor == None:
-            self.y_init,self.x_init = curses.getsyx()
+            self.y_init, self.x_init = curses.getsyx()
             # prefill compatibility
             self.x_init -= len(Gui.cmd.args[self.current_arg][1])
             self.xcursor = self.x_init + len(Gui.cmd.args[self.current_arg][1])
         # set cursor position
-        curses.setsyx(self.y_init,self.xcursor)
+        curses.setsyx(self.y_init, self.xcursor)
         curses.doupdate()
 
-
-    def check_move_cursor(self,n):
+    def check_move_cursor(self, n):
         return self.x_init <= (self.xcursor + n) < self.x_init + len(Gui.cmd.args[self.current_arg][1]) + 1
-
 
     def run(self, stdscr):
         """
@@ -619,13 +597,15 @@ class ArgslistMenu:
             elif c == curses.KEY_BACKSPACE or c == 127:
                 if self.check_move_cursor(-1):
                     i = self.xcursor - self.x_init - 1
-                    Gui.cmd.args[self.current_arg][1] = Gui.cmd.args[self.current_arg][1][:i] + Gui.cmd.args[self.current_arg][1][i+1:]
+                    Gui.cmd.args[self.current_arg][1] = Gui.cmd.args[self.current_arg][1][:i] + \
+                                                        Gui.cmd.args[self.current_arg][1][i + 1:]
                     self.xcursor -= 1
             elif c == curses.KEY_DC or c == 127:
                 # DELETE key
                 if self.check_move_cursor(1):
                     i = self.xcursor - self.x_init - 1
-                    Gui.cmd.args[self.current_arg][1] = Gui.cmd.args[self.current_arg][1][:i+1] + Gui.cmd.args[self.current_arg][1][i+2:]
+                    Gui.cmd.args[self.current_arg][1] = Gui.cmd.args[self.current_arg][1][:i + 1] + \
+                                                        Gui.cmd.args[self.current_arg][1][i + 2:]
             elif c == curses.KEY_LEFT:
                 # Move cursor LEFT
                 if self.check_move_cursor(-1): self.xcursor -= 1
@@ -640,13 +620,14 @@ class ArgslistMenu:
                 self.xcursor = self.x_init + len(Gui.cmd.args[self.current_arg][1])
             elif c >= 20 and c < 127:
                 i = self.xcursor - self.x_init
-                Gui.cmd.args[self.current_arg][1] = Gui.cmd.args[self.current_arg][1][:i] + chr(c) + Gui.cmd.args[self.current_arg][1][i:]
+                Gui.cmd.args[self.current_arg][1] = Gui.cmd.args[self.current_arg][1][:i] + chr(c) + \
+                                                    Gui.cmd.args[self.current_arg][1][i:]
                 self.xcursor += 1
 
 
 class Gui:
     # result CMD
-    cmd = None 
+    cmd = None
     arsenalGlobalVars = {}
     savefile = config.savevarfile
     # colors

@@ -1,4 +1,4 @@
-import os 
+import os
 from os.path import dirname, abspath, expanduser, join
 
 # Base paths
@@ -8,7 +8,7 @@ FORMATS = ["md", "rst"]
 EXCLUDE_LIST = ["README.md", "README.rst", "index.rst"]
 
 CHEATS_PATHS = [
-    join(BASEPATH, "cheats") # DEFAULT
+    join(BASEPATH, "cheats")  # DEFAULT
     # Additional paths below, add comma to line above
     # join(HOMEPATH, "my_cheats")
 ]
