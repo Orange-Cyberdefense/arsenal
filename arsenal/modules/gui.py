@@ -33,7 +33,10 @@ class CheatslistMenu:
         y, x = 5, 0
         ncols, nlines = 5, 1
         promptwin = curses.newwin(nlines, ncols, y, x)
-        promptwin.addstr("☠️  >", curses.color_pair(Gui.BASIC_COLOR))
+        try:
+            promptwin.addstr("☠️  >", curses.color_pair(Gui.BASIC_COLOR))
+        except:
+            promptwin.addstr(">>>>", curses.color_pair(Gui.BASIC_COLOR))
         promptwin.refresh()
         return promptwin
 
