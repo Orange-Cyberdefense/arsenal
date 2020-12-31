@@ -42,11 +42,11 @@ secretsdump -k <dc>
 net group "Admins du domaine"
 ```
 
-=user:anonymous
-=pass:anonymous
-=computer_name:arsenal
-=dc:DC01.domain.local
-=dc1:DC01.domain.local
-=dc2:DC02.domain.local
-=computer_password:123soleil
+= user : anonymous
+= pass : anonymous
+= computer_name : arsenal
+= dc : DC01.domain.local
+= dc1 : DC01.domain.local
+= dc2 : DC02.domain.local
+= computer_password : 123soleil
 
