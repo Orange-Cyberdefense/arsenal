@@ -21,7 +21,7 @@ Authors:
 
 This project is inspired by navi (<https://github.com/denisidoro/navi>) because the original version was in bash and too hard to understand to add features
 
-## Launch
+## Install & Launch
 ```
 git clone https://github.com/Orange-Cyberdefense/arsenal.git
 cd arsenal
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 ```
 or 
 ```
-/usr/bin/python3 -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
 Inside your .bashrc or .zshrc add the path to `run` to help you do that you could launch the addalias.sh script
