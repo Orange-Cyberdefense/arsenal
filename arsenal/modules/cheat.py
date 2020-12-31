@@ -179,7 +179,7 @@ class Cheats:
                 title = title[1:]
                 c = title[0]
                 title = title.lstrip()
-                return niv,title
+            return niv,title
         
         self.firsttitle = ''
         self.cheatlist = []
