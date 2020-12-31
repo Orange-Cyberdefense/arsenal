@@ -137,11 +137,11 @@ class CheatslistMenu:
         nbinfowin.refresh()
 
         # print cheatsheet filename (bottom right)
-        if self.selected_cheat() != None:
+        if self.selected_cheat() is not None:
             cheat_file = self.selected_cheat().filename
 
             # protection in case screen to small or name too long        
-            if (len(cheat_file) > self.width - 16):
+            if len(cheat_file) > self.width - 16:
                 cheat_file = cheat_file[0:self.width - 17] + ".."
 
             fileinfowin = curses.newwin(nlines, ncols, y, self.width - (len(cheat_file) + 3))
@@ -209,7 +209,7 @@ class CheatslistMenu:
         # create edit windows
         self.draw_editbox()
         # init cursor postion (if first draw)
-        if self.x_init == None or self.y_init == None or self.xcursor == None:
+        if self.x_init is None or self.y_init is None or self.xcursor is None:
             self.y_init, self.x_init = curses.getsyx()
             self.xcursor = self.x_init
         # set cursor position
@@ -284,7 +284,7 @@ class CheatslistMenu:
             c = stdscr.getch()
             if c == curses.KEY_ENTER or c == 10 or c == 13:
                 # Process selected command (if not empty)
-                if self.selected_cheat() != None:
+                if self.selected_cheat() is not None:
                     Gui.cmd = command.Command(self.selected_cheat(), Gui.arsenalGlobalVars)
                     # check if arguments are needed
                     if len(Gui.cmd.args) != 0:
@@ -348,7 +348,7 @@ class CheatslistMenu:
                         self.xcursor = self.x_init + len(self.input_buffer)
                         self.position = 0
                         self.page_position = 0
-            elif c >= 20 and c < 127:
+            elif 20 <= c < 127:
                 i = self.xcursor - self.x_init
                 self.input_buffer = self.input_buffer[:i] + chr(c) + self.input_buffer[i:]
                 self.xcursor += 1
@@ -555,7 +555,7 @@ class ArgslistMenu:
         self.draw_args_list()
         self.draw_selected_arg()
         # init cursor postion (if first draw)
-        if self.x_init == None or self.y_init == None or self.xcursor == None:
+        if self.x_init is None or self.y_init is None or self.xcursor is None:
             self.y_init, self.x_init = curses.getsyx()
             # prefill compatibility
             self.x_init -= len(Gui.cmd.args[self.current_arg][1])
@@ -618,7 +618,7 @@ class ArgslistMenu:
             elif c == curses.KEY_END:
                 # Move cursor to the END
                 self.xcursor = self.x_init + len(Gui.cmd.args[self.current_arg][1])
-            elif c >= 20 and c < 127:
+            elif 20 <= c < 127:
                 i = self.xcursor - self.x_init
                 Gui.cmd.args[self.current_arg][1] = Gui.cmd.args[self.current_arg][1][:i] + chr(c) + \
                                                     Gui.cmd.args[self.current_arg][1][i:]
