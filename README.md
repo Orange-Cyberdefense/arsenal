@@ -52,7 +52,9 @@ Inside your .bashrc or .zshrc add the path to `run` to help you do that you coul
 
 ## Add external cheatsheets
 
-Add additional paths to the file `<arsenal_home>/arsenal/modules/config.py`,
+You could add your own cheatsheets insode the my_cheats folder or in the ~/.cheats folder.
+
+You could also add additional paths to the file `<arsenal_home>/arsenal/modules/config.py`,
 arsenal reads `.md` (MarkDown) and `.rst` (RestructuredText).
 
 ```

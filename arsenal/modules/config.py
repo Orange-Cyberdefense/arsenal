@@ -8,9 +8,10 @@ FORMATS = ["md", "rst"]
 EXCLUDE_LIST = ["README.md", "README.rst", "index.rst"]
 
 CHEATS_PATHS = [
-    join(BASEPATH, "cheats")  # DEFAULT
+    join(BASEPATH, "cheats"),  # DEFAULT
     # Additional paths below, add comma to line above
-    # join(HOMEPATH, "my_cheats")
+    join(BASEPATH, "my_cheats"),
+    "~/.cheats"
 ]
 
 messages_error_missing_arguments = 'Error missing arguments'
