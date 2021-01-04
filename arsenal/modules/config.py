@@ -19,4 +19,4 @@ messages_error_missing_arguments = 'Error missing arguments'
 # set lower delay to use ESC key (in ms)
 os.environ.setdefault('ESCDELAY', '25')
 
-savevarfile = join(expanduser("~"), ".arsenal.json")
+savevarfile = join(HOMEPATH, ".arsenal.json")
