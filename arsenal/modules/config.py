@@ -11,7 +11,7 @@ CHEATS_PATHS = [
     join(BASEPATH, "cheats"),  # DEFAULT
     # Additional paths below, add comma to line above
     join(BASEPATH, "my_cheats"),
-    "~/.cheats"
+    join(HOMEPATH, ".cheats")
 ]
 
 messages_error_missing_arguments = 'Error missing arguments'
