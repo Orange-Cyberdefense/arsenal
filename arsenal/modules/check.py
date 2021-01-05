@@ -16,6 +16,7 @@ class bcolors:
 
 def check(cheatsheets):
     done = []
+    interactive_shell = '/bin/zsh'  # used for alias
     skip = ['powershell.md', 'windows.md', 'laps.md', 'reverse.md']
     for cheat in cheatsheets.values():
         if os.path.basename(cheat.filename) not in skip:
@@ -30,8 +31,8 @@ def check(cheatsheets):
                                                                            cheat.printable_command, bcolors.ENDC))
                     continue
                 try:
-                    cmd = 'type %s ' % shlex.quote(binary)
-                    output = subprocess.check_output(cmd, shell=True).decode()
+                    cmd = interactive_shell + ' -i -c "type %s"' % shlex.quote(binary)
+                    output = subprocess.check_output(cmd, shell=True, executable='/bin/zsh').decode()
                     print(
                         '{}{:<6s} : {} ({}){}'.format(bcolors.GREEN, '✔ OK', binary, output.split('\n')[0],
                                                       bcolors.ENDC))
