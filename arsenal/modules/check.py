@@ -16,7 +16,7 @@ class bcolors:
 
 def check(cheatsheets):
     done = []
-    skip = ['powershell.md', 'laps.md', 'reverse.md']
+    skip = ['powershell.md', 'windows.md', 'laps.md', 'reverse.md']
     for cheat in cheatsheets.values():
         if os.path.basename(cheat.filename) not in skip:
             binary = cheat.printable_command.split(' ')[0]
