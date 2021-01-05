@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import pyperclip
+import libtmux
 import fcntl
 import termios
 import re
@@ -10,6 +11,7 @@ import time
 # arsenal
 from modules import config
 from modules import cheat
+from modules import check
 from modules import gui as arsenal_gui
 
 
@@ -43,9 +45,10 @@ class App:
         group_out = parser.add_argument_group('output [default = prefill]')
         group_out.add_argument('-p', '--print', action='store_true', help='Print the result')
         group_out.add_argument('-o', '--outfile', action='store', help='Output to file')
-        group_out.add_argument('-c', '--copy', action='store_true', help='Output to clipboard')
+        group_out.add_argument('-x', '--copy', action='store_true', help='Output to clipboard')
         group_out.add_argument('-e', '--exec', action='store_true', help='Execute cmd')
         group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
+        group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
         parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(self.version))
 
         return parser.parse_args()
@@ -53,13 +56,16 @@ class App:
     def run(self):
         args = self.get_args()
 
-        # load tmux only if needed
-        if args.tmux:
-            import libtmux
-
         # load cheatsheets
         cheatsheets = cheat.Cheats().read_files(config.CHEATS_PATHS, config.FORMATS,
                                                 config.EXCLUDE_LIST)
+
+        if args.check:
+            check.check(cheatsheets)
+        else:
+            self.start(args, cheatsheets)
+
+    def start(self, args, cheatsheets):
         # create gui object
         gui = arsenal_gui.Gui()
         while True:
