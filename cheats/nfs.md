@@ -9,7 +9,7 @@ showmount -e <ip>
 
 ## nfs - nmap showmount
 ```
-map -sV --script=nfs-showmount <ip>
+nmap -sV --script=nfs-showmount <ip>
 ```
 
 ## nfs - mount

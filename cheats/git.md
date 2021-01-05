@@ -169,7 +169,7 @@ git checkout -b <new_branch_name> <remote>/<branch_name>
 
 ## git dump
 ```
-gitdumper.sh <url>/.git/ <destination_dir>
+gitdumper <url>/.git/ <destination_dir>
 ```
 
 = remote: origin

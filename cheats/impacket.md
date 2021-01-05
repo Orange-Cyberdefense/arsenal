@@ -148,7 +148,7 @@ getTGT.py -dc-ip <dc_ip> -hashes <lm_hash>:<nt_hash> <domain>/<user>
 
 ## GetADUser - gather data about the domain’s users and their corresponding email addresses
 ```
-GetADUSers.py -all <domain>/<user>:<password> -dc-ip <dc_ip>
+GetADUsers.py -all <domain>/<user>:<password> -dc-ip <dc_ip>
 ```
 
 ## ntlmrelay - host a payload that will automatically be served to the remote host connecting

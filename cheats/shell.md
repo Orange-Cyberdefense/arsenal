@@ -296,11 +296,6 @@ tail error.log -f -n 0
 xdg-open <programme> 
 ```
 
-## Open finder with current folder
-```
-open .
-```
-
 ## Register variable
 ```
 export <TESTING>=<Variable-text>
