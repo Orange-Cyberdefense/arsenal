@@ -39,10 +39,15 @@ sed -i 's/SMB = On/SMB = Off/g' /opt/tools/Responder/Responder.conf && cat /opt/
 
 ## multirelay attack - user filtered (previous disable HTTP and SMB in Responder.conf)
 ```
-responder-MultiRelay -t <ip> -u <user1> <user2>
+multirelay -t <ip> -u <user1> <user2>
 ```
 
 ## multirelay attack - all user (previous disable HTTP and SMB in Responder.conf)
 ```
-responder-MultiRelay -t <ip> -u ALL
+multirelay -t <ip> -u ALL
+```
+
+## runfinger - Responder-related utility which will finger a single IP address or an IP subnet and will reveal if a target requires SMB Signing or not.
+```
+runfinger -i <network_range>
 ```

