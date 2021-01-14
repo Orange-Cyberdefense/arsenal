@@ -2,9 +2,34 @@
 
 % bruteforce, hydra
 
-## Hydra - SSH - 22
+## Hydra - SSH - userlist and password list - 22
 ```
 hydra -L <userlist> -P <passlist> <ip> ssh 
+```
+
+## Hydra - SSH - user and password  - 22
+```
+hydra -l <user|root> -p <password|root> <ip> ssh 
+```
+
+## Hydra - SSH - user=password - 22
+```
+hydra -L <userlist> -e s <ip> ssh 
+```
+
+## Hydra - SSH - null password - 22
+```
+hydra -l <user|root> -e n <ip> ssh 
+```
+
+## Hydra - SSH - password=reverseuser - 22
+```
+hydra -L <userlist> -e r <ip> ssh 
+```
+
+## Hydra - SSH - file "login:pass" format - 22
+```
+hydra -C <file_login_pass> <ip> ssh 
 ```
 
 ## Hydra - FTP - 21 

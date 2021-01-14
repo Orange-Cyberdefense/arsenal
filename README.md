@@ -125,6 +125,7 @@ export TERM='xterm-256color'
 
 ### bruteforce & pass cracking
 - [X] hydra
+- [ ] medusa
 - [X] hashcat
 - [ ] john
 

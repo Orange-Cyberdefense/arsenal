@@ -31,3 +31,8 @@ ssh-keyscan -t rsa <IP> -p <PORT>
 ```
 msfconsole -x "use scanner/ssh/ssh_enumusers; set RHOSTS <ip>; set USER_FILE <user_file>; set CHECK_FALSE true; exploit"
 ```
+
+## SSH - old algorithm
+```
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 <user>@<ip>
+```
