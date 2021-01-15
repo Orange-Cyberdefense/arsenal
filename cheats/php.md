@@ -2,6 +2,11 @@
 
 % php, whitebox
 
+## php quick server on current folder
+```
+php -S 0.0.0.0:<port>
+```
+
 ## php grep include
 ```
 grep -rn --include "*.php" -e "^\(.*\s\|\)\(include\|require\|virtual\|require_once\|include_once\)\(\s\|(\).*\\$" --color

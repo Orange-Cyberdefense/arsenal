@@ -22,4 +22,3 @@ echo public > community; echo private >> community; echo manager >> community; o
 snmpwalk -c public -v1 <ip>
 ```
 
-

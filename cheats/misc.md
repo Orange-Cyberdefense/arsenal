@@ -25,3 +25,10 @@ grep <pattern> <file> | tr '\n' ' '
 
 ## grep nmap protocol from file and get ips in one line
 grep <pattern> <file>.gnmap|cut -d ' ' -f 2 | tr '\n' ' '
+
+% scanner
+
+## find service on port
+amap -d <ip> <port>
+
+
