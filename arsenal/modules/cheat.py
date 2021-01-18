@@ -33,19 +33,20 @@ class ArsenalRstVisitor(nodes.GenericNodeVisitor):
 
     def default_visit(self, node):
         # Previous cheat completed ? -> Create a new one
-        if self.cheats.current_cheat.is_done():
-            self.cheats.end_cheat()
-            self.cheats.new_cheat()
+        # if self.cheats.current_cheat.is_done():
+        #     self.cheats.end_cheat()
+        #     self.cheats.new_cheat()
+        pass
 
     def visit_section(self, node):
         """Cheats and titles"""
         # if no cmd but description use description as the command
-        if self.cheats.current_cheat.command == "" and \
-                self.cheats.current_cheat.description != "":
-            self.cheats.current_cheat.command = self.cheats.current_cheat.description.replace('\n', ';\\\n')
-            self.cheats.current_cheat.description = ""
-            self.cheats.end_cheat()
-            self.cheats.new_cheat()
+        # if self.cheats.current_cheat.command == "" and \
+        #         self.cheats.current_cheat.description != "":
+        #     self.cheats.current_cheat.command = self.cheats.current_cheat.description.replace('\n', ';\\\n')
+        #     self.cheats.current_cheat.description = ""
+        #     self.cheats.end_cheat()
+        #     self.cheats.new_cheat()
         # Parsing is based on sections (delimited by titles)
         current = " ".join(node.get('ids'))
         niv = 0
@@ -56,7 +57,7 @@ class ArsenalRstVisitor(nodes.GenericNodeVisitor):
             parent = " ".join(node.parent.get('ids'))
             niv = self.cheats.titles.index(parent) + 1
             self.cheats.titles = self.cheats.titles[:niv] + [current]
-        self.cheats.new_cheat()
+        # self.cheats.new_cheat()
         # Set default tag to all titles tree
         self.cheats.current_tags = ", ".join(self.cheats.titles)
 
@@ -80,15 +81,21 @@ class ArsenalRstVisitor(nodes.GenericNodeVisitor):
                     varval = "$({0})".format(varval)
                 self.cheats.filevars[varname] = varval
             elif line.endswith(":"):  # Name
+                # new name seems new cheat
+                if self.cheats.current_cheat.name != '':
+                    self.cheats.end_cheat()
+                    self.cheats.new_cheat()
                 self.cheats.current_cheat.name = line[:-1]
             else:  # Description
                 descr += [line]
         # If description list is not empty, convert it to string as description
         # Here we only do this if command has been filled to avoid junk text
         if len(descr) and len(self.cheats.current_cheat.command):
-            self.cheats.current_cheat.description = "\n".join(descr)
+            if self.cheats.current_cheat.description != "":
+                self.cheats.current_cheat.description += "\n"
+            self.cheats.current_cheat.description += "\n".join(descr)
             # For me descriptions are in paragraphs not title so I use the descr as a name
-            self.cheats.current_cheat.name = " ".join(descr)
+            # self.cheats.current_cheat.name = " ".join(descr)
 
 
 class Cheats:
