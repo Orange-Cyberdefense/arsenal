@@ -1,6 +1,6 @@
 import re
 import curses
-
+import textwrap
 
 class Command:
     cmdline = ""
@@ -15,8 +15,23 @@ class Command:
         self.description = cheat.description
         self.get_args(cheat, gvars)
         self.nb_args = len(self.args)
+        # careful this is not the lines number in GUI
         self.nb_lines_cmd = len(cheat.command.split('\n'))
+        # careful this is not the lines number in GUI
         self.nb_lines_desc = 0 if cheat.description == '' else len(cheat.description.split('\n'))
+
+    def get_description_cut_by_size(self, size):
+        """
+        The description cut by lines inside the gui size
+        """
+        if self.description != '':
+            desc_lines = self.description.split('\n')
+            result = []
+            for line in desc_lines:
+                result.extend(textwrap.wrap(line, size))
+            return result
+        else:
+            return []
 
     def get_args(self, cheat, gvars):
         """
@@ -38,6 +53,14 @@ class Command:
                 self.args.append([arg_name, cheat.variables[arg_name]])
             else:
                 self.args.append([arg_name, ""])
+
+    def get_command_parts(self):
+        if self.nb_args != 0:
+            regex = ''.join('<' + arg[0] + '>|' for arg in self.args)[:-1]
+            cmdparts = re.split(regex, self.cmdline)
+        else:
+            cmdparts = [self.cmdline]
+        return cmdparts
 
     def build(self):
         """

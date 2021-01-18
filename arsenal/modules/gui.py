@@ -1,7 +1,6 @@
 import time
 import curses
 import math
-import re
 import json
 from curses import wrapper
 from os.path import commonprefix, exists
@@ -385,12 +384,11 @@ class ArgslistMenu:
         nblines = 0
         multiline = '\n' in Gui.cmd.cmdline
         firstline = True
-        regex = ''.join('<' + arg[0] + '>|' for arg in Gui.cmd.args)[:-1]
         # in case of multiline cmd process each line separately
         # for each line we have to count each char and deduce the
         # number of lines needed to print it
         for line in Gui.cmd.cmdline.split('\n'):
-            parts = re.split(regex, line)
+            parts = Gui.cmd.get_command_parts()
             nb_args_todo = len(parts) - 1
             nbchar = 0
 
@@ -464,13 +462,14 @@ class ArgslistMenu:
                 self.prev_lastline_len = 2
                 win.addstr("\n    > ", color)
             elif self.prev_lastline_len < self.max_preview_size:
-                # size ok -> print the char 
+                # size ok -> print the char
                 self.prev_lastline_len += 1
                 win.addstr(c, color)
             else:
                 # last line too long -> new line
                 self.prev_lastline_len = 1
                 win.addstr("\n    " + c, color)
+
 
     def draw_selected_arg(self, y_pos):
         """
@@ -499,34 +498,27 @@ class ArgslistMenu:
             argwin.addstr(argline, curses.color_pair(Gui.BASIC_COLOR))
         argwin.refresh()
 
-    def draw_desc_preview(self, argprev, p_y):
-        # position
-        p_x = 3
+    def draw_desc_preview(self, argprev, p_x, p_y, description_lines):
+        """
+        Draw the descriptions_line preview in the preview windows (argprev)
+        """
         # draw description
-        if Gui.cmd.description != '':
+        if len(description_lines) > 0:
             argprev.addstr(p_y, p_x, "-----", curses.color_pair(Gui.BASIC_COLOR))
             p_y += 1
-            for description_line in Gui.cmd.description.split('\n'):
+            for description_line in description_lines:
                 argprev.addstr(p_y, p_x, description_line, curses.color_pair(Gui.BASIC_COLOR))
                 p_y += 1
             p_y += 1
             argprev.refresh()
         return p_y
 
-    def draw_cmd_preview(self, argprev, p_y=1):
+    def draw_cmd_preview(self, argprev, p_x, p_y=1):
         """
         Draw the cmd preview in the argument menu
         Also used to draw the borders of this menu
         """
-        # split cmdline
-        if Gui.cmd.nb_args != 0:
-            regex = ''.join('<' + arg[0] + '>|' for arg in Gui.cmd.args)[:-1]
-            cmdparts = re.split(regex, Gui.cmd.cmdline)
-        else:
-            cmdparts = [Gui.cmd.cmdline]
-
-        # position
-        p_x = 3
+        cmdparts = Gui.cmd.get_command_parts()
 
         # draw command
         argprev.addstr(p_y, p_x, "$ ", curses.color_pair(Gui.BASIC_COLOR))
@@ -563,17 +555,19 @@ class ArgslistMenu:
         # init vars and set margins values
         self.height, self.width = stdscr.getmaxyx()
         self.AB_SIDE = 5
-        self.max_preview_size = self.width - (2 * self.AB_SIDE) - 7
+        padding_text_border = 3
+        self.max_preview_size = self.width - (2 * self.AB_SIDE) - (2 * padding_text_border)
 
         # draw backgroud cheatslist menu (clean resize)
         self.previous_menu.draw(stdscr)
 
         # draw argslist menu popup
         self.prev_lastline_len = 0
-        if Gui.cmd.nb_args != 0:
-            nbpreviewnewlines = self.get_nb_preview_new_lines()
-        else:
-            nbpreviewnewlines = 0
+        nbpreviewnewlines = self.get_nb_preview_new_lines()
+        # if Gui.cmd.nb_args != 0:
+        #     nbpreviewnewlines = self.get_nb_preview_new_lines()
+        # else:
+        #     nbpreviewnewlines = 0
 
         # -------------- border
         # cmd
@@ -585,37 +579,52 @@ class ArgslistMenu:
         # .............  description margin
         # ---------- border
 
+        # width - preview
+        ncols = self.width - 2 * self.AB_SIDE
+
+        # prepare showed description
+        description_lines = Gui.cmd.get_description_cut_by_size(ncols - (padding_text_border * 2))
+
         border_height = 1
-        desc_height = (Gui.cmd.nb_lines_desc + 1 + 1) if (Gui.cmd.nb_lines_desc > 0) else 0
         cmd_height = 1 + nbpreviewnewlines
         args_height = (2 + Gui.cmd.nb_args) if (Gui.cmd.nb_args > 0) else 0
+        desc_height = (len(description_lines) + 1 + 1) if (len(description_lines) > 0) else 0
 
         cmd_pos = 1
         args_pos = border_height + cmd_height + 1
         desc_pos = args_pos + args_height - 1
 
-        ncols, nlines = self.width - 2 * self.AB_SIDE, border_height * 2 + cmd_height + args_height + desc_height
+        nlines = border_height * 2 + cmd_height + args_height + desc_height
+        if nlines > self.height:
+            nlines = self.height
 
         self.AB_TOP = (self.height - nlines) // 2
         y, x = self.AB_TOP, self.AB_SIDE
 
-        argprev = curses.newwin(nlines, ncols, y, x)
+        try:
+            argprev = curses.newwin(nlines, ncols, y, x)
 
-        self.draw_cmd_preview(argprev, cmd_pos)
-        self.draw_desc_preview(argprev, desc_pos)
+            # draw command
+            self.draw_cmd_preview(argprev, padding_text_border, cmd_pos)
 
-        if len(Gui.cmd.args) > 0:
-            self.draw_args_list(args_pos)
-            self.draw_selected_arg(args_pos)
-            # init cursor postion (if first draw)
-            if self.x_init is None or self.y_init is None or self.xcursor is None:
-                self.y_init, self.x_init = curses.getsyx()
-                # prefill compatibility
-                self.x_init -= len(Gui.cmd.args[self.current_arg][1])
-                self.xcursor = self.x_init + len(Gui.cmd.args[self.current_arg][1])
-            # set cursor position
-            curses.setsyx(self.y_init, self.xcursor)
-            curses.doupdate()
+            # draw description
+            self.draw_desc_preview(argprev, padding_text_border, desc_pos, description_lines)
+
+            if len(Gui.cmd.args) > 0:
+                self.draw_args_list(args_pos)
+                self.draw_selected_arg(args_pos)
+                # init cursor postion (if first draw)
+                if self.x_init is None or self.y_init is None or self.xcursor is None:
+                    self.y_init, self.x_init = curses.getsyx()
+                    # prefill compatibility
+                    self.x_init -= len(Gui.cmd.args[self.current_arg][1])
+                    self.xcursor = self.x_init + len(Gui.cmd.args[self.current_arg][1])
+                # set cursor position
+                curses.setsyx(self.y_init, self.xcursor)
+                curses.doupdate()
+        except curses.error:
+            # catch all curses error to not end with an exception in case of size error
+            pass
 
     def check_move_cursor(self, n):
         if Gui.cmd.nb_args == 0:
