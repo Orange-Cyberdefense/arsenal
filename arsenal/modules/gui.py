@@ -588,11 +588,11 @@ class ArgslistMenu:
         border_height = 1
         desc_height = (Gui.cmd.nb_lines_desc + 1 + 1) if (Gui.cmd.nb_lines_desc > 0) else 0
         cmd_height = 1 + nbpreviewnewlines
-        args_height = (1 + Gui.cmd.nb_args) if (Gui.cmd.nb_args > 0) else 0
+        args_height = (2 + Gui.cmd.nb_args) if (Gui.cmd.nb_args > 0) else 0
 
         cmd_pos = 1
         args_pos = border_height + cmd_height + 1
-        desc_pos = args_pos + args_height
+        desc_pos = args_pos + args_height - 1
 
         ncols, nlines = self.width - 2 * self.AB_SIDE, border_height * 2 + cmd_height + args_height + desc_height
 

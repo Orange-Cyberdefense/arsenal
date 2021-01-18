@@ -45,6 +45,8 @@ class Command:
         -> if some args values are still empty do nothing
         -> else build the final command string by adding args values
         """
+        if self.nb_args == 0 :
+            return True
         argsval = [a[1] for a in self.args]
         if "" not in argsval:
             # split cmdline at each arg position
