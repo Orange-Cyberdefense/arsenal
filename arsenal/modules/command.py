@@ -4,13 +4,19 @@ import curses
 
 class Command:
     cmdline = ""
-    args = []
+    description = ""
+    args = []  # [(name, value)]
     nb_args = 0
+    nb_lines_cmd = 1
+    nb_lines_desc = 0
 
     def __init__(self, cheat, gvars):
         self.cmdline = cheat.command
+        self.description = cheat.description
         self.get_args(cheat, gvars)
         self.nb_args = len(self.args)
+        self.nb_lines_cmd = len(cheat.command.split('\n'))
+        self.nb_lines_desc = 0 if cheat.description == '' else len(cheat.description.split('\n'))
 
     def get_args(self, cheat, gvars):
         """

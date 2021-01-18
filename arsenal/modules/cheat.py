@@ -15,6 +15,7 @@ class Cheat:
     tags = ""
     command = ""
     printable_command = ""
+    description = ""
     variables = dict()
     command_capture = False
 
@@ -255,6 +256,7 @@ class Cheats:
                                 self.current_cheat.command += "\\\n" + line.rstrip()
                             else:
                                 self.current_cheat.command += ";\\\n" + line.rstrip()
+                        continue
                     else:
                         raise Exception('Error parsing (CMD) markdown file ' + filename)
 
