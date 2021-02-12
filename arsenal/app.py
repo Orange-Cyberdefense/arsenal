@@ -131,7 +131,7 @@ class App:
             elif args.tmux:
                 try:
                     server = libtmux.Server()
-                    session = server.list_sessions()[0]
+                    session = server.list_sessions()[-1]
                     window = session.attached_window
                     panes = window.panes
                     if len(panes) == 1:
