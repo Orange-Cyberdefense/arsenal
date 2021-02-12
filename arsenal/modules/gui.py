@@ -82,30 +82,46 @@ class CheatslistMenu:
         win_height, win_width = win.getmaxyx()
         prompt = '> '
         max_width = win_width - len(prompt) - len("\n")
-        first_col_size = math.floor(max_width * 20 / 100)
-        sec_col_size = math.floor(max_width * 30 / 100)
-        third_col_size = math.floor(max_width * 50 / 100)
+
+
+        col4_size = math.floor(max_width * 15 / 100)
+        col3_size = math.floor(max_width * 8 / 100)
+        col1_size = math.floor(max_width * 25 / 100)
+        col2_size = math.floor(max_width * 52 / 100)
+        #col0_size = math.floor(max_width * 20 / 100)
 
         title = cheat.tags if cheat.tags != '' else cheat.str_title
 
+        tags = cheat.get_tags()
+
         if selected:
             win.addstr(prompt, curses.color_pair(Gui.CURSOR_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(title, first_col_size), first_col_size),
+            win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
                        curses.color_pair(Gui.COL1_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, sec_col_size), sec_col_size),
-                       curses.color_pair(Gui.COL2_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, third_col_size), third_col_size),
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
                        curses.color_pair(Gui.COL3_COLOR_SELECT))
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
+                       curses.color_pair(Gui.COL2_COLOR_SELECT))
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, col2_size), col2_size),
+                       curses.color_pair(Gui.COL3_COLOR_SELECT))
+            # win.addstr("{:{}s}".format(Gui.draw_string(title, col0_size), col0_size),
+            #            curses.color_pair(Gui.COL1_COLOR_SELECT))
             win.addstr("\n")
         else:
             win.addstr(' ' * len(prompt), curses.color_pair(Gui.BASIC_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(title, first_col_size), first_col_size),
+            win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
                        curses.color_pair(Gui.COL1_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, sec_col_size), sec_col_size),
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
+                       curses.color_pair(Gui.COL1_COLOR))
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
                        curses.color_pair(Gui.COL2_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, third_col_size), third_col_size),
+            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, col2_size), col2_size),
                        curses.color_pair(Gui.COL3_COLOR))
+            # win.addstr("{:{}s}".format(Gui.draw_string(title, col0_size), col0_size),
+            #            curses.color_pair(Gui.COL1_COLOR))
             win.addstr("\n")
+
+
 
     def draw_cheatslistbox(self):
         """
@@ -165,6 +181,7 @@ class CheatslistMenu:
             if value in cheat.str_title.lower() \
                     or value in cheat.name.lower() \
                     or value in cheat.tags.lower() \
+                    or value in "".join(cheat.command_tags.values()).lower() \
                     or value in cheat.command.lower():
                 match = True and match
             else:
