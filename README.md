@@ -25,16 +25,8 @@ This project is inspired by navi (<https://github.com/denisidoro/navi>) because 
 ```
 git clone https://github.com/Orange-Cyberdefense/arsenal.git
 cd arsenal
-./run
-```
-
-if you use the tmux mode please install requirements first as we use the libtmux lib:
-```
-pip install -r requirements.txt
-```
-or 
-```
 python3 -m pip install -r requirements.txt
+./run
 ```
 
 Inside your .bashrc or .zshrc add the path to `run` to help you do that you could launch the addalias.sh script
