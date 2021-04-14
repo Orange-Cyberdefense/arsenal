@@ -5,6 +5,7 @@ from docutils.parsers import rst
 from docutils.utils import new_document
 from docutils.frontend import OptionParser
 from docutils import nodes
+import re
 
 
 class Cheat:
@@ -13,17 +14,50 @@ class Cheat:
     titles = []
     filename = ""
     tags = ""
+    command_tags = {}
     command = ""
     printable_command = ""
     description = ""
     variables = dict()
     command_capture = False
+    rate = 0
 
     def is_done(self):
         return self.name != "" and self.command != "" and not self.command_capture
 
     def inline_cheat(self):
         return "{}{}{}".format({self.tags}, {self.name}, {self.command})
+
+    def get_rating(self):
+        # Rating
+        rate = ""
+        for i in range(0, 5):
+            if self.rate <= i:
+                rate += "★"
+            else:
+                rate += "⭐"
+        return rate
+
+    def get_tags(self):
+        tags_dict = {'target/local': 'Loc',
+                     'target/remote': 'Rem',
+                     'target/serve': 'Ser',
+                     'plateform/linux': '[L] ',
+                     'plateform/windows': '[W] ',
+                     'plateform/mac': '[M] ',
+                     'plateform/multiple': '[*] '}
+
+        tag_string = ''
+        if self.command_tags is not None:
+            for tag_key in self.command_tags.keys():
+                tag = tag_key + '/' + self.command_tags[tag_key]
+                if tag in tags_dict.keys():
+                    tag_string += '' + tags_dict[tag]
+                elif 'cat/' in tag:
+                    tag_string += ' ' + tag.split('cat/')[1].upper().strip()
+                # else:
+                #     tag_string += '|' + tag.lower().strip()
+        return tag_string
 
 
 class ArsenalRstVisitor(nodes.GenericNodeVisitor):
@@ -108,12 +142,18 @@ class Cheats:
         else:
             self.current_cheat.titles = "".join(self.titles[:-1])
             self.current_cheat.name = self.titles[-1]
+        # self.current_cheat.command_tags = {}
 
     def end_cheat(self):
         self.current_cheat.tags = self.current_tags
         self.current_cheat.str_title = ", ".join(self.titles[:-1])
         if self.current_cheat.str_title == '':
             self.current_cheat.str_title = self.firsttitle
+        # merge ref cmd_tags (title) with current_cheat cmd tags
+        if len(self.command_tags_ref) > 0:
+            cmd_tags = self.command_tags_ref.copy()
+            cmd_tags.update(self.current_cheat.command_tags)
+            self.current_cheat.command_tags = cmd_tags
         self.cheatlist.append(self.current_cheat)
 
     # -----------------------------------------------------------------------------#
@@ -180,6 +220,7 @@ class Cheats:
         self.filevars = {}
         self.titles = []
         self.new_cheat()
+        self.command_tags_ref = {}
         nb = 0
 
         with open(filename) as f:
@@ -192,15 +233,14 @@ class Cheats:
                     self.end_cheat()
                     self.new_cheat()
 
-                # TAGS
+                # cheat TAGS
                 if line.startswith('%'):
                     # replace current tags (metadata)
                     self.current_tags = line[1:].strip()
                     continue
 
                 # Name & Titles
-                if line.startswith('#'):
-
+                if line.startswith('# ') or line.startswith('##'):
                     if self.current_cheat.command_capture:
                         raise Exception('Error parsing (Title) markdown file ' + filename + ' line: ' + str(nb))
                     # if no cmd but description use description as the command
@@ -234,6 +274,24 @@ class Cheats:
                     else:
                         raise Exception('Error parsing (Title Skip) markdown file ' + filename + ' line: ' + str(nb))
                     self.new_cheat()
+                    continue
+
+                # CMD TAGS (with #tag format on same line)
+                if re.match(r'^#[^\s#]', line):
+                    # replace current tags (metadata)
+                    cmd_tags = re.split(r'#([^\s#]+)', line)
+                    cmd_tags = ' '.join(cmd_tags).split()
+                    #if niv > 1:
+                    # reset current_cheat tag with backup of lvl1 title
+                    self.current_cheat.command_tags = self.command_tags_ref
+                    for cmd_tag in cmd_tags:
+                        tag_split = cmd_tag.split('/')
+                        if len(tag_split) >= 2:
+                            cmd_tag_key = tag_split[0]
+                            cmd_tag_value = "/".join(tag_split[1:])
+                            self.current_cheat.command_tags[cmd_tag_key] = cmd_tag_value
+                    if niv <= 1:
+                        self.command_tags_ref = self.current_cheat.command_tags.copy()
                     continue
 
                 # CMD Start/End

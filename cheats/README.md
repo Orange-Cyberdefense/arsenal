@@ -2,8 +2,45 @@
 
 % tag1, tag2
 
-Tags are used to categorize the cheat sheet
+#cat/INTERNAL
 
+```
+#plateform/linux
+#plateform/windows
+#plateform/mac
+#plateform/multiple
+
+#target/local 
+#target/remote
+
+#cat/UTILS
+#cat/RECON
+#cat/ATTACK
+#cat/ATTACK/BRUTEFORCE-SPRAY
+#cat/ATTACK/LISTEN-SERVE
+#cat/ATTACK/FILE_TRANSFERT
+#cat/ATTACK/CONNECT
+#cat/ATTACK/EXPLOIT
+#cat/ATTACK/MITM
+#cat/ATTACK/REVERSE_SHELL
+#cat/ATTACK/INJECTION
+#cat/CODE
+#cat/CODE/SAMPLE
+#cat/CODE/WHITEBOX
+#cat/CRACKING
+#cat/CRACKING/PASSWORD
+#cat/PIVOT
+#cat/PIVOT/TUNNEL-PORTFW
+#cat/PRIVESC
+#cat/POSTEXPLOIT
+#cat/POSTEXPLOIT/CREDS_RECOVER
+#cat/PERSIST
+
+#port/<portnum>
+```
+
+Tags are used to categorize the cheat sheet
+Command tags start with a #tag the level1 tags are overrided by other tags commands tags are in the form : #key/value
 
 ## Command description
 Lines beginning with `#` represents the command main description
