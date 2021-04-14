@@ -21,6 +21,18 @@ Authors:
 
 This project is inspired by navi (<https://github.com/denisidoro/navi>) because the original version was in bash and too hard to understand to add features
 
+
+## Arsenal new features
+
+![](img/arsenal_update.png)
+
+- New colors
+- Add tmux new pane support (with -t)
+- Add default values in cheatsheets commands with `<argument|default_value>`
+- Support description inside cheatsheets
+- New categories and Tags
+- New cheatsheets
+
 ## Install & Launch
 ```
 git clone https://github.com/Orange-Cyberdefense/arsenal.git
