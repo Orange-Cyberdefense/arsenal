@@ -12,7 +12,15 @@ class Command:
 
     def __init__(self, cheat, gvars):
         self.cmdline = cheat.command
-        self.description = cheat.description
+
+        self.cmd_tags = cheat.command_tags
+        self.description = ''
+        for tag in self.cmd_tags:
+            self.description += '[' + self.cmd_tags[tag] + '] '
+        if self.description != '' and cheat.description != '':
+            self.description += '\n-----\n'
+        self.description += cheat.description
+
         self.get_args(cheat, gvars)
         self.nb_args = len(self.args)
         # careful this is not the lines number in GUI
@@ -24,14 +32,11 @@ class Command:
         """
         The description cut by lines inside the gui size
         """
-        if self.description != '':
-            desc_lines = self.description.split('\n')
-            result = []
-            for line in desc_lines:
-                result.extend(textwrap.wrap(line, size))
-            return result
-        else:
-            return []
+        desc_lines = self.description.split('\n')
+        result = []
+        for line in desc_lines:
+            result.extend(textwrap.wrap(line, size))
+        return result
 
     def get_args(self, cheat, gvars):
         """

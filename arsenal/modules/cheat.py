@@ -39,9 +39,9 @@ class Cheat:
         return rate
 
     def get_tags(self):
-        tags_dict = {'target/local': 'Local ',
-                     'target/remote': 'Remote',
-                     'target/serve': 'Serve ',
+        tags_dict = {'target/local': 'Loc',
+                     'target/remote': 'Rem',
+                     'target/serve': 'Ser',
                      'plateform/linux': '[L] ',
                      'plateform/windows': '[W] ',
                      'plateform/mac': '[M] ',

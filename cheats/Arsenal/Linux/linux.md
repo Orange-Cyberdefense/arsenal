@@ -79,9 +79,9 @@ ps -ef | grep apache | grep -v grep
 chgrp <group-name-from> <group-name-to>
 ```
 
-## List directory contents
+## List directory contents by size
 ```
-ls
+ls -Slrh
 ```
 
 ## List all directory contents sorted by time edited reverse

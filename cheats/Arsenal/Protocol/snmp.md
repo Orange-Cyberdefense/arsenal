@@ -1,4 +1,4 @@
-# snmap
+# snmp
 
 % snmp, 161
 

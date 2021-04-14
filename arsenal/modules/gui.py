@@ -84,10 +84,10 @@ class CheatslistMenu:
         max_width = win_width - len(prompt) - len("\n")
 
 
-        col4_size = math.floor(max_width * 15 / 100)
+        col4_size = math.floor(max_width * 14 / 100)
         col3_size = math.floor(max_width * 8 / 100)
-        col1_size = math.floor(max_width * 25 / 100)
-        col2_size = math.floor(max_width * 52 / 100)
+        col1_size = math.floor(max_width * 23 / 100)
+        col2_size = math.floor(max_width * 55 / 100)
         #col0_size = math.floor(max_width * 20 / 100)
 
         title = cheat.tags if cheat.tags != '' else cheat.str_title
@@ -97,7 +97,7 @@ class CheatslistMenu:
         if selected:
             win.addstr(prompt, curses.color_pair(Gui.CURSOR_COLOR_SELECT))
             win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                       curses.color_pair(Gui.COL1_COLOR_SELECT))
+                       curses.color_pair(Gui.COL4_COLOR_SELECT))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
                        curses.color_pair(Gui.COL3_COLOR_SELECT))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
@@ -109,8 +109,12 @@ class CheatslistMenu:
             win.addstr("\n")
         else:
             win.addstr(' ' * len(prompt), curses.color_pair(Gui.BASIC_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                       curses.color_pair(Gui.COL1_COLOR))
+            if tags.startswith('[W]'):
+                win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
+                           curses.color_pair(Gui.COL5_COLOR))
+            else:
+                win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
+                           curses.color_pair(Gui.COL4_COLOR))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
                        curses.color_pair(Gui.COL1_COLOR))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
@@ -713,17 +717,20 @@ class Gui:
     savefile = config.savevarfile
     # colors
     BASIC_COLOR = 0  # output std
-    COL1_COLOR = 0
-    COL2_COLOR = 5  # blue
-    COL3_COLOR = 3  # green
+    COL1_COLOR = 7
+    COL2_COLOR = 4 # 5  # blue
+    COL3_COLOR = 0  # green
+    COL4_COLOR = 5  # 26  # violet clair: 14  # 4 yellow  # 6 purple # 7 cyan # 9 dark grey
+    COL5_COLOR = 5 # 7
     COL1_COLOR_SELECT = 256  # output std invert
     COL2_COLOR_SELECT = 256
     COL3_COLOR_SELECT = 256
+    COL4_COLOR_SELECT = 256
     CURSOR_COLOR_SELECT = 266  # background red
     PROMPT_COLOR = 0
-    INFO_NAME_COLOR = 5
+    INFO_NAME_COLOR = 4 # 5
     INFO_DESC_COLOR = 0
-    INFO_CMD_COLOR = 3
+    INFO_CMD_COLOR = 0
     ARG_NAME_COLOR = 5
     loaded_menu = False
 

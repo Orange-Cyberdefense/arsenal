@@ -14,9 +14,9 @@ hashcat -a 0 -m 400 hashes <wordlist>
 hashcat -a 0 -m 400 hashes <wordlist> -r /usr/share/doc/hashcat/rules/best64.rule 
 ```
 
-## hashcat - kerberos ticket
+## hashcat - kerberos ticket (after kerberoasting)
 ```
-hashcat -m 18200 --force -a 0 hashes <wordlist> 
+hashcat -m 13100 --force -a 0 hashes <wordlist> 
 ```
 
 ## hashcat - LM
