@@ -1,11 +1,11 @@
 #!/bin/sh
 
 if [ -L $0 ] ; then
-    DIR=$(dirname $(readlink -f $0)) ;
+    DIR=$(dirname "$(readlink -f "$0")") ;
 else
-    DIR=$(dirname $0) ;
+    DIR=$(dirname "$0") ;
 fi ;
 
 export TERM='xterm-256color'
-exec python3 ${DIR}/arsenal/app.py "$@"
+exec python3 "${DIR}/arsenal/app.py" "$@"
 
