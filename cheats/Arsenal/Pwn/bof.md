@@ -32,32 +32,32 @@ msf-nasm_shell # nasm > jmp esp
 
 % bof, ropgadget
 
-## ropgadget - find gadgets
+## ropgadget - Specify a binary filename to analyze
 ```
 ROPgadget --binary <binary>
 ```
 
-## ropgagdet - create a ROP chain
+## ropgagdet - Enable the ROP chain generation
 ```
 ROPgadget --binary <binary> --ropchain
 ```
 
-## ropgagdet - search opcode in executable segment
+## ropgagdet - Search opcode in executable segment
 ```
 ROPgadget --binary <binary> --opcode <opcode>
 ```
 
-## ropgadget - search a string between two addresses (0x...-0x...)
+## ropgadget - Search string between two addresses (0x...-0x...)
 ```
 ROPgadget --binary <binary> --string <string> --range <start_address>-<end_address>
 ```
 
-## ropgadget - only show specific instructions
+## ropgadget - Only show specific instructions
 ```
 ROPgadget --binary <binary> --only="<instructions>"
 ```
 
-## ropgadget - suppress specific mnemonics
+## ropgadget - Suppress specific mnemonics
 ```
 ROPgadget --binary <binary> --filter="<instructions>"
 ```
