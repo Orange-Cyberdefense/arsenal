@@ -3,7 +3,9 @@ import curses
 import math
 import json
 from curses import wrapper
-from os.path import commonprefix, exists
+from os.path import commonprefix, exists, isdir
+from os import sep
+import glob
 
 #  local
 from . import config
@@ -652,6 +654,35 @@ class ArgslistMenu:
             return False
         return self.x_init <= (self.xcursor + n) < self.x_init + len(Gui.cmd.args[self.current_arg][1]) + 1
 
+    def autocomplete_arg(self):
+        """
+        Autocomplete the current argument
+        """
+        # current argument value
+        argument = Gui.cmd.args[self.current_arg][1]
+        # look for all files that match the argument in the working directory
+        matches = glob.glob('{}*'.format(argument))
+
+        if not matches:
+            return False
+
+        # init the autocompleted argument
+        autocompleted_argument = ""
+        # autocompleted argument is the longest start common string in all matches
+        for i in range(len(min(matches))):
+            if not all(min(matches)[:i + 1] == match[:i + 1] for match in matches):
+                break
+            autocompleted_argument = min(matches)[:i + 1]
+        
+        # add a "/" at the end of the autocompleted argument if it is a directory
+        if isdir(autocompleted_argument) and autocompleted_argument[-1] != sep:
+            autocompleted_argument = autocompleted_argument + sep
+
+        # autocomplete the argument 
+        Gui.cmd.args[self.current_arg][1] = autocompleted_argument
+        # update cursor position
+        self.xcursor = self.x_init + len(autocompleted_argument)
+
     def run(self, stdscr):
         """
         Arguments selection menu processing..
@@ -678,7 +709,13 @@ class ArgslistMenu:
             elif c == curses.KEY_UP:
                 self.previous_arg()
             elif c == 9:
-                self.next_arg()
+                if Gui.cmd.args:
+                    # autocomplete the current argument
+                    if Gui.cmd.args[self.current_arg][1]:
+                        self.autocomplete_arg()
+                    # go to the next argument
+                    else:
+                        self.next_arg()
             elif c == curses.KEY_BACKSPACE or c == 127:
                 if self.check_move_cursor(-1):
                     i = self.xcursor - self.x_init - 1
