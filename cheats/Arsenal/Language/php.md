@@ -51,7 +51,7 @@ grep -rn --include "*.php" -e "^\(.*\s\|\)\(echo\|printf\|print\)\(\s\|(\).*\\$"
 
 ## php grep weak comparaison
 ```
-grep -rn --include "*.php" -e "\(\\$[^=]\|0\)\s*==\s*\(0\|\\$[^=]\\)" --color
+grep -rn --include "*.php" -e "\(\\\$[^=]\|0\)\s*==\s*\(0\|\\\$[^=]\\)" --color
 ```
 
 ## php grep entry points
