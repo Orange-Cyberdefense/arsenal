@@ -73,3 +73,10 @@ docker-compose logs -f --tail 100 <service_name>
 
 # Stops containers and removes containers, networks created by up
 docker-compose down
+
+% docker, mysql
+# run mysql container
+docker run --rm --name=<container_name|mysql8> -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql/mysql-server:<version|latest>
+
+# connect to mysql docker container
+docker exec -ti <container_name> mysql
