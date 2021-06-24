@@ -1,5 +1,7 @@
 # Arsenal
 
+![](img/logo.png)
+
 Arsenal is just a quick inventory, reminder and launcher for pentest commands.
 <br>This project written by pentesters for pentesters simplify the use of all the hard-to-remember commands
 
