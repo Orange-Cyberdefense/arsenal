@@ -755,10 +755,10 @@ class Gui:
     # colors
     BASIC_COLOR = 0  # output std
     COL1_COLOR = 7
-    COL2_COLOR = 4 # 5  # blue
-    COL3_COLOR = 0  # green
+    COL2_COLOR = 4 # gold
+    COL3_COLOR = 14  # purple light 
     COL4_COLOR = 5  # 26  # violet clair: 14  # 4 yellow  # 6 purple # 7 cyan # 9 dark grey
-    COL5_COLOR = 5 # 7
+    COL5_COLOR = 5 # blue
     COL1_COLOR_SELECT = 256  # output std invert
     COL2_COLOR_SELECT = 256
     COL3_COLOR_SELECT = 256
