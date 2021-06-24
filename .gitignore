@@ -1,6 +1,7 @@
 .venv/
 .idea/
 cheats/.obsidian/
+cheats/Arsenal/.obsidian/
 arsenal.egg-info/
 arsenal/__pycache__/
 arsenal/modules/__pycache__/
