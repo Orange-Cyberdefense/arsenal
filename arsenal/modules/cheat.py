@@ -166,10 +166,12 @@ class Cheats:
         self.filevars = {}
         self.titles = []
         self.cheatlist = []
+        self.command_tags_ref = {}
         self.new_cheat()
 
         parser = rst.Parser()
         with open(filename, "r") as fd:
+            print(filename)
             text = fd.read()
             settings = OptionParser(components=(rst.Parser,)).get_default_values()
             document = new_document(filename + ".tmp", settings)
