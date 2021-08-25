@@ -163,6 +163,7 @@ class Cheats:
     def parse_restructuredtext(self, filename):
         self.firsttitle = ""
         self.current_tags = ""
+        self.command_tags_ref = {}
         self.filevars = {}
         self.titles = []
         self.cheatlist = []
