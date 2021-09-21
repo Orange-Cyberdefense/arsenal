@@ -254,7 +254,7 @@ class Cheats:
                     # New title found !
                     niv, title = parse_title(line)
 
-                    # Save first title (incase only niv1 title are used)
+                    # Save first title (in case only niv1 title are used)
                     if self.firsttitle == "":
                         self.firsttitle = title
 

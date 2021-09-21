@@ -264,7 +264,7 @@ ps aux | grep php
 tail error.log -f -n 0
 ```
 
-## Start appliction
+## Start application
 ```
 xdg-open <programme> 
 ```

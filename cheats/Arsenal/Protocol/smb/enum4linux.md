@@ -4,7 +4,7 @@
 
 #plateform/linux  #target/remote  #port/445 #protocol/smb #cat/RECON 
 
-## enum4linux - all except dictionnary based share name listing (default)
+## enum4linux - all except dictionary based share name listing (default)
 ```
 enum4linux -a <ip>
 ```

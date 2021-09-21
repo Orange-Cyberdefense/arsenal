@@ -34,7 +34,7 @@ dig ANY <domain_name> @<dns_ip>
 dig -x <ip> @<dns_ip>
 ```
 
-## dig zone transfert
+## dig zone transfer
 #plateform/linux  #target/remote  #cat/RECON
 ```
 dig axfr <domain_name> @<name_server>
@@ -46,7 +46,7 @@ dig axfr <domain_name> @<name_server>
 dig +short <domain_name> @resolver1.opendns.com
 ```
 
-## dig, find domains file ip addresse value
+## dig, find domains file ip address value
 #plateform/linux  #target/remote  #cat/RECON
 ```
 dig -f <domains.txt> +noall +answer
@@ -66,7 +66,7 @@ dig -f <domains.txt> MX +noall +answer
 dnsrecon -d <domain>
 ```
 
-## dnsrecon zone transfert
+## dnsrecon zone transfer
 #plateform/linux  #target/remote  #cat/RECON
 ```
 dnsrecon -d <domain> -t axfr

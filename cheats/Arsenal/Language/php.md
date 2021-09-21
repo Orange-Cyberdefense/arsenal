@@ -49,7 +49,7 @@ grep -rn --include "*.php" -e "^\(.*\s\|\)mail(.*\\$" --color
 grep -rn --include "*.php" -e "^\(.*\s\|\)\(echo\|printf\|print\)\(\s\|(\).*\\$" --color
 ```
 
-## php grep weak comparaison
+## php grep weak comparison
 ```
 grep -rn --include "*.php" -e "\(\\\$[^=]\|0\)\s*==\s*\(0\|\\\$[^=]\\)" --color
 ```

