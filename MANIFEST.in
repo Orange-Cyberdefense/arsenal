@@ -1,0 +1,6 @@
+include LICENSE README.md requirements.txt run
+recursive-include cheats *
+recursive-include img *
+recursive-include mindmap *
+recursive-include my_cheats *
+global-exclude .gitignore

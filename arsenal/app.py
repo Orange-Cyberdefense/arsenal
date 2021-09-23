@@ -9,14 +9,14 @@ import re
 import time
 
 # arsenal
-from modules import config
-from modules import cheat
-from modules import check
-from modules import gui as arsenal_gui
+from . import __version__
+from .modules import config
+from .modules import cheat
+from .modules import check
+from .modules import gui as arsenal_gui
 
 
 class App:
-    version = '1.0.0'
 
     def __init__(self):
         pass
@@ -26,7 +26,7 @@ class App:
         arsenal
         arsenal --copy
         arsenal --print
-        
+
         You can manage global variables with:
         >set GLOBALVAR1=<value>
         >show
@@ -37,7 +37,7 @@ class App:
 
         parser = argparse.ArgumentParser(
             prog="arsenal",
-            description='arsenal v{} - Pentest command launcher'.format(self.version),
+            description='arsenal v{} - Pentest command launcher'.format(__version__),
             epilog=examples,
             formatter_class=argparse.RawTextHelpFormatter
         )
@@ -49,7 +49,7 @@ class App:
         group_out.add_argument('-e', '--exec', action='store_true', help='Execute cmd')
         group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
         group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
-        parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(self.version))
+        parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(__version__))
 
         return parser.parse_args()
 
@@ -174,8 +174,12 @@ class App:
         termios.tcsetattr(stdin, termios.TCSADRAIN, oldattr)
 
 
-if __name__ == "__main__":
+def main():
     try:
         App().run()
     except KeyboardInterrupt:
         exit(0)
+
+
+if __name__ == "__main__":
+    main()
