@@ -186,7 +186,7 @@ export TERM='xterm-256color'
 - [X] evilwinrm
 
 #### redis
-- [ ] redis-cli
+- [X] redis-cli
 
 #### postgres
 - [X] psql
