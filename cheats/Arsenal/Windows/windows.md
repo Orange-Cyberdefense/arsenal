@@ -22,7 +22,7 @@ findstr /si 'password' *.txt *.xml *.docx
 findstr /S /I cpassword \\<FQDN>\sysvol\<FQDN>\policies\*.xml
 ```
 
-## get patchs
+## get patches
 ```
 wmic qfe get Caption,Description,HotFixID,InstalledOn
 ```
@@ -47,7 +47,7 @@ nslookup -type=any <userdnsdomain>.
 wmic logicaldisk get caption,description,providername
 ```
 
-## show recyle bin
+## show recycle bin
 ```
 dir C:\$Recycle.Bin /s /b
 ```

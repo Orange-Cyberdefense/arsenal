@@ -14,7 +14,7 @@ mysql -u <user> -p<password> -h <hostname> <database>
 mysql -u <user> -p -e "create database <database> character set UTF8mb4 collate utf8mb4_bin"
 ```
 
-## Export databse
+## Export database
 #cat/UTILS 
 ```
 mysqldump -u <user> -p <database> > <path>

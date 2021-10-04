@@ -232,7 +232,7 @@ class CheatslistMenu:
         self.draw_footbox(info)
         # create edit windows
         self.draw_editbox()
-        # init cursor postion (if first draw)
+        # init cursor position (if first draw)
         if self.x_init is None or self.y_init is None or self.xcursor is None:
             self.y_init, self.x_init = curses.getsyx()
             self.xcursor = self.x_init
@@ -581,7 +581,7 @@ class ArgslistMenu:
         padding_text_border = 3
         self.max_preview_size = self.width - (2 * self.AB_SIDE) - (2 * padding_text_border)
 
-        # draw backgroud cheatslist menu (clean resize)
+        # draw background cheatslist menu (clean resize)
         self.previous_menu.draw(stdscr)
 
         # draw argslist menu popup
@@ -636,7 +636,7 @@ class ArgslistMenu:
             if len(Gui.cmd.args) > 0:
                 self.draw_args_list(args_pos)
                 self.draw_selected_arg(args_pos)
-                # init cursor postion (if first draw)
+                # init cursor position (if first draw)
                 if self.x_init is None or self.y_init is None or self.xcursor is None:
                     self.y_init, self.x_init = curses.getsyx()
                     # prefill compatibility
@@ -694,7 +694,7 @@ class ArgslistMenu:
             self.draw(stdscr)
             c = stdscr.getch()
             if c == curses.KEY_ENTER or c == 10 or c == 13:
-                # try to buid the cmd
+                # try to build the cmd
                 # if cmd build is ok -> exit
                 # else continue in args menu
                 if Gui.cmd.build():
@@ -798,7 +798,7 @@ class Gui:
     def run(self, cheatsheets):
         """
         Gui entry point
-        :param cheatsheets: cheatsheets dictionnary
+        :param cheatsheets: cheatsheets dictionary
         """
         if self.cheats_menu is None:
             # Load cheatList if not already done

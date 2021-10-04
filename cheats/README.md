@@ -40,7 +40,7 @@
 ```
 
 Tags are used to categorize the cheat sheet
-Command tags start with a #tag the level1 tags are overrided by other tags commands tags are in the form : #key/value
+Command tags start with a #tag the level1 tags are overridden by other tags commands tags are in the form : #key/value
 
 ## Command description
 Lines beginning with `#` represents the command main description
