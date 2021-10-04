@@ -9,17 +9,15 @@ jobs:
       - run: pip install --upgrade pip wheel
       - run: pip install bandit black codespell flake8 flake8-bugbear
                          flake8-comprehensions isort mypy pytest pyupgrade safety
-      - run: bandit --recursive --skip B101 . || true  # B101 is assert statements
+      - run: bandit --recursive --skip B404,B602,B605 .
       - run: black --check . || true
       - run: codespell --ignore-words-list="fo,seh"
-      - run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-      - run: flake8 . --count --exit-zero --max-complexity=10 --max-line-length=88
-                      --show-source --statistics
+      - run: flake8 --ignore=B001,B007,C408,E111,E127,E203,E261,E265,E303,E402,E701,E711,E722,F401,F541,F841,W291,W293
+                    --max-complexity=32 --max-line-length=118 --show-source --statistics .
       - run: isort --check-only --profile black . || true
-      - run: pip install -r requirements.txt || pip install --editable . || true
+      - run: pip install -r requirements.txt
       - run: mkdir --parents --verbose .mypy_cache
       - run: mypy --ignore-missing-imports --install-types --non-interactive . || true
-      - run: pytest . || true
-      - run: pytest --doctest-modules . || true
+      - run: pytest . || pytest --doctest-modules . || true
       - run: shopt -s globstar && pyupgrade --py36-plus **/*.py || true
       - run: safety check

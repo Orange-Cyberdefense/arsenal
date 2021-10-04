@@ -90,7 +90,7 @@ class App:
                     with open(config.savevarfile, "w") as f:
                         f.write(json.dumps({}))
                     self.run()
-                elif re.match("^\>set( [^= ]+=[^= ]+)+$", cmd.cmdline):
+                elif re.match(r"^\>set( [^= ]+=[^= ]+)+$", cmd.cmdline):
                     # Load previous global var
                     if (os.path.exists(config.savevarfile)):
                         with open(config.savevarfile, 'r') as f:
