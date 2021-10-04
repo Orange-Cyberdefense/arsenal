@@ -111,7 +111,7 @@ class ArsenalRstVisitor(nodes.GenericNodeVisitor):
             if line.startswith("=") or line.startswith("$") and ":" in line:
                 varname, varval = [x.strip() for x in line[1:].split(":")]
                 if line.startswith("$"):
-                    varval = "$({0})".format(varval)
+                    varval = f"$({varval})"
                 self.cheats.filevars[varname] = varval
             elif line.endswith(":"):  # Name
                 self.cheats.current_cheat.name = line[:-1]
@@ -170,7 +170,7 @@ class Cheats:
         self.new_cheat()
 
         parser = rst.Parser()
-        with open(filename, "r") as fd:
+        with open(filename) as fd:
             text = fd.read()
             settings = OptionParser(components=(rst.Parser,)).get_default_values()
             document = new_document(filename + ".tmp", settings)
@@ -368,7 +368,7 @@ class Cheats:
         paths = [paths] if isinstance(paths, str) else paths
         for path in paths:
             for file_format in file_formats:
-                for entry in Path(path).rglob('*.{0}'.format(file_format)):
+                for entry in Path(path).rglob(f'*.{file_format}'):
                     if entry.name not in exclude_list and file_format in parsers.keys():
                         parsers[file_format](str(entry.absolute()))
         return self.cheatsheets

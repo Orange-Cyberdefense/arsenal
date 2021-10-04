@@ -21,5 +21,5 @@ jobs:
       - run: mypy --ignore-missing-imports --install-types --non-interactive . || true
       - run: pytest . || true
       - run: pytest --doctest-modules . || true
-      - run: shopt -s globstar && pyupgrade --py36-plus **/*.py || true
+      - run: shopt -s globstar && pyupgrade --py36-plus **/*.py
       - run: safety check

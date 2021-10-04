@@ -37,7 +37,7 @@ class App:
 
         parser = argparse.ArgumentParser(
             prog="arsenal",
-            description='arsenal v{} - Pentest command launcher'.format(self.version),
+            description=f'arsenal v{self.version} - Pentest command launcher',
             epilog=examples,
             formatter_class=argparse.RawTextHelpFormatter
         )
@@ -49,7 +49,7 @@ class App:
         group_out.add_argument('-e', '--exec', action='store_true', help='Execute cmd')
         group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
         group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
-        parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(self.version))
+        parser.add_argument('-V', '--version', action='version', version=f'%(prog)s (version {self.version})')
 
         return parser.parse_args()
 
@@ -81,7 +81,7 @@ class App:
                     break
                 elif cmd.cmdline == ">show":
                     if (os.path.exists(config.savevarfile)):
-                        with open(config.savevarfile, 'r') as f:
+                        with open(config.savevarfile) as f:
                             arsenalGlobalVars = json.load(f)
                             for k, v in arsenalGlobalVars.items():
                                 print(k + "=" + v)
@@ -90,10 +90,10 @@ class App:
                     with open(config.savevarfile, "w") as f:
                         f.write(json.dumps({}))
                     self.run()
-                elif re.match("^\>set( [^= ]+=[^= ]+)+$", cmd.cmdline):
+                elif re.match(r"^\>set( [^= ]+=[^= ]+)+$", cmd.cmdline):
                     # Load previous global var
                     if (os.path.exists(config.savevarfile)):
-                        with open(config.savevarfile, 'r') as f:
+                        with open(config.savevarfile) as f:
                             arsenalGlobalVars = json.load(f)
                     else:
                         arsenalGlobalVars = {}

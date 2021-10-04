@@ -661,7 +661,7 @@ class ArgslistMenu:
         # current argument value
         argument = Gui.cmd.args[self.current_arg][1]
         # look for all files that match the argument in the working directory
-        matches = glob.glob('{}*'.format(argument))
+        matches = glob.glob(f'{argument}*')
 
         if not matches:
             return False
@@ -808,7 +808,7 @@ class Gui:
 
         # if global var save exists load it
         if exists(Gui.savefile):
-            with open(Gui.savefile, 'r') as f:
+            with open(Gui.savefile) as f:
                 Gui.arsenalGlobalVars = json.load(f)
 
         wrapper(self.cheats_menu.run)
