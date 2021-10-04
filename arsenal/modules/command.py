@@ -2,6 +2,7 @@ import re
 import curses
 import textwrap
 
+
 class Command:
     cmdline = ""
     description = ""
