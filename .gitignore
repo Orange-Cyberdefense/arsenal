@@ -1,7 +1,10 @@
 .venv/
 .idea/
+__pycache__/
+*.pyc
 cheats/.obsidian/
 cheats/Arsenal/.obsidian/
 arsenal.egg-info/
-arsenal/__pycache__/
-arsenal/modules/__pycache__/
+build/
+dist/
+Pipfile.lock
