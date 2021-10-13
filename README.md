@@ -39,6 +39,10 @@ This project is inspired by navi (<https://github.com/denisidoro/navi>) because 
 - with pip :
 ```
 python3 -m pip install arsenal-cli
+```
+
+- run (we also advice you to add this alias : `alias a='arsenal'`)
+```
 arsenal
 ```
 
