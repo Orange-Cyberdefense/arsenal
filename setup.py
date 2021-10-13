@@ -10,8 +10,8 @@ README = (HERE / "README.md").read_text()
 REQUIREMENTS = (HERE / "requirements.txt").read_text()
 
 setup(
-    name='arsenal',
-    version='1.0.0',
+    name='arsenal-cli',
+    version='1.0.1',
     packages=find_packages(),
     install_requires=REQUIREMENTS,
     include_package_data=True,

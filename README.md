@@ -36,6 +36,13 @@ This project is inspired by navi (<https://github.com/denisidoro/navi>) because 
 - New cheatsheets
 
 ## Install & Launch
+- with pip :
+```
+python3 -m pip install arsenal-cli
+arsenal
+```
+
+- manually:
 ```
 git clone https://github.com/Orange-Cyberdefense/arsenal.git
 cd arsenal
