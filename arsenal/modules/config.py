@@ -9,7 +9,7 @@ FORMATS = ["md", "rst"]
 EXCLUDE_LIST = ["README.md", "README.rst", "index.rst"]
 
 CHEATS_PATHS = [
-    join(DATAPATH,  "cheats"),  # DEFAULT
+    join(DATAPATH, "cheats"),  # DEFAULT
     # Additional paths below, add comma to line above
     join(BASEPATH, "my_cheats"),
     join(HOMEPATH, ".cheats")

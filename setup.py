@@ -47,5 +47,5 @@ setup(
         ],
     },
     package_data={'': ['data/cheats/*']},
-    exclude_package_data={"": ["my_cheats/","mindmap/"]},
+    exclude_package_data={"": ["my_cheats/", "mindmap/"]},
 )
