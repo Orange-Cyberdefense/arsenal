@@ -2,13 +2,14 @@ import os
 from os.path import dirname, abspath, expanduser, join
 
 # Base paths
+DATAPATH = join(dirname(dirname(abspath(__file__))),'data')
 BASEPATH = dirname(dirname(dirname(abspath(__file__))))
 HOMEPATH = expanduser("~")
 FORMATS = ["md", "rst"]
 EXCLUDE_LIST = ["README.md", "README.rst", "index.rst"]
 
 CHEATS_PATHS = [
-    join(BASEPATH, "cheats"),  # DEFAULT
+    join(DATAPATH, "cheats"),  # DEFAULT
     # Additional paths below, add comma to line above
     join(BASEPATH, "my_cheats"),
     join(HOMEPATH, ".cheats")

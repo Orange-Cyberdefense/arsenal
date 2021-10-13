@@ -2,30 +2,25 @@
 """
 Packaging setup for Arsenal
 """
-from pathlib import Path
+import pathlib
 from setuptools import find_packages, setup
 
-import arsenal as package
-
-
-def read_file(filename):
-    """Get the contents of a file"""
-    with open(Path(__file__).resolve().parent / filename) as file:
-        return file.read()
-
+HERE = pathlib.Path(__file__).parent
+README = (HERE / "README.md").read_text()
+REQUIREMENTS = (HERE / "requirements.txt").read_text()
 
 setup(
-    name=package.name,
-    version=package.__version__,
+    name='arsenal',
+    version='1.0.0',
     packages=find_packages(),
-    install_requires=read_file('requirements.txt'),
+    install_requires=REQUIREMENTS,
     include_package_data=True,
-    url=package.__url__,
-    license=package.__license__,
-    author=package.__author__,
-    author_email=package.__author_email__,
-    description=package.__doc__.strip(),
-    long_description=read_file('README.md'),
+    url='https://github.com/Orange-Cyberdefense/arsenal',
+    license='GPL-3.0',
+    author='Guillaume Muh, mayfly',
+    author_email='csr-audit.so@orange.com',
+    description='Arsenal is just a quick inventory, reminder and launcher for pentest commands. ',
+    long_description=README,
     long_description_content_type='text/markdown',
     keywords=[
         'security',
@@ -51,4 +46,6 @@ setup(
             'arsenal = arsenal.app:main',
         ],
     },
+    package_data={'': ['data/cheats/*']},
+    exclude_package_data={"": ["my_cheats/","mindmap/"]},
 )
