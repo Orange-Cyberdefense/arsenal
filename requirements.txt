@@ -1,3 +1,4 @@
 libtmux
 docutils
 pyperclip
+pyyaml

@@ -5,6 +5,8 @@ from docutils.parsers import rst
 from docutils.utils import new_document
 from docutils.frontend import OptionParser
 from docutils import nodes
+
+from yaml import load as yml_load, FullLoader
 import re
 
 
@@ -157,7 +159,7 @@ class Cheats:
         self.cheatlist.append(self.current_cheat)
 
     # -----------------------------------------------------------------------------#
-    # RestructuredText                                                            #
+    # RestructuredText                                                             #
     # -----------------------------------------------------------------------------#
 
     def parse_restructuredtext(self, filename):
@@ -199,7 +201,76 @@ class Cheats:
             self.cheatsheets[cheat.str_title + cheat.name] = cheat
 
     # -----------------------------------------------------------------------------#
-    # Markdown                                                                    #
+    # Yaml                                                                         #
+    # -----------------------------------------------------------------------------#
+
+    def parse_yaml(self, filename):
+        self.cheatlist = []
+        self.titles = []
+        self.filevars = {}
+
+        required_fields = ["name", "cmds"]
+
+        with open(filename, "r") as fd:
+            yml_text = yml_load(fd, Loader=FullLoader)
+
+            for tool_id in yml_text.keys():
+                self.command_tags_ref = {}
+                self.firsttitle = ""
+                self.current_tags = ""
+
+                tool = yml_text[tool_id]
+
+                if all(item in tool.keys() for item in required_fields):
+                    self.firsttitle = tool["name"]
+
+                    if "tags" in tool.keys():
+                        self.current_tags = ", ".join(tool["tags"])
+
+                    if "const_variables" in tool.keys():
+                        for variable in tool["const_variables"]:
+                            varname, varval = list(variable.items())[0]
+                            self.filevars[varname] = varval
+
+                    if "exec_variables" in tool.keys():
+                        for variable in tool["exec_variables"]:
+                            varname, varval = list(variable.items())[0]
+                            self.filevars[varname] = "$(" + varval + ")"
+
+                    if "command_tags" in tool.keys():
+                        for cmd_tag in tool["command_tags"]:
+                            if "/" in cmd_tag:
+                                cat, value = cmd_tag.split("/", 1)
+                                self.command_tags_ref[cat] = value
+
+                    for cmd_id in tool["cmds"].keys():
+                        cmd = tool["cmds"][cmd_id]
+
+                        self.new_cheat()
+                        self.current_cheat.name = cmd["name"]
+                        self.current_cheat.command = cmd["cmd"]
+                        self.current_cheat.description = cmd["description"]
+
+                        self.current_cheat.command_tags = {}
+                        if "command_tags" in cmd.keys():
+                            for cmd_tag in cmd["command_tags"]:
+                                if "/" in cmd_tag:
+                                    cat, value = cmd_tag.split("/", 1)
+                                    self.current_cheat.command_tags[cat] = value
+                        
+                        self.end_cheat()
+
+        for varname, varval in self.filevars.items():
+            for cheat in self.cheatlist:
+                cheat.variables[varname] = varval
+
+        for cheat in self.cheatlist:
+            cheat.filename = filename
+            cheat.printable_command = cheat.command.replace('\\\n', '')
+            self.cheatsheets[cheat.str_title + cheat.name] = cheat
+
+    # -----------------------------------------------------------------------------#
+    # Markdown                                                                     #
     # -----------------------------------------------------------------------------#
 
     def parse_markdown(self, filename):
@@ -363,7 +434,8 @@ class Cheats:
     def read_files(self, paths, file_formats, exclude_list):
         parsers = {
             "md": self.parse_markdown,
-            "rst": self.parse_restructuredtext
+            "rst": self.parse_restructuredtext,
+            "yml": self.parse_yaml
         }
         paths = [paths] if isinstance(paths, str) else paths
         for path in paths:
