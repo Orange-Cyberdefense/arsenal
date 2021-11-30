@@ -716,6 +716,19 @@ class ArgslistMenu:
                     # go to the next argument
                     else:
                         self.next_arg()
+            elif c == 20:
+                try:
+                    from pyfzf.pyfzf import FzfPrompt
+                    files = []
+                    for fuzz_dir in config.FUZZING_DIRS:
+                        files += glob.glob(fuzz_dir, recursive=True)
+                    fzf = FzfPrompt().prompt(files)
+                    # autocomplete the argument 
+                    Gui.cmd.args[self.current_arg][1] = fzf[0]
+                    # update cursor position
+                    self.xcursor = self.x_init + len(fzf[0])
+                except:
+                    pass
             elif c == curses.KEY_BACKSPACE or c == 127 or c == 8:
                 if self.check_move_cursor(-1):
                     i = self.xcursor - self.x_init - 1
