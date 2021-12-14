@@ -5,7 +5,7 @@ from os.path import dirname, abspath, expanduser, join
 DATAPATH = join(dirname(dirname(abspath(__file__))), 'data')
 BASEPATH = dirname(dirname(dirname(abspath(__file__))))
 HOMEPATH = expanduser("~")
-FORMATS = ["md", "rst"]
+FORMATS = ["md", "rst", "yml"]
 EXCLUDE_LIST = ["README.md", "README.rst", "index.rst"]
 
 CHEATS_PATHS = [
