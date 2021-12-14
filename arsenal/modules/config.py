@@ -7,6 +7,7 @@ BASEPATH = dirname(dirname(dirname(abspath(__file__))))
 HOMEPATH = expanduser("~")
 FORMATS = ["md", "rst", "yml"]
 EXCLUDE_LIST = ["README.md", "README.rst", "index.rst"]
+FUZZING_DIRS = ["/usr/local/share/wordlists/**/*.txt"]
 
 CHEATS_PATHS = [
     join(DATAPATH, "cheats"),  # DEFAULT
