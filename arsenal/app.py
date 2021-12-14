@@ -1,8 +1,6 @@
 import argparse
 import json
 import os
-import pyperclip
-import libtmux
 import fcntl
 import termios
 import re
@@ -109,8 +107,12 @@ class App:
 
             # OPT: Copy CMD to clipboard
             elif args.copy:
-               pyperclip.copy(cmd.cmdline)
-               break
+                try:
+                    import pyperclip
+                    pyperclip.copy(cmd.cmdline)
+                except ImportError:
+                    pass
+                break
 
             # OPT: Only print CMD
             elif args.print:
@@ -130,26 +132,30 @@ class App:
 
             elif args.tmux:
                 try:
-                    server = libtmux.Server()
-                    session = server.list_sessions()[-1]
-                    window = session.attached_window
-                    panes = window.panes
-                    if len(panes) == 1:
-                        # split window to get more pane
-                        pane = window.split_window(attach=False)
-                        time.sleep(0.3)
-                    else:
-                        pane = panes[-1]
-                    # send command to other pane and switch pane
-                    if args.exec:
-                        pane.send_keys(cmd.cmdline)
-                    else:
-                        pane.send_keys(cmd.cmdline, enter=False)
-                        pane.select_pane()
-                except libtmux.exc.LibTmuxException:
+                    import libtmux
+                    try:
+                        server = libtmux.Server()
+                        session = server.list_sessions()[-1]
+                        window = session.attached_window
+                        panes = window.panes
+                        if len(panes) == 1:
+                            # split window to get more pane
+                            pane = window.split_window(attach=False)
+                            time.sleep(0.3)
+                        else:
+                            pane = panes[-1]
+                        # send command to other pane and switch pane
+                        if args.exec:
+                            pane.send_keys(cmd.cmdline)
+                        else:
+                            pane.send_keys(cmd.cmdline, enter=False)
+                            pane.select_pane()
+                    except libtmux.exc.LibTmuxException:
+                        self.prefil_shell_cmd(cmd)
+                        break
+                except ImportError:
                     self.prefil_shell_cmd(cmd)
                     break
-
             # DEFAULT: Prefill Shell CMD
             else:
                 self.prefil_shell_cmd(cmd)

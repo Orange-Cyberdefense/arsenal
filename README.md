@@ -34,6 +34,8 @@ This project is inspired by navi (<https://github.com/denisidoro/navi>) because 
 - Support description inside cheatsheets
 - New categories and Tags
 - New cheatsheets
+- Add yml support (thx @0xswitch )
+- Add fzf support with ctrl+t (thx @mgp25)
 
 ## Install & Launch
 - with pip :
@@ -134,6 +136,8 @@ export TERM='xterm-256color'
 - [X] bloodhound
 - [X] rubeus
 - [ ] powerview
+- [ ] shadow credentials attack
+- [ ] samaccountname attack
 
 #### MITM
 - [X] mitm6
@@ -145,9 +149,8 @@ export TERM='xterm-256color'
 
 ### bruteforce & pass cracking
 - [X] hydra
-- [ ] medusa
 - [X] hashcat
-- [ ] john
+- [X] john
 
 #### scan
 - [X] nmap
@@ -226,3 +229,4 @@ export TERM='xterm-256color'
 #### app web
 - [X] drupwn
 - [X] wpscan
+- [ ] nuclei

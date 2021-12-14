@@ -2,3 +2,4 @@ libtmux
 docutils
 pyperclip
 pyyaml
+pyfzf
