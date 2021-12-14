@@ -154,6 +154,8 @@ export TERM='xterm-256color'
 
 #### scan
 - [X] nmap
+- [X] eyewitness
+- [X] gowitness
 
 #### fuzz    
 - [X] gobuster
@@ -213,7 +215,6 @@ export TERM='xterm-256color'
 - [X] xspy
 - [X] xwd
 - [X] xwininfo
-
 
 #### ldap
 - [X] ldapsearch
