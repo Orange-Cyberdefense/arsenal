@@ -173,7 +173,7 @@ export TERM='xterm-256color'
 
 #### netbios-ssn
 - [X] snmpwalk
-- [ ] snmp-check
+- [X] snmp-check
 - [X] onesixtyone
 
 #### sql
@@ -224,7 +224,7 @@ export TERM='xterm-256color'
 
 #### web 
 - [ ] burp
-- [ ] nikto
+- [X] nikto
 - [ ] tplmap
 
 #### app web
