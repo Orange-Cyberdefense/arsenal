@@ -24,5 +24,14 @@ john --wordlist=<wordlist> --format=netntlm hash.txt
 john --wordlist=<wordlist> --format=netntlmv2 hash.txt
 ```
 
+## john ssh convert key 
+```
+python /usr/share/john/ssh2john.py <ssh_key> > <ssh_hash|sshkey.hash>
+```
+
+## john ssh
+```
+john --wordlist=<wordlist> <ssh_hash|sshkey.hash>
+```
 
 = wordlist: /usr/share/wordlist/rockyou.lst

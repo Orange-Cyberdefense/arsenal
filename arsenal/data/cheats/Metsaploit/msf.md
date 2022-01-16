@@ -31,3 +31,15 @@ use multi/manage/autoroute
 ```
 use auxiliary/server/socks_proxy
 ```
+
+## load incognito 
+#plateform/linux #target/local #cat/PRIVESC  
+```
+load incognito
+```
+
+## incognito impersonate token
+#plateform/linux #target/local #cat/PRIVESC  
+```
+impersonate_token <domain>\\<user>
+```

