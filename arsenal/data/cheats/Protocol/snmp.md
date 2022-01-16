@@ -28,3 +28,16 @@ echo public > community; echo private >> community; echo manager >> community; o
 snmpwalk -c public -v1 <ip>
 ```
 
+## snmpwalk - list running processes
+#cat/RECON 
+```
+snmpwalk -c private -v1 <ip> 1.3.6.1.2.1.25.4.2.1.2
+```
+
+## snmp-check - check snmp service on specified port (default:162)
+#cat/RECON 
+```
+snmp-check -t <ip> -c public -p 162
+```
+
+

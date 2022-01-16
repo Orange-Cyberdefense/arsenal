@@ -36,4 +36,14 @@ pdfcrack <file>.pdf -w <wordlist>
 qpdf --password=<PASSWORD> --decrypt <encrypted_pdf>.pdf <plaintext_pdf>.pdf
 ```
 
+## keepass kdbx - john
+```
+keepass2john <file>.kdbx > out.kbdx.hashes && john --wordlist <wordlist> out.kbdx.hashes
+```
+
+## XLS PPT DOC - john
+```
+python3 <path_to_john>/run/office2john.py <file>.xls > out.hash && john --wordlist <wordlist> out.hash
+```
+
 = wordlist: /usr/share/wordlists/rockyou.txt

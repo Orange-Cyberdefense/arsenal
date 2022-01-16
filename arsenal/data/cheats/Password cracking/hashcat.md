@@ -39,4 +39,11 @@ hashcat -m 5500 -a 0 hashes <wordlist>
 hashcat -m 5600 -a 0 hashes <wordlist> 
 ```
 
+## hashcat - generate wordlist using rules
+```
+cat keywords.txt | hashcat -r <rule_file> --stdout > ./<custom_wordlist>
+```
+
 = wordlist: /usr/share/wordlist/rockyou.lst
+= rule_file: /usr/share/doc/hashcat/rules/best64.rule 
+= custom_wordlist: myCustomWordlist.txt

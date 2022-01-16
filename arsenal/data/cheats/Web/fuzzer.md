@@ -75,4 +75,13 @@ ffuf -w <wordlist> -u <url>?<param>=FUZZ -fs <response_size>
 ffuf -w <wordlist> -u <url> -X POST -d "username=admin\&password=FUZZ" -fc 401
 ```
 
+# nikto
+
+% fuzzer, fuzz, nikto
+#plateform/linux #target/remote #cat/ATTACK/FUZZ
+## nikto - first vuln scan
+```
+nikto -C all -h <url>
+```
+
 = wordlist: /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
