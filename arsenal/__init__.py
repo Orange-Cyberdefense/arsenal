@@ -1,7 +1,6 @@
 """
 pentest command launcher
 """
-name = "arsenal"
 
 __author__ = 'Guillaume Muh, mayfly'
 __author_email__ = 'csr-audit.so@orange.com'
