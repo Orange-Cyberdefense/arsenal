@@ -26,7 +26,7 @@ on server : ssh -p 2222 127.0.0.1
 ## chisel remote port forwarding (client on remote machine) - forward server port on client
 #plateform/linux  #target/remote  #cat/PIVOT 
 
-To expose server port remotely (usefull to expose your listener)
+To expose server port remotely (useful to expose your listener)
 This forward {serverside-host}:{serverside-port} from the server to {clientside-host}:{clientside-port}
 ex : 0.0.0.0:4445:127.0.0.1:4444 expose the server 4444 listener to client 4445
 | server | - 4444 ------->  |client|-4445 : *   <-

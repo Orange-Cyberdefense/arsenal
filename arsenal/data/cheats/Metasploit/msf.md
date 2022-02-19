@@ -22,7 +22,7 @@ route print
 
 ## add pivot (autoroute)
 #plateform/linux #target/remote #cat/PIVOT/TUNNEL-PORTFW 
-exemple : 
+example : 
 use multi/manage/autoroute
 set session 1
 exploit
@@ -33,7 +33,7 @@ use multi/manage/autoroute
 ## add socks proxy (autoroute first)
 #plateform/linux #target/remote #cat/PIVOT/TUNNEL-PORTFW 
 
-exemple : 
+example : 
 use multi/manage/autoroute
 set session 1
 exploit

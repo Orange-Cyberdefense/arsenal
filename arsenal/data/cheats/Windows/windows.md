@@ -251,7 +251,7 @@ net group "Admins du domaine"
 net user <username>
 ```
 
-## infos on a Administrator and retreive SID
+## infos on a Administrator and retrieve SID
 ```powershell
 [wmi] "Win32_userAccount.Domain='<computer_name>',Name='Administrator'"
 ```
@@ -504,7 +504,7 @@ nslookup -type=SRV _ldap._tcp.dc._msdcs.<domain_name>
 % windows, active directory
 
 ## enable sid history 
-Enable history on source domain for target domain (usefull for forest extra SID exploitation)
+Enable history on source domain for target domain (useful for forest extra SID exploitation)
 ```
 netdom trust <source_domain> /d:<target_domain> /enablesidhistory:yes
 ```

@@ -5,7 +5,7 @@
 ## stealty psexec
 #plateform/linux #target/remote #cat/ATTACK/CONNECT 
 
-no service created, no smb used, no file droped
+no service created, no smb used, no file dropped
 https://github.com/Mr-Un1k0d3r/SCShell
 
 ```

@@ -23,7 +23,7 @@ Import-Module .\LAPSToolkit.ps1; Get-LAPSComputers
 Import-Module .\LAPSToolkit.ps1; Find-LAPSDelegatedGroups
 ```
 
-## laps toolkit - Find users with Extented rights
+## laps toolkit - Find users with Extended rights
 #plateform/windows  #target/remote  #cat/RECON 
 ```powershell
 Import-Module .\LAPSToolkit.ps1; Find-AdmPwdExtendedRights
