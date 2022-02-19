@@ -112,6 +112,11 @@ dir /a "C:\Program Files (x86)"
 reg query HKEY_LOCAL_MACHINE\SOFTWARE
 ```
 
+## show lsa cached credentials value
+```
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+```
+
 ## register query word password (1)
 ```
 reg query HKLM /f password /t REG_SZ /s

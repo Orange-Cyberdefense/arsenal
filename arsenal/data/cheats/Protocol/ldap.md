@@ -14,6 +14,12 @@ nmap -n -sV --script "ldap* and not brute" -p 389 <ip>
 ldapsearch -x -h <ip> -s base
 ```
 
+## ldapsearch SPN
+#cat/ATTACK/CONNECT 
+```
+ldapsearch -Y GSSAPI -H ldap://<dc_fqdn> -D "<user>" -W -b "dc=<domain_name>,dc=com" "servicePrincipalName=*" servicePrincipalName
+```
+	
 ## ldapsearch with base dn
 #cat/ATTACK/CONNECT 
 ```
