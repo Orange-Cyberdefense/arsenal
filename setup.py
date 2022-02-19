@@ -11,7 +11,7 @@ REQUIREMENTS = (HERE / "requirements.txt").read_text()
 
 setup(
     name='arsenal-cli',
-    version='1.1.0',
+    version='1.1.1',
     packages=find_packages(),
     install_requires=REQUIREMENTS,
     include_package_data=True,
