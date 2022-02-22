@@ -86,9 +86,25 @@ CHEATS_PATHS = [
 Cheatsheets examples are in `<arsenal_home>/cheats`: `README.md` and `README.rst`
 
 ## Troubleshooting
+
 If you got on error on color init try : 
 ```
 export TERM='xterm-256color'
+```
+
+--
+
+If you have the following exception when running Arsenal:
+```
+ImportError: cannot import name 'FullLoader'
+```
+First, check that requirements are installed:
+```
+pip install -r requirements.txt
+```
+If the exception is still there:
+```
+pip install -U PyYAML
 ```
 
 ## Mindmap
