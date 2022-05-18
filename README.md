@@ -61,6 +61,17 @@ Inside your .bashrc or .zshrc add the path to `run` to help you do that you coul
 ./addalias.sh
 ```
 
+- Also if you are an Arch user you can install from the AUR:
+```bash
+git clone https://aur.archlinux.org/arsenal.git
+cd arsenal 
+makepkg -si
+```
+- Or with an AUR helper like yay:
+```bash
+yay -S arsenal
+```
+
 ## Launch in tmux mode
 
 ```
