@@ -1,3 +1,5 @@
+#Maintainer: Viking @Vikingfr <https://twitter.com/Vikingfr>
+#Maintainer: Mayfly @M4yFly <https://twitter.com/M4yFly>
 #Maintainer: Erick Sanchez Vera "T1erno" <erickdeveloper2000@outlook com>
 
 pkgname=arsenal
