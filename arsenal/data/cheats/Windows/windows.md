@@ -352,6 +352,16 @@ net group "Domain Controllers" /domain
 net group "Domain Admins" /domain
 ```
 
+## Add user to domain admin group
+```
+net group "Domain Admins" <username> /add /domain
+```
+
+## Add user to domain admin group - FR
+```
+net group "Admins du domaine" <username> /add /domain
+```
+
 ## List users that belongs to the administrators group inside the domain
 ```
 net localgroup administrators /domain
