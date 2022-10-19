@@ -39,6 +39,11 @@ hashcat -m 5500 -a 0 hashes <wordlist>
 hashcat -m 5600 -a 0 hashes <wordlist> 
 ```
 
+## hashcat - NTLMv2 - Combination attack (ex:passpass,testtest,passtest,etc)
+```
+hashcat -m 5600 --force -a 1 hashes <custom_wordlist> <custom_wordlist>
+```
+
 ## hashcat - generate wordlist using rules
 ```
 cat keywords.txt | hashcat -r <rule_file> --stdout > ./<custom_wordlist>
