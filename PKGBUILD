@@ -20,6 +20,11 @@ build() {
 
 package() {
 	cd $pkgname
+
+	echo "alias a='arsenal'" >> ~/.bash_aliases
+	echo "alias a='arsenal'" >> ~/.zshrc
+	echo "alias a='arsenal'" >> ~/.bashrc
+
 	python setup.py install --prefix=/usr --root="${pkgdir}" -O1 --skip-build
 	install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/${pkgname}
 	install -Dm 644 README.md -t "${pkgdir}"/usr/share/doc/${pkgname}
