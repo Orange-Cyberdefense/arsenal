@@ -120,7 +120,9 @@ pip install -U PyYAML
 
 ## Mindmap
 - Active directory mindmap
-![](./mindmap/pentest_ad.png)
+  - Due to csp on github when you open the svg, we moved the AD mindmap and the source to this repository : [https://github.com/Orange-Cyberdefense/ocd-mindmaps](https://github.com/Orange-Cyberdefense/ocd-mindmaps)
+
+[https://orange-cyberdefense.github.io/ocd-mindmaps/img/pentest_ad_dark_2022_11.svg](https://orange-cyberdefense.github.io/ocd-mindmaps/img/pentest_ad_dark_2022_11.svg)
 
 - AD mindmap black version
 ![](./mindmap/pentest_ad_black.png)
