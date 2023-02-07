@@ -169,7 +169,7 @@ Dump LSA secrets using methods from secretsdump.py
 Requires Domain Admin or Local Admin Privileges on target Domain Controller
 
 ```bash
-cme smb <ip> -u <user> -p <password> -d <domaine> --lsa
+cme smb <ip> -u <user> -p <password> -d <domain> --lsa
 ```
 
 ## cme - dump ntds.dit
