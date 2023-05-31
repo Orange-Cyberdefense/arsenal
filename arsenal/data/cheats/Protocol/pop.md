@@ -1,7 +1,7 @@
 # pop
 
 % pop, pop3, 110, 995
-#plateform/linux  #target/remote  #protocol/pop #port/110 #port/995
+#platform/linux  #target/remote  #protocol/pop #port/110 #port/995
 
 ## nmap - pop3 infos
 #cat/RECON 

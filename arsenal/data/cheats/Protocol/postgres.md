@@ -1,7 +1,7 @@
 # Postgres
 
 % postgres, 5432, 5433
-#plateform/linux  #target/remote  #protocol/postgres #port/5432 #port/5433
+#platform/linux  #target/remote  #protocol/postgres #port/5432 #port/5433
 
 ## postgres - connect
 #cat/ATTACK/CONNECT 

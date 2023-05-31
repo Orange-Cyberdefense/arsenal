@@ -1,7 +1,7 @@
 # ssh
 
 % ssh, 22
-#plateform/linux  #target/remote  #protocol/ssh #port/22
+#platform/linux  #target/remote  #protocol/ssh #port/22
 
 ## Start ssh agent
 #target/local #cat/UTILS 

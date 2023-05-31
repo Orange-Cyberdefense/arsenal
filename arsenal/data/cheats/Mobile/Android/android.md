@@ -2,7 +2,7 @@
 
 % android, device, adb, bridge
 
-#plateform/linux #target/local #cat/ANDROID
+#platform/linux #target/local #cat/ANDROID
 
 ## Get property
 adb -s <device> shell getprop <property>

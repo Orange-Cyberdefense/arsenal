@@ -1,6 +1,6 @@
 # gowitness
 
-#plateform/linux #target/remote #cat/RECON #tag/scan
+#platform/linux #target/remote #cat/RECON #tag/scan
 
 ## gowitness - web screenshots (nmap xml file)
 ```

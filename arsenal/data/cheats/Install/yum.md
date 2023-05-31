@@ -1,7 +1,7 @@
 # yum
 
 % yum
-#plateform/linux #target/local  #cat/UTILS 
+#platform/linux #target/local  #cat/UTILS 
 
 ## List all available packages
 ```

@@ -1,7 +1,7 @@
 # reverse shell
 
 %reverse shell, reverse
-#plateform/linux #target/local #cat/ATTACK/REVERSE_SHELL 
+#platform/linux #target/local #cat/ATTACK/REVERSE_SHELL 
 
 ## bash reverse shell
 ```

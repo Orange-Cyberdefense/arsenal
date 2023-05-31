@@ -2,7 +2,7 @@
 
 % openssl, certificate, encryption
 
-#plateform/linux #target/local #cat/UTILS 
+#platform/linux #target/local #cat/UTILS 
 
 ## Create a new signing request and key
 ```

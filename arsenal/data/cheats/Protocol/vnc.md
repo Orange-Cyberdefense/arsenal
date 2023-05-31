@@ -1,7 +1,7 @@
 # VNC
 
 % vnc, 5800, 5801, 5900, 5901
-#plateform/linux  #target/remote  #protocol/vnc #port/5800 #port/5801 #port/5900 #port/5901
+#platform/linux  #target/remote  #protocol/vnc #port/5800 #port/5801 #port/5900 #port/5901
 
 ## vnc - nmap enum
 #cat/RECON 

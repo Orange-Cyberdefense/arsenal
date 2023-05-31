@@ -2,7 +2,7 @@
 
 % snmp, 161
 
-#plateform/linux  #target/remote  #protocol/snmp #port/161
+#platform/linux  #target/remote  #protocol/snmp #port/161
 
 ## nmap, snmp scan
 #cat/RECON

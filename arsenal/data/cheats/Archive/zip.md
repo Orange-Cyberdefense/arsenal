@@ -2,7 +2,7 @@
 
 % archive, compress
 
-#plateform/linux #target/local #cat/UTILS 
+#platform/linux #target/local #cat/UTILS 
 
 ## create zip file
 ```

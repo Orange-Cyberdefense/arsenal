@@ -1,7 +1,7 @@
 # nfs
 
 % nfs, showmount, 2049
-#plateform/linux  #target/remote  #protocol/nfs #port/2049
+#platform/linux  #target/remote  #protocol/nfs #port/2049
 
 ## nfs showmount
 #cat/RECON 

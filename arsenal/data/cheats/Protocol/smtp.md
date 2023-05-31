@@ -1,7 +1,7 @@
 # SMTP
 
 % smtp, 25
-#plateform/linux  #target/remote  #protocol/smtp #port/25
+#platform/linux  #target/remote  #protocol/smtp #port/25
 
 ## smtp nmap enumeration
 #cat/RECON 

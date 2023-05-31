@@ -1,6 +1,6 @@
 # eyewitness
 
-#plateform/linux #target/remote #cat/RECON #tag/scan
+#platform/linux #target/remote #cat/RECON #tag/scan
 
 ## eyewitness - web screenshots
 ```

@@ -2,7 +2,7 @@
 
 % arsenal, internal
 
-#plateform/linux #target/local #cat/INTERNAL 
+#platform/linux #target/local #cat/INTERNAL 
 
 ## List global variable
 ```

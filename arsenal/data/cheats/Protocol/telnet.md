@@ -1,7 +1,7 @@
 # telnet 
 
 % telnet, 23
-#plateform/linux  #target/remote  #protocol/telnet #port/23
+#platform/linux  #target/remote  #protocol/telnet #port/23
 
 ## nmap - telnet
 #cat/RECON 
