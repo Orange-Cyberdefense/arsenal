@@ -2,7 +2,7 @@
 
 % php, whitebox
 
-#plateform/linux #target/local  #cat/CODE/WHITEBOX 
+#platform/linux #target/local  #cat/CODE/WHITEBOX 
 
 ## php grep include
 ```

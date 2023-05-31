@@ -2,7 +2,7 @@
 
 % kubernetes, k8s, kubectl
 
-#plateform/linux #target/local #cat/UTILS 
+#platform/linux #target/local #cat/UTILS 
 
 ## Print all contexts
 ```

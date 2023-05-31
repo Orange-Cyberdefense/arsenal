@@ -1,7 +1,7 @@
 # rar
 
 %archive
-#plateform/linux #target/local #cat/UTILS 
+#platform/linux #target/local #cat/UTILS 
 
 ## Compress dir to rar file
 ```

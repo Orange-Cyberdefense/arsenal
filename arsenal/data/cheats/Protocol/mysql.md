@@ -1,7 +1,7 @@
 # Mysql
 
 % mysql, database, db, 3306
-#plateform/linux  #target/remote  #protocol/mysql  #port/3306
+#platform/linux  #target/remote  #protocol/mysql  #port/3306
 ## connect
 #cat/ATTACK/CONNECT 
 ```

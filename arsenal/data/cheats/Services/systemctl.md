@@ -1,7 +1,7 @@
 # systemctl
 
 % systemctl, service
-#plateform/linux #target/local #cat/UTILS 
+#platform/linux #target/local #cat/UTILS 
 
 ## Start service
 ```

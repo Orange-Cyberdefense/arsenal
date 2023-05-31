@@ -2,7 +2,7 @@
 
 % smb, samba
 
-#plateform/linux  #target/remote  #port/445 #protocol/smb #cat/RECON 
+#platform/linux  #target/remote  #port/445 #protocol/smb #cat/RECON 
 
 ## enum4linux - all except dictionary based share name listing (default)
 ```

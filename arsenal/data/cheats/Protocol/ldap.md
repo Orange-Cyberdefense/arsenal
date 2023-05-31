@@ -1,6 +1,6 @@
 # ldap
 
-#plateform/linux  #target/remote  #protocol/ldap  #port/639 #port/389
+#platform/linux  #target/remote  #protocol/ldap  #port/639 #port/389
 
 ## ldap nmap
 #cat/RECON 

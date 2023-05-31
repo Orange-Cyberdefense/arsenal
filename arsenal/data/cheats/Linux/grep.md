@@ -1,6 +1,6 @@
 # grep
 
-#plateform/linux #target/local #cat/UTILS
+#platform/linux #target/local #cat/UTILS
 
 ## grep classic
 ```
@@ -29,7 +29,7 @@ grep -e "\(<word_A>\|<word_B>\)" <file>
 
 # grep hash
 
-#plateform/linux #target/local #cat/UTILS
+#platform/linux #target/local #cat/UTILS
 
 ## Extract md5 hashes ({32})
 ```
@@ -104,7 +104,7 @@ egrep -o '$6$w{8}S{86}' *.txt > sha512crypt.txt
 
 # Others grep
 
-#plateform/linux #target/local #cat/UTILS
+#platform/linux #target/local #cat/UTILS
 
 ## Extract emails from file
 ```

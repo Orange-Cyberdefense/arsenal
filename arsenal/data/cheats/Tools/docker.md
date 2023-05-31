@@ -2,7 +2,7 @@
 
 % docker, container
 
-#plateform/multiple #target/local #cat/UTILS 
+#platform/multiple #target/local #cat/UTILS 
 
 ## Remove an image
 docker image rm <image_id>

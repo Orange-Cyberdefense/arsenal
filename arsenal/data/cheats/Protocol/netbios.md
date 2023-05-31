@@ -1,7 +1,7 @@
 # netbios
 
 % netbios, scan, nbtscan
-#plateform/linux  #target/remote  #protocol/netbios
+#platform/linux  #target/remote  #protocol/netbios
 ## nbtscan - netbios scan
 #cat/RECON 
 ```

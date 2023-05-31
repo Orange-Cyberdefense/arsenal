@@ -1,7 +1,7 @@
 # Objection
 
 % objection, android, ios, frida,
-#plateform/linux #target/local #cat/ANDROID
+#platform/linux #target/local #cat/ANDROID
 ## Patch the app
 objection patchapk -s <package>
 

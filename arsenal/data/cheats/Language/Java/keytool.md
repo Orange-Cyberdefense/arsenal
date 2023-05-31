@@ -2,7 +2,7 @@
 
 % java keytool, certificate, encryption
 
-#plateform/linux #target/local  #cat/UTILS 
+#platform/linux #target/local  #cat/UTILS 
 
 ## Generate a Java keystore and key pair
 ```

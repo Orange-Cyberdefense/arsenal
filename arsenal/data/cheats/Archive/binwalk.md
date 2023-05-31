@@ -2,7 +2,7 @@
 
 % archive
 
-#plateform/linux #target/local #cat/UTILS 
+#platform/linux #target/local #cat/UTILS 
 
 ## Recursively extract files from a firmware
 ```

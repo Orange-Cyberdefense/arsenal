@@ -1,6 +1,6 @@
 # nmap
 
-#plateform/linux #target/remote #cat/RECON #tag/scan
+#platform/linux #target/remote #cat/RECON #tag/scan
 
 ## nmap - hosts alive
 ```

@@ -2,7 +2,7 @@
 
 % whitebox, nodejs
 
-#plateform/linux #target/local  #cat/CODE/WHITEBOX 
+#platform/linux #target/local  #cat/CODE/WHITEBOX 
 
 ## command execution
 ```

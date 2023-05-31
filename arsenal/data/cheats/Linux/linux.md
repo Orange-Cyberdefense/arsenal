@@ -2,7 +2,7 @@
 
 % shell, linux
 
-#plateform/linux #target/local #cat/UTILS #cat/PRIVESC #cat/RECON 
+#platform/linux #target/local #cat/UTILS #cat/PRIVESC #cat/RECON 
 
 ## Re-call last input with sudo
 ```

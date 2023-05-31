@@ -1,6 +1,6 @@
 # Service
 
-#plateform/linux #target/local #cat/RECON #cat/PRIVESC 
+#platform/linux #target/local #cat/RECON #cat/PRIVESC 
 
 ## List services
 ```

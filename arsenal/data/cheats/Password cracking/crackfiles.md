@@ -2,7 +2,7 @@
 
 % bruteforce, crack, files
 
-#plateform/linux  #target/local  #cat/CRACKING/PASSWORD 
+#platform/linux  #target/local  #cat/CRACKING/PASSWORD 
 
 ## ZIP - fcrackzip
 ```

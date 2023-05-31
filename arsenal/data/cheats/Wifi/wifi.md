@@ -1,6 +1,6 @@
 # wifi
 
-#plateform/linux #target/remote #cat/RECON #cat/ATTACK
+#platform/linux #target/remote #cat/RECON #cat/ATTACK
 
 ## airmon - Kill processes which can cause trouble
 ```

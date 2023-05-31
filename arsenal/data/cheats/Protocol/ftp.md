@@ -1,7 +1,7 @@
 # FTP
 
 % ftp, 21
-#plateform/linux  #target/remote  #port/21 #protocol/ftp 
+#platform/linux  #target/remote  #port/21 #protocol/ftp 
 
 ## ftp - download all 
 #cat/ATTACK/FILE_TRANSFERT 

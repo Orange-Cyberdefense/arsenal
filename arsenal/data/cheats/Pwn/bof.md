@@ -1,7 +1,7 @@
 # bof
 
 % bof, buffer overflow
-#plateform/linux #target/local #cat/PWN
+#platform/linux #target/local #cat/PWN
 
 ## bof, pattern creation
 ```

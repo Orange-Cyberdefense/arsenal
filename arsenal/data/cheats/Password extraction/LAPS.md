@@ -3,7 +3,7 @@
 % LAPS, passwords
 
 ## laps toolkit
-#plateform/windows  #target/remote  #cat/POSTEXPLOIT/CREDS_RECOVER 
+#platform/windows  #target/remote  #cat/POSTEXPLOIT/CREDS_RECOVER 
 
 https://github.com/leoloobeek/LAPSToolkit
 
@@ -12,19 +12,19 @@ https://github.com/leoloobeek/LAPSToolkit
 ```
 
 ## laps toolkit - Get laps computer
-#plateform/windows  #target/remote  #cat/RECON 
+#platform/windows  #target/remote  #cat/RECON 
 ```powershell
 Import-Module .\LAPSToolkit.ps1; Get-LAPSComputers
 ```
 
 ## laps toolkit - find LAPS Delegated Groups
-#plateform/windows  #target/remote  #cat/RECON 
+#platform/windows  #target/remote  #cat/RECON 
 ```powershell
 Import-Module .\LAPSToolkit.ps1; Find-LAPSDelegatedGroups
 ```
 
 ## laps toolkit - Find users with Extended rights
-#plateform/windows  #target/remote  #cat/RECON 
+#platform/windows  #target/remote  #cat/RECON 
 ```powershell
 Import-Module .\LAPSToolkit.ps1; Find-AdmPwdExtendedRights
 ```

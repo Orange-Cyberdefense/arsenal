@@ -1,7 +1,7 @@
 # windows rdp
 
 % rdp, windows, 3389
-#plateform/windows  #target/local  #protocol/rdp #port/3389
+#platform/windows  #target/local  #protocol/rdp #port/3389
 
 ## enable RDP
 #cat/POSTEXPLOIT 
@@ -34,7 +34,7 @@ netsh.exe advfirewall firewall add rule name="Remote Desktop - User Mode (TCP-In
 
 # rdesktop
 % rdp, windows
-#plateform/linux  #target/remote  #protocol/rdp #port/3389 #cat/ATTACK/CONNECT 
+#platform/linux  #target/remote  #protocol/rdp #port/3389 #cat/ATTACK/CONNECT 
 
 ## rdesktop - classic
 ```
@@ -49,7 +49,7 @@ rdesktop -g 90% <ip> -u <user> -p <password> -d <domain> -r disk:share=<share>
 # xfreerdp
 
 % rdp, windows
-#plateform/linux  #target/remote  #protocol/rdp #port/3389 #cat/ATTACK/CONNECT 
+#platform/linux  #target/remote  #protocol/rdp #port/3389 #cat/ATTACK/CONNECT 
 
 ## xfreerdp - classic
 ```

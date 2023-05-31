@@ -2,7 +2,7 @@
 
 % veracrypt
 
-#plateform/linux
+#platform/linux
 
 ## Create veracrypt volume for Linux
 ```
