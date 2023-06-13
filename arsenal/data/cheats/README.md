@@ -5,10 +5,10 @@
 #cat/INTERNAL
 
 ```
-#plateform/linux
-#plateform/windows
-#plateform/mac
-#plateform/multiple
+#platform/linux
+#platform/windows
+#platform/mac
+#platform/multiple
 
 #target/local 
 #target/remote

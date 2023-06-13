@@ -2,7 +2,7 @@
 
 % msfvenom, reverse shell
 
-#plateform/linux #target/local #cat/ATTACK/REVERSE_SHELL 
+#platform/linux #target/local #cat/ATTACK/REVERSE_SHELL 
 
 ## msfvenom payloads list
 ```

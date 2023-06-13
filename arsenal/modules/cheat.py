@@ -44,10 +44,10 @@ class Cheat:
         tags_dict = {'target/local': 'Loc',
                      'target/remote': 'Rem',
                      'target/serve': 'Ser',
-                     'plateform/linux': '[L] ',
-                     'plateform/windows': '[W] ',
-                     'plateform/mac': '[M] ',
-                     'plateform/multiple': '[*] '}
+                     'platform/linux': '[L] ',
+                     'platform/windows': '[W] ',
+                     'platform/mac': '[M] ',
+                     'platform/multiple': '[*] '}
 
         tag_string = ''
         if self.command_tags is not None:

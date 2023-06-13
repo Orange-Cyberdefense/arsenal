@@ -2,7 +2,7 @@
 
 % password recovery, password cracking
 
-#plateform/linux  #target/local  #cat/CRACKING/PASSWORD 
+#platform/linux  #target/local  #cat/CRACKING/PASSWORD 
 
 ## john LM
 ```

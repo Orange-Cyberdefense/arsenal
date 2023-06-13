@@ -1,6 +1,6 @@
 # flashrom
 
-#plateform/linux #target/remote #cat/RECON
+#platform/linux #target/remote #cat/RECON
 
 ## Read from linux (e.g. Raspberry Pi)
 ```

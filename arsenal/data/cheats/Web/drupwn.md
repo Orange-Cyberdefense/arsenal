@@ -2,7 +2,7 @@
 
 % drupal, drupwn
 
-#plateform/linux #target/remote #cat/RECON  
+#platform/linux #target/remote #cat/RECON  
 
 ## drupwn classic
 ```

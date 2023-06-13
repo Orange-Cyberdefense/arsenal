@@ -1,7 +1,7 @@
 # Brew
 % mac, install
 
-#plateform/mac #target/local  #cat/UTILS 
+#platform/mac #target/local  #cat/UTILS 
 
 ## update brew
 ```

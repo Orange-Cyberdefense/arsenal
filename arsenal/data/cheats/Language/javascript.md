@@ -2,7 +2,7 @@
 
 % npm, node, js
 
-#plateform/linux #target/local  #cat/UTILS 
+#platform/linux #target/local  #cat/UTILS 
 
 ## initial new package
 ```
@@ -43,7 +43,7 @@ npm install <package_name> -g
 
 % nvm, node, js
 
-#plateform/linux #target/local  #cat/UTILS 
+#platform/linux #target/local  #cat/UTILS 
 
 ## install a specified version of node
 ```

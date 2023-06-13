@@ -1,6 +1,6 @@
 # git
 
-#plateform/multiple #target/local #cat/UTILS 
+#platform/multiple #target/local #cat/UTILS 
 
 ## Set global git user name
 ```

@@ -1,7 +1,7 @@
 # race condition
 
 % toctou, race condition
-#plateform/linux #target/local #cat/PRIVESC 
+#platform/linux #target/local #cat/PRIVESC 
 
 ## change a file by a symlink when found
 ```bash

@@ -1,6 +1,6 @@
 # windows
 
-#plateform/windows #target/local #cat/PRIVESC
+#platform/windows #target/local #cat/PRIVESC
 
 ## get info system
 ```
@@ -240,7 +240,7 @@ net users
 ```
 
 ## list domain admins (fr)
-#plateform/windows  #target/local #cat/RECON
+#platform/windows  #target/local #cat/RECON
 ```
 net group "Admins du domaine"
 ```

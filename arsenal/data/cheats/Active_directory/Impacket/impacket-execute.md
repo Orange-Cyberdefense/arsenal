@@ -3,7 +3,7 @@
 % impacket, windows, exec
 
 ## PSEXEC with username
-#plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 create a new service (using \pipe\svcctl via SMB)
 
 ```
@@ -11,7 +11,7 @@ impacket-psexec <domain>/<user>:<password>@<target_ip>
 ```
 
 ## PSEXEC with pass the Hash (pth)
-#plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 create a new service (using \pipe\svcctl via SMB)
 
 ```
@@ -24,7 +24,7 @@ impacket-psexec -hashes 00000000000000000000000000000000:<nthash> -port <port|44
 ```
 
 ## PSEXEC with kerberos
-#plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 create a new service (using \pipe\svcctl via SMB)
 
 ```
@@ -32,28 +32,28 @@ export KRB5CCNAME=<ccache_file>; impacket-psexec -dc-ip <dc_ip> -target-ip <targ
 ```
 
 ## SMBEXEC with username
-#plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 create a new service 'BTOBTO' (using temp bat files via SMB)
 ```
 smbexec.py <domain>/<user>:<password>@<target_ip>
 ```
 
 ## SMBEXEC with pass the Hash (pth)
-#plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 create a new service 'BTOBTO' (using temp bat files via SMB)
 ```
 smbexec.py -hashes <nthash> <user>@<target_ip>
 ```
 
 ## SMBEXEC with kerberos
-#plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 create a new service 'BTOBTO' (using temp bat files via SMB)
 ```
 export KRB5CCNAME=<ccache_file>; smbexec.py -dc-ip <dc_ip> -target-ip <ip>> -no-pass -k <domain>/<user>@<target_name>
 ```
 
 ## wmiexec
-#plateform/linux #target/remote #port/135 #protocol/wmi #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/135 #protocol/wmi #cat/ATTACK/CONNECT  
 Execute a command shell without touching the disk or running a new service using DCOM
 
 ```
@@ -61,7 +61,7 @@ wmiexec.py <domain>/<user>:<password>@<ip>
 ```
 
 ## wmiexec  with pass the hash (pth) 
-#plateform/linux #target/remote #port/135 #protocol/wmi #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/135 #protocol/wmi #cat/ATTACK/CONNECT  
 
 Execute a command shell without touching the disk or running a new service using DCOM
 
@@ -70,7 +70,7 @@ wmiexec.py -hashes <nthash> <user>@<ip>
 ```
 
 ## atexec - execute command view the task scheduler 
-#plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 Using \pipe\atsvc via SMB
 
 ```
@@ -78,7 +78,7 @@ atexec.py <domain>/<user>:<password>@<ip> "command"
 ```
 
 ## atexec pass the hash (pth)
-#plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
+#platform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 Execute command view the task scheduler (using \pipe\atsvc via SMB)
 
 ```

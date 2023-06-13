@@ -1,7 +1,7 @@
 # msssql
 
 % mssql, Microsoft SQL Server, 1433
-#plateform/linux  #target/remote  #protocol/ldap  #port/1433 
+#platform/linux  #target/remote  #protocol/ldap  #port/1433 
 
 ## mssql - connect
 #cat/ATTACK/CONNECT 

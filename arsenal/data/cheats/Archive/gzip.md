@@ -1,7 +1,7 @@
 # gzip
 
 % archive
-#plateform/linux #target/local #cat/UTILS 
+#platform/linux #target/local #cat/UTILS 
 
 ## Compress file and appends .gz to its name
 ```

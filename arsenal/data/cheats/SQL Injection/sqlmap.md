@@ -1,7 +1,7 @@
 # SQLMAP
 
 % sql injection
-#plateform/linux #target/remote #cat/ATTACK/INJECTION  #port/80 #port/443 #port/8080 #port/8443
+#platform/linux #target/remote #cat/ATTACK/INJECTION  #port/80 #port/443 #port/8080 #port/8443
 
 ## basic sqlmap step 1
 ```
