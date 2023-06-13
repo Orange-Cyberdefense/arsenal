@@ -15,11 +15,23 @@ eval "$(ssh-agent -s)"; ssh-add
 ssh -L <local_port>:<remote_host>:<remote_port> <user>@<ip>
 ```
 
-## SSH remote port forwarding (send local port to remote) (need GatewayPorts yes)
+## SSH dynamic port forwarding
+Connect to remote and create a **D**ynamic port forwarding rule
+```
+ssh -Nf -D <local_ip|0.0.0.0>:<local_port|9999> <user>@<remote_ip>
+```
+
+## SSH REMOTE port forwarding (send local port to remote) (need GatewayPorts yes)
 #cat/PIVOT/TUNNEL-PORTFW 
 ```
 ssh -R <remote_binding>:<remote_port>:<local_host>:<local_port> <user>@<ip>
 ```
+
+## SSH REMOTE dynamic port forwarding
+```
+ssh -Nf -R <kali_port|9998> kali@<ip>
+```
+
 
 ## SSH proxysocks
 #cat/PIVOT/TUNNEL-PORTFW 
@@ -43,4 +55,9 @@ msfconsole -x "use scanner/ssh/ssh_enumusers; set RHOSTS <ip>; set USER_FILE <us
 #cat/UTILS 
 ```
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 <user>@<ip>
+```
+
+## SSH - connect to domain joined Linux machine with kerberos ticket
+```
+ssh -o GSSAPIAuthentication=yes user@domain.local
 ```

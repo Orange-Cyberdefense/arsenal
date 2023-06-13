@@ -34,4 +34,4 @@ python /usr/share/john/ssh2john.py <ssh_key> > <ssh_hash|sshkey.hash>
 john --wordlist=<wordlist> <ssh_hash|sshkey.hash>
 ```
 
-= wordlist: /usr/share/wordlist/rockyou.lst
+= wordlist: /usr/share/wordlists/rockyou.txt

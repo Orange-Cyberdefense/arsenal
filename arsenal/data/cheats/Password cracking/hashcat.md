@@ -46,9 +46,9 @@ hashcat -m 5600 --force -a 1 hashes <custom_wordlist> <custom_wordlist>
 
 ## hashcat - generate wordlist using rules
 ```
-cat keywords.txt | hashcat -r <rule_file> --stdout > ./<custom_wordlist>
+cat <password_file|pass.txt> | hashcat -r <rule_file> --stdout > ./<custom_wordlist>
 ```
 
 = wordlist: /usr/share/wordlist/rockyou.lst
-= rule_file: /usr/share/doc/hashcat/rules/best64.rule 
+= rule_file: /usr/share/hashcat/rules/best64.rule 
 = custom_wordlist: myCustomWordlist.txt

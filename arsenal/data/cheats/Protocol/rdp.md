@@ -38,12 +38,12 @@ netsh.exe advfirewall firewall add rule name="Remote Desktop - User Mode (TCP-In
 
 ## rdesktop - classic
 ```
-rdesktop -g 90% <ip> -u <user> -p <password> -d <domain>
+rdesktop -g 90% <target_ip> -u <user> -p <password> -d <domain>
 ```
 
 ## rdesktop - with share
 ```
-rdesktop -g 90% <ip> -u <user> -p <password> -d <domain> -r disk:share=<share>
+rdesktop -g 90% <target_ip> -u <user> -p <password> -d <domain> -r disk:share=<share>
 ```
 
 # xfreerdp
@@ -53,15 +53,20 @@ rdesktop -g 90% <ip> -u <user> -p <password> -d <domain> -r disk:share=<share>
 
 ## xfreerdp - classic
 ```
-xfreerdp /u:<user> /p:<password> /d:<domain> /v:<ip> /size:1800x924
+xfreerdp /u:<user> /p:<password> /d:<domain> /v:<target_ip> /size:1920x1080
 ```
 
-## xfreerdp - with share
+## xfreerdp - password with share
 ```
-xfreerdp /u:<user> /p:<password> /d:<domain> /v:<ip> /size:1800x924 /drive:share,<share>
+xfreerdp /u:<user> /p:<password> /d:<domain> /v:<target_ip> /size:1920x1080 /drive:PandorasBox,<local_path|/home/kali/PandorasBox>
 ```
 
 ## xfreerdp - pass the hash
 ```
-xfreerdp /u:<user> /pth:<hash> /d:<domain> /v:<ip>
+xfreerdp /u:<user> /pth:<nthash> /d:<domain> /v:<target_ip>
+```
+
+## xfreerdp - hash with share
+```
+xfreerdp /u:<user> /pth:<nthash> /d:<domain> /v:<target_ip> /size:1920x1080 /drive:PandorasBox,<local_path|/home/kali/PandorasBox>
 ```
