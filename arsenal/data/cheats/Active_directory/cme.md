@@ -206,7 +206,7 @@ cme smb <dc-ip> -u <user.txt> -p <password.txt> --no-bruteforce --continue-on-su
 ## cme - password spray multiple test 
 #plateform/linux #target/remote #port/445 #protocol/smb #cat/ATTACK/BRUTEFORCE-SPRAY #tag/warning
 
-(carrefull on lockout)
+(careful on lockout)
 
 ```bash
 cme smb <dc-ip> -u <user.txt> -p <password.txt> --continue-on-success

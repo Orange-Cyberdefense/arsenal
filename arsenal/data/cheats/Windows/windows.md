@@ -94,7 +94,7 @@ wmic service list brief
 
 ## list services (3)
 ```
-sc query #List of services
+sc query
 ```
 
 ## list installed software (1)
@@ -230,7 +230,7 @@ whoami /all
 ## whoami privilegied
 #cat/PRIVESC
 ```
-whoami /priv #Show only privileges
+whoami /priv
 ```
 
 ## list all users
@@ -285,11 +285,6 @@ net localgroup
 net localgroup <group_name>
 ```
 
-## show domain groups
-```
-net group /domain
-```
-
 ## show domain group users
 ```
 net group /domain <domain_group_name>
@@ -324,7 +319,7 @@ set logonserver #Get name of the domain controller
 
 ## list of domain groups
 ```
-net groups /domain
+net group /domain
 ```
 
 ## list of computer connected to the domain
@@ -384,7 +379,7 @@ net accounts /domain
 
 ## get mapping of the trust relationships
 ```
-nltest /domain_trust
+nltest /domain_trusts
 ```
 
 % windows, network
@@ -438,7 +433,7 @@ netsh firewall show config
 
 ## turn off firewall
 ```
-NetSh Advfirewall set allprofiles state off
+netsh Advfirewall set allprofiles state off
 ```
 
 ## turn off firewall (2)
@@ -448,7 +443,7 @@ netsh firewall set opmode disable
 
 ## turn on firewall
 ```
-NetSh Advfirewall set allprofiles state on
+netsh Advfirewall set allprofiles state on
 ```
 
 ## firewall open port RDP

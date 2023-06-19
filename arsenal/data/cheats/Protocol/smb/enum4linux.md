@@ -31,5 +31,5 @@ enum4linux -u <user> -p <password> <ip>
 
 ## enum4linux - list Users
 ```
-enum4linux -U <ip> |grep 'users:'
+enum4linux -U <ip> |grep 'user:'
 ```

@@ -9,7 +9,7 @@
 echo <content> | curl -F-=\<- qrenco.de
 ```
 
-## json
+# json
 
 % json
 
@@ -19,7 +19,7 @@ echo <content> | curl -F-=\<- qrenco.de
 cat <json_file> | ruby -ryaml -rjson -e 'puts YAML.dump(JSON.load(ARGF))'
 ```
 
-# linux 
+# linux
 
 % misc, linux
 
