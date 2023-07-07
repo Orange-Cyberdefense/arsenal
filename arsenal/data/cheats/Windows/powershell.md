@@ -17,6 +17,11 @@ Get-ADObject -filter 'isDeleted -eq $true -and name -ne "Deleted Objects"' -incl
 Get-Process
 ```
 
+## Path to a running process
+```Powershell
+get-process -name <process> | select-object -expandproperty path
+```
+
 ## Get Proxy
 ```powershell
 [System.Net.WebRequest]::DefaultWebProxy.GetProxy("http://<ip>/<url>")

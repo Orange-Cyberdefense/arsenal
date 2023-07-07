@@ -4,6 +4,11 @@
 
 #platform/linux  #target/local  #cat/CRACKING/PASSWORD 
 
+## hashcat - show example hashes
+```
+hashcat --example-hashes
+```
+
 ## hashcat - basic md5 (joomla/wordpress) - wordlist
 ```
 hashcat -a 0 -m 400 hashes <wordlist>

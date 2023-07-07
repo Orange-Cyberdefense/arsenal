@@ -33,6 +33,11 @@ truncate -s [-]<size_in_bytes> <file_path>
 find / -iname <file_name> 2>/dev/null
 ```
 
+## find - exclude specific path
+```
+find / -iname <file_name> -not -path '<exclude_dir|/proc>/*'
+```
+
 ## find writable directories
 ```
 find / -type d -writable 2>/dev/null 

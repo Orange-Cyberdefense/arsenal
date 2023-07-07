@@ -26,20 +26,30 @@ gobuster dir -u <url> -w <wordlist> -x json,html,php,txt
 # wfuzz
 
 % fuzzer, fuzz, wfuzz
-#platform/linux #target/remote #cat/ATTACK/FUZZ
-## wfuzz with number on url ( url : http://site/ )
+#platform/linux #target/remote #cat/ATTACK/FUZZ 
+## wfuzz - show payload types
+```
+wfuzz -z help
+```
+
+## wfuzz - number after url ( url : http://site/ )
 ```
 wfuzz -z range,1-1000 -u <url>FUZZ
 ```
 
-## wfuzz with wordlist on url ( url : http://site/ )
+## wfuzz - directory brute-force ( url : http://site/ )
 ```
 wfuzz -z file,<file> -u <url>FUZZ
 ```
 
-## wfuzz on post parameter
+## wfuzz - post parameter only showing HTTP 200 OK
 ```
-wfuzz -z file,<file> -X post -u <url> -d 'FUZZ=1'
+wfuzz -z file,<file> -X post -u <url> -d 'FUZZ=1&redirect=True' --sc 200
+```
+
+## wfuzz - get parameter, to output file
+```
+wfuzz -z file,<file> -f <out_file|out.txt> http://10.10.10.37/?s=FUZZ
 ```
 
 # Dirb
