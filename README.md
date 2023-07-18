@@ -120,7 +120,7 @@ pip install -U PyYAML
 
 --
 
-If you an exception similar to the following (contains TIOCSTI in strace) when running Arsenal:
+If you encounter an exception similar to the following (contains TIOCSTI in strace) when running Arsenal:
 ```
 [...]
     fcntl.ioctl(stdin, termios.TIOCSTI, c)
