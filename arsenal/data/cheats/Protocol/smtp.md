@@ -32,3 +32,8 @@ smtp-user-enum -M VRFY -U <userlist> -t <ip>
 ```
 msfconsole -x "use auxiliary/scanner/smtp/smtp_enum; set RHOSTS <ip>; exploit"
 ```
+
+## python - create SMTP server
+```
+sudo python -m smtpd -n -c DebuggingServer :25
+```

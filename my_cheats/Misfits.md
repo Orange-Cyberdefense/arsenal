@@ -10,3 +10,7 @@ seq 1 1000 | xargs -P 50 -I{} proxychains nmap -p {} -sT -Pn --open -n -T4 --min
 ```
 sudo mount -t cifs -o sec=krb5,vers=3.0 '//SERVER.DOMAIN.LOCAL/SHARE' /mnt/share
 ```
+## autorecon - scan single target
+```
+autorecon --single-target -o <output_folder> <target_ip>
+```
