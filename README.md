@@ -118,6 +118,19 @@ If the exception is still there:
 pip install -U PyYAML
 ```
 
+--
+
+If you encounter an exception similar to the following (contains TIOCSTI in strace) when running Arsenal:
+```
+[...]
+    fcntl.ioctl(stdin, termios.TIOCSTI, c)
+OSError: [Errno 5] Input/output error
+```
+Then you may need to re-enable TIOCSTI:
+```
+sudo sysctl -w dev.tty.legacy_tiocsti=1
+```
+
 ## Mindmap
 - Active directory mindmap
   - Due to csp on github when you open the svg, we moved the AD mindmap and the source to this repository : [https://github.com/Orange-Cyberdefense/ocd-mindmaps](https://github.com/Orange-Cyberdefense/ocd-mindmaps)
