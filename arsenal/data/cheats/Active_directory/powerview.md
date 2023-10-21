@@ -91,5 +91,5 @@ Get-DomainGroupMember -Identity "<group|Administrators>" -Domain <domain> -Recur
 Description : The following will enumerate 'Kerberoastable' users for a given domain
 
 ```powershell
-Get-NetUser -Domain <domain> | Where-Object {$_.servicePrincipalName} | select name, samaccountname, serviceprincipalname 
+Get-DomainUser -SPN -Domain <domain> | select name, samaccountname, serviceprincipalname
 ```
