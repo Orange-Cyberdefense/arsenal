@@ -86,7 +86,7 @@ Get-DomainGroupMember -Identity "<group|Administrators>" -Domain <domain> -Recur
 
 
 
-## Get list of kerbroastable users
+## Get list of kerberoastable users
 #plateform/windows #target/remote  #cat/RECON 
 Description : The following will enumerate 'Kerberoastable' users for a given domain
 
