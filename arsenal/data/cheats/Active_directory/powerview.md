@@ -16,9 +16,7 @@ https://github.com/PowerShellMafia/PowerSploit/
 Example : Use with commands as "-Credential $creds"
 
 ```powershell
-$passwd = ConvertTo-SecureString <password> -AsPlainText -Force
-$creds = New-Object System.Management.Automation.PSCredential (<domain\user>, $passwd)
-Get-DomainUser -Credential $Cred
+$passwd = ConvertTo-SecureString "<password>" -AsPlainText -Force; $creds = New-Object System.Management.Automation.PSCredential ("<domain>\<user>", $passwd)
 ```
 
 ## Get User from SID
