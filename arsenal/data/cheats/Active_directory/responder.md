@@ -56,7 +56,7 @@ sed -i 's/Challenge =.*$/Challenge = <challenge>/g' /opt/tools/Responder/Respond
 ## responder challenge reset
 #plateform/linux #target/local #cat/UTILS
 ```
-sed -i 's/Challenge =.*$/Challenge = Random/g' /opt/tools/Responder/Responder.conf && cat /opt/tools/Responder/Responder.conf | grep --color=never 'Challenge ='
+sed -i 's/Challenge =.*$/Challenge = 1122334455667788/g' /opt/tools/Responder/Responder.conf && cat /opt/tools/Responder/Responder.conf | grep --color=never 'Challenge ='
 ```
 
 ## multirelay attack - user filtered (previous disable HTTP and SMB in Responder.conf)
