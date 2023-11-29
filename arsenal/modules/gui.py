@@ -184,14 +184,19 @@ class CheatslistMenu:
             match = cheat.command[0] == '>'
 
         for value in self.input_buffer.lower().split(' '):
+            excludeValue = False
+            # ! == The following value should not occur
+            if value.startswith('!'):
+                value = value.removeprefix('!')
+                excludeValue = True
             if value in cheat.str_title.lower() \
                     or value in cheat.name.lower() \
                     or value in cheat.tags.lower() \
                     or value in "".join(cheat.command_tags.values()).lower() \
                     or value in cheat.command.lower():
-                match = True and match
+                match = not excludeValue and match
             else:
-                match = False
+                match = excludeValue and match
         return match
 
     def search(self):
