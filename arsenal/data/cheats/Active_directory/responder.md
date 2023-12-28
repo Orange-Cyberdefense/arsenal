@@ -44,6 +44,21 @@ sed -i 's/SMB = Off/SMB = On/g' /opt/tools/Responder/Responder.conf && cat /opt/
 sed -i 's/SMB = On/SMB = Off/g' /opt/tools/Responder/Responder.conf && cat /opt/tools/Responder/Responder.conf | grep --color=never 'SMB ='
 ```
 
+## responder challenge set
+#plateform/linux #target/local #cat/UTILS
+Set the NTLM challenge for cracking
+
+= challenge: 1122334455667788
+```
+sed -i 's/Challenge =.*$/Challenge = <challenge>/g' /opt/tools/Responder/Responder.conf && cat /opt/tools/Responder/Responder.conf | grep --color=never 'Challenge ='
+```
+
+## responder challenge reset
+#plateform/linux #target/local #cat/UTILS
+```
+sed -i 's/Challenge =.*$/Challenge = 1122334455667788/g' /opt/tools/Responder/Responder.conf && cat /opt/tools/Responder/Responder.conf | grep --color=never 'Challenge ='
+```
+
 ## multirelay attack - user filtered (previous disable HTTP and SMB in Responder.conf)
 #plateform/linux #target/serve #cat/ATTACK/MITM 
 ```
