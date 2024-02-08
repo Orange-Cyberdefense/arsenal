@@ -130,6 +130,7 @@ Then you may need to re-enable TIOCSTI:
 ```
 sudo sysctl -w dev.tty.legacy_tiocsti=1
 ```
+More information is available in the issue [https://github.com/Orange-Cyberdefense/arsenal/issues/77](https://github.com/Orange-Cyberdefense/arsenal/issues/77)
 
 ## Mindmap
 - Active directory mindmap
