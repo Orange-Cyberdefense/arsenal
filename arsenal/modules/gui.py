@@ -314,9 +314,8 @@ class CheatslistMenu:
                     # if len(Gui.cmd.args) != 0:
                     # args needed -> ask
                     args_menu = ArgslistMenu(self)
-                    curses.endwin()
-                    curses.echo()
-                    wrapper(args_menu.run)
+                    args_menu.run(stdscr) 
+                    stdscr.refresh()
                     break
             elif c == curses.KEY_F10 or c == 27:
                 Gui.cmd = None
@@ -379,7 +378,6 @@ class CheatslistMenu:
                 # new search -> reset position
                 self.position = 0
                 self.page_position = 0
-        curses.endwin()
 
 
 class ArgslistMenu:
@@ -690,7 +688,9 @@ class ArgslistMenu:
         """
         # init
         Gui.init_colors()
+        stdscr.clear()
         while True:
+            stdscr.refresh()
             self.draw(stdscr)
             c = stdscr.getch()
             if c == curses.KEY_ENTER or c == 10 or c == 13:
@@ -701,8 +701,8 @@ class ArgslistMenu:
                     break
             elif c == curses.KEY_F10 or c == 27:
                 # exit args_menu -> return to cheatslist_menu
-                curses.endwin()
-                wrapper(self.previous_menu.run)
+                self.previous_menu.run(stdscr)
+                stdscr.refresh()
                 break
             elif c == curses.KEY_DOWN:
                 self.next_arg()

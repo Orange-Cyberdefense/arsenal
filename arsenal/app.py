@@ -5,6 +5,7 @@ import fcntl
 import termios
 import re
 import time
+from curses import wrapper
 
 # arsenal
 from . import __version__
@@ -188,4 +189,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    wrapper(main()) 
