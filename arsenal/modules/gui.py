@@ -177,22 +177,28 @@ class CheatslistMenu:
         :param cheat: cheat to check
         :return: boolean
         """
-        match = True
-
         # if search begin with '>' print only internal CMD
-        if self.input_buffer != '' and self.input_buffer[0] == '>':
-            match = cheat.command[0] == '>'
+        if(self.input_buffer.startswith('>')
+           and not cheat.command.startswith('>')):
+                return False
 
         for value in self.input_buffer.lower().split(' '):
-            if value in cheat.str_title.lower() \
-                    or value in cheat.name.lower() \
-                    or value in cheat.tags.lower() \
-                    or value in "".join(cheat.command_tags.values()).lower() \
-                    or value in cheat.command.lower():
-                match = True and match
-            else:
-                match = False
-        return match
+            is_value_excluded = False
+            if value.startswith("!") and len(value) > 1:
+                value = value[1:]
+                is_value_excluded = True
+
+            if (value in cheat.str_title.lower()
+                   or value in cheat.name.lower()
+                   or value in cheat.tags.lower()
+                   or value in "".join(cheat.command_tags.values()).lower()
+                   or value in cheat.command.lower()):
+                if is_value_excluded:
+                    return False
+
+            elif not is_value_excluded:
+                    return False
+        return True
 
     def search(self):
         """
