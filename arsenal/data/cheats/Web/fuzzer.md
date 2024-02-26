@@ -101,52 +101,17 @@ feroxbuster --url <URL> -w <wordlist>
 
 ## Multiple headers:
 ```
-./feroxbuster -u http://127.1 -H Accept:application/json "Authorization: Bearer {token}"
+feroxbuster -u <URL> -H Accept:application/json "Authorization: Bearer {token}"
 ```
 
 ## IPv6, non-recursive scan with INFO-level logging enabled:
 ```
-./feroxbuster -u http://[::1] --no-recursion -vv
-```
-
-## Read urls from STDIN; pipe only resulting urls out to another tool
-```
-cat targets | ./feroxbuster --stdin --silent -s 200 301 302 --redirects -x js | fff -s 200 -o js-files
-```
-
-## Proxy traffic through Burp
-```
-./feroxbuster -u http://127.1 --burp
-```
-
-## Proxy traffic through a SOCKS proxy
-```
-./feroxbuster -u http://127.1 --proxy socks5://127.0.0.1:9050
-```
-
-## Pass auth token via query parameter
-```
-./feroxbuster -u http://127.1 --query token=0123456789ABCDEF
-```
-
-## Ludicrous speed... go!
-```
-./feroxbuster -u http://127.1 --threads 200
-```
-        
-## Limit to a total of 60 active requests at any given time (threads * scan limit)
-```
-./feroxbuster -u http://127.1 --threads 30 --scan-limit 2
-```
-    
-## Send all 200/302 responses to a proxy (only proxy requests/responses you care about)
-```
-./feroxbuster -u http://127.1 --replay-proxy http://localhost:8080 --replay-codes 200 302 --insecure
+feroxbuster -u http://[::1] --no-recursion -vv
 ```
         
 ## Abort or reduce scan speed to individual directory scans when too many errors have occurred
 ```
-./feroxbuster -u http://127.1 --auto-bail
+feroxbuster -u <URL> --auto-bail
 ```
 
 = wordlist: /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
