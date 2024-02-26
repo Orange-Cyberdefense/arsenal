@@ -46,7 +46,7 @@ class Command:
         self.args = []
         # Use a list of tuples here instead of dict in case
         # the cmd has multiple args with the same name..
-        for arg_name in re.findall(r'<([^ <>:]+)>', cheat.command):
+        for arg_name in re.findall(r'<([^ <>]+)>', cheat.command):
             if "|" in arg_name:  # Format <name|default_value>
                 name, var = arg_name.split("|")[:2]
                 self.args.append([name, var])
