@@ -91,27 +91,27 @@ nikto -C all -h <url>
 
 ## default scan
 ```
-feroxbuster --url <URL>
+feroxbuster --url <url>
 ```
 
 ## default scan with wordlist
 ```
-feroxbuster --url <URL> -w <wordlist>
+feroxbuster --url <url> -w <wordlist>
 ```
 
-## Multiple headers:
+## Multiple headers
 ```
-feroxbuster -u <URL> -H Accept:application/json "Authorization: Bearer {token}"
+feroxbuster -u <url> -H "<header>" "<header>"
 ```
 
-## IPv6, non-recursive scan with INFO-level logging enabled:
+## IPv6, non-recursive scan with INFO-level logging enabled
 ```
-feroxbuster -u http://[::1] --no-recursion -vv
+feroxbuster -u <proto|https>://[<ipv6>] --no-recursion -vv
 ```
         
 ## Abort or reduce scan speed to individual directory scans when too many errors have occurred
 ```
-feroxbuster -u <URL> --auto-bail
+feroxbuster -u <url> --auto-bail
 ```
 
 = wordlist: /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
