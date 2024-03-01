@@ -84,4 +84,34 @@ ffuf -w <wordlist> -u <url> -X POST -d "username=admin\&password=FUZZ" -fc 401
 nikto -C all -h <url>
 ```
 
+# feroxbuster
+
+% fuzzer, fuzz, ffuf, dirsearch, gobuster, dirb
+#plateform/linux #target/remote #cat/ATTACK/FUZZ
+
+## default scan
+```
+feroxbuster --url <url>
+```
+
+## default scan with wordlist
+```
+feroxbuster --url <url> -w <wordlist>
+```
+
+## Multiple headers
+```
+feroxbuster -u <url> -H "<header>" "<header>"
+```
+
+## IPv6, non-recursive scan with INFO-level logging enabled
+```
+feroxbuster -u <proto|https>://[<ipv6>] --no-recursion -vv
+```
+        
+## Abort or reduce scan speed to individual directory scans when too many errors have occurred
+```
+feroxbuster -u <url> --auto-bail
+```
+
 = wordlist: /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
