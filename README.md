@@ -126,11 +126,16 @@ If you encounter an exception similar to the following (contains TIOCSTI in stra
     fcntl.ioctl(stdin, termios.TIOCSTI, c)
 OSError: [Errno 5] Input/output error
 ```
-Then you may need to re-enable TIOCSTI:
+Then you may need to re-enable TIOCSTI. Please run the following commands as root to fix this issue on the current session :
 ```
-sudo sysctl -w dev.tty.legacy_tiocsti=1
+sysctl -w dev.tty.legacy_tiocsti=1
+```
+If you want this workaround to survive a reboot, add the following configuration to sysctl.conf file and reboot :
+```
+echo "dev.tty.legacy_tiocsti=1" >> /etc/sysctl.conf
 ```
 More information is available in the issue [https://github.com/Orange-Cyberdefense/arsenal/issues/77](https://github.com/Orange-Cyberdefense/arsenal/issues/77)
+
 
 ## Mindmap
 - Active directory mindmap
