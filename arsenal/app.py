@@ -175,8 +175,18 @@ class App:
         # use the new attributes
         termios.tcsetattr(stdin, termios.TCSANOW, newattr)
         # write the selected command in stdin queue
-        for c in cmd.cmdline:
-            fcntl.ioctl(stdin, termios.TIOCSTI, c)
+        try:
+            for c in cmd.cmdline:
+                fcntl.ioctl(stdin, termios.TIOCSTI, c)
+        except OSError:
+            message = "========== OSError ============\n"
+            message += "Arsenal needs TIOCSTI enable for running\n"
+            message += "Please run the following commands as root to fix this issue on the current session :\n"
+            message += "sysctl -w dev.tty.legacy_tiocsti=1\n"
+            message += "If you want this workaround to survive a reboot, add the following configuration to sysctl.conf file and reboot :\n"
+            message += "echo \"dev.tty.legacy_tiocsti=1\" >> /etc/sysctl.conf\n"
+            message += "More details about this bug here: https://github.com/Orange-Cyberdefense/arsenal/issues/77"
+            print(message)
         # restore TTY attribute for stdin
         termios.tcsetattr(stdin, termios.TCSADRAIN, oldattr)
 
