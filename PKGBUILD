@@ -3,7 +3,7 @@
 #Maintainer: Erick Sanchez Vera "T1erno" <erickdeveloper2000@outlook com>
 
 pkgname=arsenal
-pkgver=1.2.0
+pkgver=1.2.1
 pkgrel=1
 pkgdesc='Arsenal is just a quick inventory and launcher for hacking programs'
 url='https://github.com/Orange-Cyberdefense/arsenal'
