@@ -76,7 +76,7 @@ yay -S arsenal
 
 ```
 ./run -t # if you launch arsenal in a tmux window with one pane, it will split the window and send the command to the otherpane without quitting arsenal
-         # if the window is already splited the command will be send to the other pane without quitting arsenal
+         # if the window is already split the command will be send to the other pane without quitting arsenal
 ./run -t -e # just like the -t mode but with direct execution in the other pane without quitting arsenal
 ```
 

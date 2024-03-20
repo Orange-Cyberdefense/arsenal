@@ -13,17 +13,17 @@ redis-cli
 redis-cli -h <ip> -a <password>
 ```
 
-## connect remotly specifying a port
+## connect remotely specifying a port
 ```bash
 redis-cli -h <ip> -p <port> -a <password>
 ```
 
-## connect remotly over tls w/ server certificate
+## connect remotely over tls w/ server certificate
 ```bash
 redis-cli -h <ip> --tls --cacert <redis_cert_path.pem>
 ```
 
-## connect remotly over tls w/ server & client certificates
+## connect remotely over tls w/ server & client certificates
 ```bash
 redis-cli -h <ip> --tls --cacert <redis_cert_path.pem> --cert <redis_user_path.crt> --key <redis_user_private_path.key>
 ```
