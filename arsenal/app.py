@@ -183,7 +183,8 @@ class App:
             message += "Arsenal needs TIOCSTI enable for running\n"
             message += "Please run the following commands as root to fix this issue on the current session :\n"
             message += "sysctl -w dev.tty.legacy_tiocsti=1\n"
-            message += "If you want this workaround to survive a reboot, add the following configuration to sysctl.conf file and reboot :\n"
+            message += "If you want this workaround to survive a reboot,\n" 
+            message += "add the following configuration to sysctl.conf file and reboot :\n"
             message += "echo \"dev.tty.legacy_tiocsti=1\" >> /etc/sysctl.conf\n"
             message += "More details about this bug here: https://github.com/Orange-Cyberdefense/arsenal/issues/77"
             print(message)

@@ -85,12 +85,11 @@ class CheatslistMenu:
         prompt = '> '
         max_width = win_width - len(prompt) - len("\n")
 
-
         col4_size = math.floor(max_width * 14 / 100)
         col3_size = math.floor(max_width * 8 / 100)
         col1_size = math.floor(max_width * 23 / 100)
         col2_size = math.floor(max_width * 55 / 100)
-        #col0_size = math.floor(max_width * 20 / 100)
+        # col0_size = math.floor(max_width * 20 / 100)
 
         title = cheat.tags if cheat.tags != '' else cheat.str_title
 
@@ -126,8 +125,6 @@ class CheatslistMenu:
             # win.addstr("{:{}s}".format(Gui.draw_string(title, col0_size), col0_size),
             #            curses.color_pair(Gui.COL1_COLOR))
             win.addstr("\n")
-
-
 
     def draw_cheatslistbox(self):
         """
@@ -178,9 +175,8 @@ class CheatslistMenu:
         :return: boolean
         """
         # if search begin with '>' print only internal CMD
-        if(self.input_buffer.startswith('>')
-           and not cheat.command.startswith('>')):
-                return False
+        if self.input_buffer.startswith('>') and not cheat.command.startswith('>'):
+            return False
 
         for value in self.input_buffer.lower().split(' '):
             is_value_excluded = False
@@ -189,15 +185,15 @@ class CheatslistMenu:
                 is_value_excluded = True
 
             if (value in cheat.str_title.lower()
-                   or value in cheat.name.lower()
-                   or value in cheat.tags.lower()
-                   or value in "".join(cheat.command_tags.values()).lower()
-                   or value in cheat.command.lower()):
+                    or value in cheat.name.lower()
+                    or value in cheat.tags.lower()
+                    or value in "".join(cheat.command_tags.values()).lower()
+                    or value in cheat.command.lower()):
                 if is_value_excluded:
                     return False
 
             elif not is_value_excluded:
-                    return False
+                return False
         return True
 
     def search(self):
@@ -320,7 +316,7 @@ class CheatslistMenu:
                     # if len(Gui.cmd.args) != 0:
                     # args needed -> ask
                     args_menu = ArgslistMenu(self)
-                    args_menu.run(stdscr) 
+                    args_menu.run(stdscr)
                     stdscr.refresh()
                     break
             elif c == curses.KEY_F10 or c == 27:
@@ -497,7 +493,6 @@ class ArgslistMenu:
                 self.prev_lastline_len = 1
                 win.addstr("\n    " + c, color)
 
-
     def draw_selected_arg(self, y_pos):
         """
         Draw the selected argument line in the argument menu
@@ -662,22 +657,22 @@ class ArgslistMenu:
         """
         Autocomplete the current argument
         """
-        # current argument value
+        # current argument value
         argument = Gui.cmd.args[self.current_arg][1]
-        # look for all files that match the argument in the working directory
+        # look for all files that match the argument in the working directory
         matches = glob.glob('{}*'.format(argument))
 
         if not matches:
             return False
 
-        # init the autocompleted argument
+        # init the autocompleted argument
         autocompleted_argument = ""
-        # autocompleted argument is the longest start common string in all matches
+        # autocompleted argument is the longest start common string in all matches
         for i in range(len(min(matches))):
             if not all(min(matches)[:i + 1] == match[:i + 1] for match in matches):
                 break
             autocompleted_argument = min(matches)[:i + 1]
-        
+
         # add a "/" at the end of the autocompleted argument if it is a directory
         if isdir(autocompleted_argument) and autocompleted_argument[-1] != sep:
             autocompleted_argument = autocompleted_argument + sep
@@ -716,10 +711,10 @@ class ArgslistMenu:
                 self.previous_arg()
             elif c == 9:
                 if Gui.cmd.args:
-                    # autocomplete the current argument
+                    # autocomplete the current argument
                     if Gui.cmd.args[self.current_arg][1]:
                         self.autocomplete_arg()
-                    # go to the next argument
+                    # go to the next argument
                     else:
                         self.next_arg()
             elif c == 20:
@@ -774,17 +769,17 @@ class Gui:
     # colors
     BASIC_COLOR = 0  # output std
     COL1_COLOR = 7
-    COL2_COLOR = 4 # gold
+    COL2_COLOR = 4  # gold
     COL3_COLOR = 14  # purple light 
     COL4_COLOR = 5  # 26  # violet clair: 14  # 4 yellow  # 6 purple # 7 cyan # 9 dark grey
-    COL5_COLOR = 5 # blue
+    COL5_COLOR = 5  # blue
     COL1_COLOR_SELECT = 256  # output std invert
     COL2_COLOR_SELECT = 256
     COL3_COLOR_SELECT = 256
     COL4_COLOR_SELECT = 256
     CURSOR_COLOR_SELECT = 266  # background red
     PROMPT_COLOR = 0
-    INFO_NAME_COLOR = 4 # 5
+    INFO_NAME_COLOR = 4  # 5
     INFO_DESC_COLOR = 0
     INFO_CMD_COLOR = 0
     ARG_NAME_COLOR = 5
