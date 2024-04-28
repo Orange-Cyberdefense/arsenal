@@ -809,7 +809,12 @@ class Gui:
             result_string = str_value[:max_size - 4] + '...'
         return result_string
 
-    def run(self, cheatsheets):
+    @staticmethod
+    def prefix_cmdline_with_prefix():
+        if config.PREFIX_GLOBALVAR_NAME in Gui.arsenalGlobalVars:
+            Gui.cmd.cmdline = f"{Gui.arsenalGlobalVars[config.PREFIX_GLOBALVAR_NAME]} {Gui.cmd.cmdline}"
+
+    def run(self, cheatsheets, has_prefix):
         """
         Gui entry point
         :param cheatsheets: cheatsheets dictionary
@@ -826,4 +831,6 @@ class Gui:
                 Gui.arsenalGlobalVars = json.load(f)
 
         wrapper(self.cheats_menu.run)
+        if Gui.cmd != None and Gui.cmd.cmdline[0] != '>' and has_prefix:
+            self.prefix_cmdline_with_prefix()
         return Gui.cmd

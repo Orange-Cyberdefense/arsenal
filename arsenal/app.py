@@ -48,6 +48,7 @@ class App:
         group_out.add_argument('-e', '--exec', action='store_true', help='Execute cmd')
         group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
         group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
+        group_out.add_argument('-f', '--prefix', action='store_true', help='command prefix')
         parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(__version__))
 
         return parser.parse_args()
@@ -69,7 +70,7 @@ class App:
         gui = arsenal_gui.Gui()
         while True:
             # launch gui
-            cmd = gui.run(cheatsheets)
+            cmd = gui.run(cheatsheets, args.prefix)
 
             if cmd == None:
                 exit(0)

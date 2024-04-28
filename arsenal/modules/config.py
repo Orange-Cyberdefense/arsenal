@@ -23,3 +23,5 @@ os.environ.setdefault('ESCDELAY', '25')
 os.environ['TERM'] = 'xterm-256color'
 
 savevarfile = join(HOMEPATH, ".arsenal.json")
+
+PREFIX_GLOBALVAR_NAME = "arsenal_prefix_cmd"
