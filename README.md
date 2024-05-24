@@ -37,7 +37,7 @@ This project is inspired by navi (<https://github.com/denisidoro/navi>) because 
 - Add yml support (thx @0xswitch )
 - Add fzf support with ctrl+t (thx @mgp25)
 - Add prefix to commands generated (with -f)
-- Add user config file (genrated at first run in ~/.arsenal.conf)
+- Add user config file (generated at first run in ~/.arsenal.conf)
 
 ## Install & Launch
 - with pip :
