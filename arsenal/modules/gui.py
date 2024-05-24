@@ -36,9 +36,9 @@ class CheatslistMenu:
         ncols, nlines = 5, 1
         promptwin = curses.newwin(nlines, ncols, y, x)
         try:
-            promptwin.addstr("\u2620  >", curses.color_pair(Gui.BASIC_COLOR))
+            promptwin.addstr("\u2620  >", curses.color_pair(config.BASIC_COLOR))
         except:
-            promptwin.addstr(">>>>", curses.color_pair(Gui.BASIC_COLOR))
+            promptwin.addstr(">>>>", curses.color_pair(config.BASIC_COLOR))
         promptwin.refresh()
         return promptwin
 
@@ -53,11 +53,11 @@ class CheatslistMenu:
         selected_cheat = self.selected_cheat()
         if selected_cheat is not None:
             infowin.addstr(y + 1, x + 2, Gui.draw_string(selected_cheat.name, self.width - 3),
-                           curses.color_pair(Gui.INFO_NAME_COLOR))
+                           curses.color_pair(config.INFO_NAME_COLOR))
             # infowin.addstr(y + 2, x + 2, Gui.draw_string(selected_cheat.description.split('\n')[0], self.width - 3),
-            #                curses.color_pair(Gui.INFO_DESC_COLOR))
+            #                curses.color_pair(config.INFO_DESC_COLOR))
             infowin.addstr(y + 2, x + 2, Gui.draw_string(selected_cheat.printable_command, self.width - 3),
-                           curses.color_pair(Gui.INFO_CMD_COLOR))
+                           curses.color_pair(config.INFO_CMD_COLOR))
         infowin.border()
         infowin.refresh()
         return infowin
@@ -69,7 +69,7 @@ class CheatslistMenu:
         y, x = 5, 6
         ncols, nlines = self.width - 5, 1
         editwin = curses.newwin(nlines, ncols, y, x)
-        editwin.addstr(self.input_buffer, curses.color_pair(Gui.BASIC_COLOR))
+        editwin.addstr(self.input_buffer, curses.color_pair(config.BASIC_COLOR))
         editwin.refresh()
         return editwin
 
@@ -96,34 +96,34 @@ class CheatslistMenu:
         tags = cheat.get_tags()
 
         if selected:
-            win.addstr(prompt, curses.color_pair(Gui.CURSOR_COLOR_SELECT))
+            win.addstr(prompt, curses.color_pair(config.CURSOR_COLOR_SELECT))
             win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                       curses.color_pair(Gui.COL4_COLOR_SELECT))
+                       curses.color_pair(config.COL4_COLOR_SELECT))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
-                       curses.color_pair(Gui.COL3_COLOR_SELECT))
+                       curses.color_pair(config.COL3_COLOR_SELECT))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
-                       curses.color_pair(Gui.COL2_COLOR_SELECT))
+                       curses.color_pair(config.COL2_COLOR_SELECT))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, col2_size), col2_size),
-                       curses.color_pair(Gui.COL3_COLOR_SELECT))
+                       curses.color_pair(config.COL3_COLOR_SELECT))
             # win.addstr("{:{}s}".format(Gui.draw_string(title, col0_size), col0_size),
-            #            curses.color_pair(Gui.COL1_COLOR_SELECT))
+            #            curses.color_pair(config.COL1_COLOR_SELECT))
             win.addstr("\n")
         else:
-            win.addstr(' ' * len(prompt), curses.color_pair(Gui.BASIC_COLOR))
+            win.addstr(' ' * len(prompt), curses.color_pair(config.BASIC_COLOR))
             if tags.startswith('[W]'):
                 win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                           curses.color_pair(Gui.COL5_COLOR))
+                           curses.color_pair(config.COL5_COLOR))
             else:
                 win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                           curses.color_pair(Gui.COL4_COLOR))
+                           curses.color_pair(config.COL4_COLOR))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
-                       curses.color_pair(Gui.COL1_COLOR))
+                       curses.color_pair(config.COL1_COLOR))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
-                       curses.color_pair(Gui.COL2_COLOR))
+                       curses.color_pair(config.COL2_COLOR))
             win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, col2_size), col2_size),
-                       curses.color_pair(Gui.COL3_COLOR))
+                       curses.color_pair(config.COL3_COLOR))
             # win.addstr("{:{}s}".format(Gui.draw_string(title, col0_size), col0_size),
-            #            curses.color_pair(Gui.COL1_COLOR))
+            #            curses.color_pair(config.COL1_COLOR))
             win.addstr("\n")
 
     def draw_cheatslistbox(self):
@@ -153,7 +153,7 @@ class CheatslistMenu:
 
         # print nb cmd info (bottom left)
         nbinfowin = curses.newwin(nlines, ncols, y, x)
-        nbinfowin.addstr(info, curses.color_pair(Gui.BASIC_COLOR))
+        nbinfowin.addstr(info, curses.color_pair(config.BASIC_COLOR))
         nbinfowin.refresh()
 
         # print cheatsheet filename (bottom right)
@@ -165,7 +165,7 @@ class CheatslistMenu:
                 cheat_file = cheat_file[0:self.width - 17] + ".."
 
             fileinfowin = curses.newwin(nlines, ncols, y, self.width - (len(cheat_file) + 3))
-            fileinfowin.addstr(cheat_file, curses.color_pair(Gui.BASIC_COLOR))
+            fileinfowin.addstr(cheat_file, curses.color_pair(config.BASIC_COLOR))
             fileinfowin.refresh()
 
     def match(self, cheat):
@@ -507,9 +507,9 @@ class ArgslistMenu:
         arg_name, arg_value = Gui.cmd.get_arg(self.current_arg)
         max_size = self.max_preview_size - 4 - len(arg_name)
         selectedargline = curses.newwin(nlines, ncols, y, x)
-        selectedargline.addstr("   > ", curses.color_pair(Gui.BASIC_COLOR))
-        selectedargline.addstr(arg_name, curses.color_pair(Gui.ARG_NAME_COLOR))
-        selectedargline.addstr(" = " + Gui.draw_string(arg_value, max_size), curses.color_pair(Gui.BASIC_COLOR))
+        selectedargline.addstr("   > ", curses.color_pair(config.BASIC_COLOR))
+        selectedargline.addstr(arg_name, curses.color_pair(config.ARG_NAME_COLOR))
+        selectedargline.addstr(" = " + Gui.draw_string(arg_value, max_size), curses.color_pair(config.BASIC_COLOR))
         selectedargline.refresh()
 
     def draw_args_list(self, y_pos):
@@ -522,7 +522,7 @@ class ArgslistMenu:
         for arg_name, arg_data in Gui.cmd.args.items():
             max_size = self.max_preview_size + 4
             argline = Gui.draw_string(f"     {arg_name} = {arg_data["value"]}", max_size) + "\n"
-            argwin.addstr(argline, curses.color_pair(Gui.BASIC_COLOR))
+            argwin.addstr(argline, curses.color_pair(config.BASIC_COLOR))
         argwin.refresh()
 
     def draw_desc_preview(self, argprev, p_x, p_y, description_lines):
@@ -531,10 +531,10 @@ class ArgslistMenu:
         """
         # draw description
         if len(description_lines) > 0:
-            argprev.addstr(p_y, p_x, "-----", curses.color_pair(Gui.BASIC_COLOR))
+            argprev.addstr(p_y, p_x, "-----", curses.color_pair(config.BASIC_COLOR))
             p_y += 1
             for description_line in description_lines:
-                argprev.addstr(p_y, p_x, description_line, curses.color_pair(Gui.BASIC_COLOR))
+                argprev.addstr(p_y, p_x, description_line, curses.color_pair(config.BASIC_COLOR))
                 p_y += 1
             p_y += 1
             argprev.refresh()
@@ -548,12 +548,12 @@ class ArgslistMenu:
         cmdparts = Gui.cmd.get_command_parts()
 
         # draw command
-        argprev.addstr(p_y, p_x, "$ ", curses.color_pair(Gui.BASIC_COLOR))
+        argprev.addstr(p_y, p_x, "$ ", curses.color_pair(config.BASIC_COLOR))
         # draw preview cmdline
         for i in range(len(cmdparts) + Gui.cmd.nb_place_holder):  
             if i % 2 == 0:
                 # draw cmd parts in white
-                self.draw_preview_part(argprev, cmdparts[i // 2], curses.color_pair(Gui.BASIC_COLOR))
+                self.draw_preview_part(argprev, cmdparts[i // 2], curses.color_pair(config.BASIC_COLOR))
             else:
                 arg_name, arg_value = Gui.cmd.get_arg((i - 1) // 2)
                 if arg_value == "":
@@ -566,10 +566,10 @@ class ArgslistMenu:
                 # draw argument
                 if self.current_arg_name == arg_name:
                     # if arg is selected print in blue COL1_COLOR
-                    self.draw_preview_part(argprev, arg, curses.color_pair(Gui.ARG_NAME_COLOR))
+                    self.draw_preview_part(argprev, arg, curses.color_pair(config.ARG_NAME_COLOR))
                 else:
                     # else in white
-                    self.draw_preview_part(argprev, arg, curses.color_pair(Gui.BASIC_COLOR))
+                    self.draw_preview_part(argprev, arg, curses.color_pair(config.BASIC_COLOR))
         argprev.border()
         argprev.refresh()
 
@@ -774,23 +774,6 @@ class Gui:
     cmd = None
     arsenalGlobalVars = {}
     savefile = config.savevarfile
-    # colors
-    BASIC_COLOR = 0  # output std
-    COL1_COLOR = 7
-    COL2_COLOR = 4  # gold
-    COL3_COLOR = 14  # purple light 
-    COL4_COLOR = 5  # 26  # violet clair: 14  # 4 yellow  # 6 purple # 7 cyan # 9 dark grey
-    COL5_COLOR = 5  # blue
-    COL1_COLOR_SELECT = 256  # output std invert
-    COL2_COLOR_SELECT = 256
-    COL3_COLOR_SELECT = 256
-    COL4_COLOR_SELECT = 256
-    CURSOR_COLOR_SELECT = 266  # background red
-    PROMPT_COLOR = 0
-    INFO_NAME_COLOR = 4  # 5
-    INFO_DESC_COLOR = 0
-    INFO_CMD_COLOR = 0
-    ARG_NAME_COLOR = 5
 
     loaded_menu = False
 

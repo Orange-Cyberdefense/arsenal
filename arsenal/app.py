@@ -5,6 +5,7 @@ import fcntl
 import termios
 import re
 import time
+from shutil import copy
 from curses import wrapper
 
 # arsenal
@@ -59,7 +60,6 @@ class App:
         # load cheatsheets
         cheatsheets = cheat.Cheats().read_files(config.CHEATS_PATHS, config.FORMATS,
                                                 config.EXCLUDE_LIST)
-
         if args.check:
             check.check(cheatsheets)
         else:
@@ -194,6 +194,8 @@ class App:
 
 
 def main():
+    if not os.path.exists(config.CONFIG_PATH):
+        copy(config.DEFAULT_CONFIG_PATH, config.CONFIG_PATH)
     try:
         App().run()
     except KeyboardInterrupt:
