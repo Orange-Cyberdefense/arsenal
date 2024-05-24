@@ -791,7 +791,7 @@ class Gui:
     INFO_DESC_COLOR = 0
     INFO_CMD_COLOR = 0
     ARG_NAME_COLOR = 5
-    ARG_NAME_COLOR = COL1_COLOR
+
     loaded_menu = False
 
     def __init__(self):
