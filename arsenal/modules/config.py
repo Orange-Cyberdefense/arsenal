@@ -38,9 +38,9 @@ if config_updated:
     with open(CONFIG_PATH, "w") as config_file:
         arsenal_config.write(config_file)
 
-CHEATS_PATHS= []
-use_builtin_cheats =  arsenal_config.getboolean("arsenal", "use_builtin_cheats")
-user_cheats_paths  = literal_eval(arsenal_config.get("arsenal", "user_cheats_paths"))
+CHEATS_PATHS = []
+use_builtin_cheats = arsenal_config.getboolean("arsenal", "use_builtin_cheats")
+user_cheats_paths = literal_eval(arsenal_config.get("arsenal", "user_cheats_paths"))
 
 for p in user_cheats_paths:
     CHEATS_PATHS.append(expanduser(p))
@@ -50,8 +50,8 @@ if use_builtin_cheats:
 savevarfile = arsenal_config.get("arsenal", "savevarfile")
 FORMATS = literal_eval(arsenal_config.get("arsenal", "formats"))
 EXCLUDE_LIST = literal_eval(arsenal_config.get("arsenal", "exclude_list"))
-FUZZING_DIRS =  literal_eval(arsenal_config.get("arsenal", "fuzzing_dirs"))
-PREFIX_GLOBALVAR_NAME =  arsenal_config.get("arsenal", "prefix_globalvar_name")
+FUZZING_DIRS = literal_eval(arsenal_config.get("arsenal", "fuzzing_dirs"))
+PREFIX_GLOBALVAR_NAME = arsenal_config.get("arsenal", "prefix_globalvar_name")
 
 BASIC_COLOR = arsenal_config.getint("colors", "basic_color")
 COL1_COLOR = arsenal_config.getint("colors", "col1_color")
