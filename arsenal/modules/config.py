@@ -23,8 +23,7 @@ arsenal_config = configparser.ConfigParser()
 arsenal_config.read(CONFIG_PATH)
 
 
-# Update config in case default have been extended or use has
-# removed requiered
+# Update config in case default have been extended or use has removed requiered
 config_updated = False
 for section in arsenal_default_config.sections():
     if not arsenal_config.has_section(section):
