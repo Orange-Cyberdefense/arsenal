@@ -51,12 +51,17 @@ class Command:
                 # Variable has been added to cheat variables before, remove it
                 cheat.command = cheat.command.replace(arg_name, name)
                 self.cmdline = cheat.command
-            elif arg_name in gvars:
-                self._add_arg(arg_name, gvars[arg_name], position)
-            elif arg_name in cheat.variables:
-                self._add_arg(arg_name, cheat.variables[arg_name], position)
             else:
                 self._add_arg(arg_name, "", position)
+        # compute values
+        for arg_name in self.args:
+            if arg_name in gvars:
+                self.args[arg_name]["value"] = gvars[arg_name]
+            elif arg_name in cheat.variables:
+                self.args[arg_name]["value"] = cheat.variables[arg_name]
+            else:
+                continue
+        print("toto")
 
     def _add_arg(self, name=None, value="", position=0):
         if name in self.args:
