@@ -425,8 +425,7 @@ class ArgslistMenu:
                 firstline = False
 
             # extract len of args in the current line
-            i = 0
-            for arg_name, arg_val in Gui.cmd.args.items():
+            for i, (arg_name, arg_val) in enumerate(Gui.cmd.args.items()):
                 if i == next_arg and nb_args_todo > 0:
                     if arg_val["value"] != "":
                         # use value len if not empty
@@ -436,7 +435,6 @@ class ArgslistMenu:
                         nbchar += (len(arg_name) + 2)
                     next_arg += 1
                     nb_args_todo -= 1
-                i += 1
 
             # len of the cmd body
             for p in parts:
@@ -556,12 +554,7 @@ class ArgslistMenu:
                 self.draw_preview_part(argprev, cmdparts[i // 2], curses.color_pair(Gui.BASIC_COLOR))
             else:
                 arg_name, arg_value = Gui.cmd.get_arg((i - 1) // 2)
-                if arg_value == "":
-                    # if arg empty use its name
-                    arg = '<' + arg_name + '>'
-                else:
-                    # else its value
-                    arg = arg_value
+                arg = "<" + arg_name + ">" if arg_value == "" else arg_value
 
                 # draw argument
                 if self.current_arg_name == arg_name:
@@ -590,10 +583,6 @@ class ArgslistMenu:
         # draw argslist menu popup
         self.prev_lastline_len = 0
         nbpreviewnewlines = self.get_nb_preview_new_lines()
-        # if len(Gui.cmd.args) != 0:
-        #     nbpreviewnewlines = self.get_nb_preview_new_lines()
-        # else:
-        #     nbpreviewnewlines = 0
 
         # -------------- border
         # cmd
@@ -664,7 +653,7 @@ class ArgslistMenu:
         """
         # current argument value
         # look for all files that match the argument in the working directory
-        matches = glob.glob('{}*'.format(self.current_arg_value))
+        matches = glob.glob(f"{self.current_arg_value}*")
 
         if not matches:
             return False
@@ -791,7 +780,6 @@ class Gui:
     INFO_DESC_COLOR = 0
     INFO_CMD_COLOR = 0
     ARG_NAME_COLOR = 5
-
     loaded_menu = False
 
     def __init__(self):
