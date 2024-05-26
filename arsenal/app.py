@@ -251,6 +251,8 @@ class App:
                 else:
                     pane.send_keys(cmdline, enter=False)
                     pane.select_pane()
+
+
 def main():
     try:
         App().run()
