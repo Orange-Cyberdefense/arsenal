@@ -22,7 +22,8 @@ class PanePathAction(argparse.Action):
         setattr(namespace, self.dest, values)
 
 class App:
-    
+
+
     tmux_server = None
     tmux_session = None
 
@@ -57,7 +58,7 @@ class App:
         group_out.add_argument('-e', '--exec', action='store_true', help='Execute cmd')
         group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
         group_out.add_argument("-z", "--tmux-new", action=PanePathAction, metavar="PANE_PATH", 
-            help="Send command to tmux pane", dest="tmux_new")
+                               help="Send command to tmux pane", dest="tmux_new")
         group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
         group_out.add_argument('-f', '--prefix', action='store_true', help='command prefix')
         parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(__version__))
