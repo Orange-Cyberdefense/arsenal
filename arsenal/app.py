@@ -21,9 +21,8 @@ class PanePathAction(argparse.Action):
             raise ValueError("Not a PANE_PATH")
         setattr(namespace, self.dest, values)
 
+
 class App:
-
-
     tmux_server = None
     tmux_session = None
 
@@ -173,36 +172,7 @@ class App:
                     self.prefil_shell_cmd(cmd)
                     break
             elif args.tmux_new:
-                pane_path = args.tmux_new.split(":")
-                new_window = False
-                import libtmux
-                try:
-                    window = self.tmux_session.select_window(pane_path[1])
-                except libtmux.exc.LibTmuxException:
-                    window = self.tmux_session.new_window(attach=False, window_name=pane_path[1])
-                    new_window = True
-                if new_window:
-                    pane = window.panes[0] 
-                elif pane_path[2] == "": # all panes
-                    pane = None
-                elif int(pane_path[2]) > len(window.panes):
-                    pane = window.split_window(attach=False)
-                    time.sleep(0.3)
-                else:
-                    pane = window.panes[int(pane_path[2])]
-                if pane:
-                    if args.exec:
-                        pane.send_keys(cmd.cmdline)
-                    else:
-                        pane.send_keys(cmd.cmdline, enter=False)
-                        pane.select_pane()
-                else:
-                    for pane in window.panes:
-                        if args.exec:
-                            pane.send_keys(cmd.cmdline)
-                        else:
-                            pane.send_keys(cmd.cmdline, enter=False)
-                            pane.select_pane()
+                self.process_tmux(args, cmd.cmdline)
                 break
             # DEFAULT: Prefill Shell CMD
             else:
@@ -250,7 +220,37 @@ class App:
         except libtmux._internal.query_list.ObjectDoesNotExist:
             raise RuntimeError(f"Could not find session {pane_path[0]}") from None
 
-
+    def process_tmux(self, args, cmdline):
+        pane_path = args.tmux_new.split(":")
+        new_window = False
+        import libtmux
+        try:
+            window = self.tmux_session.select_window(pane_path[1])
+        except libtmux.exc.LibTmuxException:
+            window = self.tmux_session.new_window(attach=False, window_name=pane_path[1])
+            new_window = True
+        if new_window:
+            pane = window.panes[0] 
+        elif pane_path[2] == "": # all panes
+            pane = None
+        elif int(pane_path[2]) > len(window.panes):
+            pane = window.split_window(attach=False)
+            time.sleep(0.3)
+        else:
+            pane = window.panes[int(pane_path[2])]
+        if pane:
+            if args.exec:
+                pane.send_keys(cmdline)
+            else:
+                pane.send_keys(cmdline, enter=False)
+                pane.select_pane()
+        else:
+            for pane in window.panes:
+                if args.exec:
+                    pane.send_keys(cmdline)
+                else:
+                    pane.send_keys(cmdline, enter=False)
+                    pane.select_pane()
 def main():
     try:
         App().run()
