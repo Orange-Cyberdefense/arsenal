@@ -15,7 +15,15 @@ from .modules import check
 from .modules import gui as arsenal_gui
 
 
+class PanePathAction(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        if not re.fullmatch("^[^:]+:[^:]+:[0-9]*", values):
+            raise ValueError("Not a PANE_PATH")
+        setattr(namespace, self.dest, values)
+
 class App:
+    tmux_server = None
+    tmux_session = None
 
     def __init__(self):
         pass
@@ -47,6 +55,7 @@ class App:
         group_out.add_argument('-x', '--copy', action='store_true', help='Output to clipboard')
         group_out.add_argument('-e', '--exec', action='store_true', help='Execute cmd')
         group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
+        group_out.add_argument("-z", "--tmux-new", action=PanePathAction, metavar="PANE_PATH", help="Send command to tmux pane", dest="tmux_new")
         group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
         group_out.add_argument('-f', '--prefix', action='store_true', help='command prefix')
         parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(__version__))
@@ -55,6 +64,8 @@ class App:
 
     def run(self):
         args = self.get_args()
+        if args.tmux_new:
+            self.check_tmux(args)
 
         # load cheatsheets
         cheatsheets = cheat.Cheats().read_files(config.CHEATS_PATHS, config.FORMATS,
@@ -158,6 +169,38 @@ class App:
                 except ImportError:
                     self.prefil_shell_cmd(cmd)
                     break
+            elif args.tmux_new:
+                pane_path = args.tmux_new.split(":")
+                new_window = False
+                import libtmux
+                try:
+                    window = self.tmux_session.select_window(pane_path[1])
+                except libtmux.exc.LibTmuxException:
+                    window = self.tmux_session.new_window(attach=False, window_name=pane_path[1])
+                    new_window = True
+                if new_window:
+                    pane = window.panes[0] 
+                elif pane_path[2] == "": # all panes
+                    pane = None
+                elif int(pane_path[2]) > len(window.panes):
+                    pane = window.split_window(attach=False)
+                    time.sleep(0.3)
+                else:
+                    pane = window.panes[int(pane_path[2])]
+                if pane:
+                    if args.exec:
+                        pane.send_keys(cmd.cmdline)
+                    else:
+                        pane.send_keys(cmd.cmdline, enter=False)
+                        pane.select_pane()
+                else:
+                    for pane in window.panes:
+                        if args.exec:
+                            pane.send_keys(cmd.cmdline)
+                        else:
+                            pane.send_keys(cmd.cmdline, enter=False)
+                            pane.select_pane()
+                break
             # DEFAULT: Prefill Shell CMD
             else:
                 self.prefil_shell_cmd(cmd)
@@ -191,6 +234,18 @@ class App:
             print(message)
         # restore TTY attribute for stdin
         termios.tcsetattr(stdin, termios.TCSADRAIN, oldattr)
+
+    def check_tmux(self, args):
+        try:
+            import libtmux
+        except ImportError:
+            raise RuntimeError("Could not load libtmux") from None
+        pane_path = args.tmux_new.split(":")
+        try:
+            self.tmux_server = libtmux.Server()
+            self.tmux_session = self.tmux_server.sessions.get(session_name=pane_path[0])
+        except libtmux._internal.query_list.ObjectDoesNotExist:
+            raise RuntimeError(f"Could not find session {pane_path[0]}") from None
 
 
 def main():
