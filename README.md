@@ -37,6 +37,7 @@ This project is inspired by navi (<https://github.com/denisidoro/navi>) because 
 - Add yml support (thx @0xswitch )
 - Add fzf support with ctrl+t (thx @mgp25)
 - Add prefix to commands generated (with -f)
+- Add user config file (generated at first run in ~/.arsenal.conf)
 
 ## Install & Launch
 - with pip :
@@ -81,19 +82,17 @@ yay -S arsenal
 ./run -t -e # just like the -t mode but with direct execution in the other pane without quitting arsenal
 ```
 
+## Edit config file
+
+When arsenal is run if `~/.arsenal.comf` does not exist a copy of `<arsenal_home>/data/arsenal.conf` is made.
+
 ## Add external cheatsheets
 
-You could add your own cheatsheets insode the my_cheats folder or in the ~/.cheats folder.
+You could add your own cheatsheets by referencing them in your `.arsenal.conf`
 
-You could also add additional paths to the file `<arsenal_home>/arsenal/modules/config.py`,
+If in `.arsenal.conf` you set `use_builtin_cheats` to `yes` your cheats will  will be mered with cheats defined in `<arsenal_home>/data/cheats`
+
 arsenal reads `.md` (MarkDown) and `.rst` (RestructuredText).
-
-```
-CHEATS_PATHS = [
-    join(BASEPATH, "cheats"), # DEFAULT
-    join(HOMEPATH, "docs/my_cheats")
-]
-```
 
 Cheatsheets examples are in `<arsenal_home>/cheats`: `README.md` and `README.rst`
 
