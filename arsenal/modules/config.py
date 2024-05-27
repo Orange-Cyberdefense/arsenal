@@ -47,7 +47,7 @@ for p in user_cheats_paths:
 if use_builtin_cheats:
     CHEATS_PATHS += DEFAULT_CHEATS_PATHS
 
-savevarfile =  expanduser(literal_eval(arsenal_config.get("arsenal", "savevarfile")))
+savevarfile = expanduser(literal_eval(arsenal_config.get("arsenal", "savevarfile")))
 FORMATS = literal_eval(arsenal_config.get("arsenal", "formats"))
 EXCLUDE_LIST = literal_eval(arsenal_config.get("arsenal", "exclude_list"))
 FUZZING_DIRS = literal_eval(arsenal_config.get("arsenal", "fuzzing_dirs"))
