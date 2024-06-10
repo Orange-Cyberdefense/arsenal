@@ -83,7 +83,7 @@ yay -S arsenal
 
 ## Add external cheatsheets
 
-You could add your own cheatsheets insode the my_cheats folder or in the ~/.cheats folder.
+You could add your own cheatsheets inside the my_cheats folder or in the ~/.cheats folder.
 
 You could also add additional paths to the file `<arsenal_home>/arsenal/modules/config.py`,
 arsenal reads `.md` (MarkDown) and `.rst` (RestructuredText).
