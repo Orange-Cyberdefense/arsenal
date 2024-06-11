@@ -49,12 +49,17 @@ class App:
         group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
         group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
         group_out.add_argument('-f', '--prefix', action='store_true', help='command prefix')
+        group_out.add_argument('-l', '--local-only', action='store_true', help='Local cheats only')
         parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(__version__))
 
         return parser.parse_args()
 
     def run(self):
         args = self.get_args()
+
+        # keep only ~/.cheats if --local-only is set
+        if args.local_only:
+            config.CHEATS_PATHS = [os.path.join(config.HOMEPATH, ".cheats")]
 
         # load cheatsheets
         cheatsheets = cheat.Cheats().read_files(config.CHEATS_PATHS, config.FORMATS,
