@@ -93,31 +93,34 @@ class CheatslistMenu:
         if Gui.with_tags:
             columns_list = ["tags"] + columns_list
 
-        get_col_size = lambda ratio: math.floor( (max_width * ratio) / 100)
+        def get_col_size(max_width, ratio):
+            """
+            Return the column size from the given ratio
+
+            :param max_width: The width maximal of the screen
+            :param ratio: The ratio of the column
+            """
+            return math.floor((max_width * ratio) / 100)
+
         ratios = Gui.get_ratios_for_column(columns_list)
 
-        columns = {
-                   "tags": {
-                            "width": get_col_size(ratios.get("tags", 0)),
+        columns = {"tags": {"width": get_col_size(max_width, ratios.get("tags", 0)),
                             "val": tags,
                             "color": Gui.COL4_COLOR_SELECT if selected else Gui.COL4_COLOR
-                            },
-                   "title": {
-                             "width": get_col_size(ratios.get("title", 0)),
+                           },
+                   "title": {"width": get_col_size(max_width, ratios.get("title", 0)),
                              "val": cheat.str_title,
                              "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL1_COLOR
-                             },
-                   "name": {
-                            "width": get_col_size(ratios.get("name", 0)),
+                            },
+                   "name": {"width": get_col_size(max_width, ratios.get("name", 0)),
                             "val": cheat.name,
                             "color": Gui.COL2_COLOR_SELECT if selected else Gui.COL2_COLOR
-                            },
-                   "description": {
-                                   "width": get_col_size(ratios.get("description", 0)),
+                           },
+                   "description": {"width": get_col_size(max_width, ratios.get("description", 0)),
                                    "val": cheat.printable_command,
                                    "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL3_COLOR
-                                   }
-                   }
+                                  }
+                  }
 
         if selected:
             win.addstr(prompt, curses.color_pair(Gui.CURSOR_COLOR_SELECT))
@@ -809,8 +812,7 @@ class Gui:
             """
             Calculate the column size from the column to print
 
-            :param columns_in_use: List of the column to print when drawing the
-              cheat
+            :param columns_in_use: List of the column to print when drawing
             :return: The updated ratios size of each columns
             """
             missing_ratio = 0
