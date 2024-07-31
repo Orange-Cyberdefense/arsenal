@@ -106,21 +106,16 @@ class CheatslistMenu:
 
         columns = {"tags": {"width": get_col_size(max_width, ratios.get("tags", 0)),
                             "val": tags,
-                            "color": Gui.COL4_COLOR_SELECT if selected else Gui.COL4_COLOR
-                           },
+                            "color": Gui.COL4_COLOR_SELECT if selected else Gui.COL4_COLOR},
                    "title": {"width": get_col_size(max_width, ratios.get("title", 0)),
                              "val": cheat.str_title,
-                             "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL1_COLOR
-                            },
+                             "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL1_COLOR},
                    "name": {"width": get_col_size(max_width, ratios.get("name", 0)),
                             "val": cheat.name,
-                            "color": Gui.COL2_COLOR_SELECT if selected else Gui.COL2_COLOR
-                           },
+                            "color": Gui.COL2_COLOR_SELECT if selected else Gui.COL2_COLOR},
                    "description": {"width": get_col_size(max_width, ratios.get("description", 0)),
                                    "val": cheat.printable_command,
-                                   "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL3_COLOR
-                                  }
-                  }
+                                   "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL3_COLOR}}
 
         if selected:
             win.addstr(prompt, curses.color_pair(Gui.CURSOR_COLOR_SELECT))
@@ -809,23 +804,23 @@ class Gui:
 
     @classmethod
     def get_ratios_for_column(cls, columns_in_use):
-            """
-            Calculate the column size from the column to print
+        """
+        Calculate the column size from the column to print
 
-            :param columns_in_use: List of the column to print when drawing
-            :return: The updated ratios size of each columns
-            """
-            missing_ratio = 0
-            for col in cls.DEFAULT_RATIOS.keys():
-                if col not in columns_in_use:
-                    missing_ratio += cls.DEFAULT_RATIOS.get(col)
-            if not missing_ratio:
-                return cls.DEFAULT_RATIOS
+        :param columns_in_use: List of the column to print when drawing
+        :return: The updated ratios size of each columns
+        """
+        missing_ratio = 0
+        for col in cls.DEFAULT_RATIOS.keys():
+            if col not in columns_in_use:
+                missing_ratio += cls.DEFAULT_RATIOS.get(col)
+        if not missing_ratio:
+            return cls.DEFAULT_RATIOS
 
-            new_ratio = {}
-            for column in columns_in_use:
-                new_ratio[column] = math.floor(cls.DEFAULT_RATIOS[column] + missing_ratio / len(columns_in_use))
-            return new_ratio
+        new_ratio = {}
+        for column in columns_in_use:
+            new_ratio[column] = math.floor(cls.DEFAULT_RATIOS[column] + missing_ratio / len(columns_in_use))
+        return new_ratio
 
     @staticmethod
     def draw_string(str_value, max_size):
