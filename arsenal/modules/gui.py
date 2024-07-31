@@ -7,7 +7,7 @@ from os.path import commonprefix, exists, isdir
 from os import sep
 import glob
 
-#  local
+# local
 from . import config
 from . import command
 
@@ -85,46 +85,51 @@ class CheatslistMenu:
         prompt = '> '
         max_width = win_width - len(prompt) - len("\n")
 
-        col4_size = math.floor(max_width * 14 / 100)
-        col3_size = math.floor(max_width * 8 / 100)
-        col1_size = math.floor(max_width * 23 / 100)
-        col2_size = math.floor(max_width * 55 / 100)
-        # col0_size = math.floor(max_width * 20 / 100)
-
         title = cheat.tags if cheat.tags != '' else cheat.str_title
 
         tags = cheat.get_tags()
 
+        columns_list = ["title", "name", "description"]
+        if Gui.with_tags:
+            columns_list = ["tags"] + columns_list
+
+        get_col_size = lambda ratio: math.floor( (max_width * ratio) / 100)
+        ratios = Gui.get_ratios_for_column(columns_list)
+
+        columns = {
+                   "tags": {
+                            "width": get_col_size(ratios.get("tags", 0)),
+                            "val": tags,
+                            "color": Gui.COL4_COLOR_SELECT if selected else Gui.COL4_COLOR
+                            },
+                   "title": {
+                             "width": get_col_size(ratios.get("title", 0)),
+                             "val": cheat.str_title,
+                             "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL1_COLOR
+                             },
+                   "name": {
+                            "width": get_col_size(ratios.get("name", 0)),
+                            "val": cheat.name,
+                            "color": Gui.COL2_COLOR_SELECT if selected else Gui.COL2_COLOR
+                            },
+                   "description": {
+                                   "width": get_col_size(ratios.get("description", 0)),
+                                   "val": cheat.printable_command,
+                                   "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL3_COLOR
+                                   }
+                   }
+
         if selected:
             win.addstr(prompt, curses.color_pair(Gui.CURSOR_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                       curses.color_pair(Gui.COL4_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
-                       curses.color_pair(Gui.COL3_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
-                       curses.color_pair(Gui.COL2_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, col2_size), col2_size),
-                       curses.color_pair(Gui.COL3_COLOR_SELECT))
-            # win.addstr("{:{}s}".format(Gui.draw_string(title, col0_size), col0_size),
-            #            curses.color_pair(Gui.COL1_COLOR_SELECT))
-            win.addstr("\n")
         else:
             win.addstr(' ' * len(prompt), curses.color_pair(Gui.BASIC_COLOR))
-            if tags.startswith('[W]'):
-                win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                           curses.color_pair(Gui.COL5_COLOR))
-            else:
-                win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                           curses.color_pair(Gui.COL4_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
-                       curses.color_pair(Gui.COL1_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
-                       curses.color_pair(Gui.COL2_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, col2_size), col2_size),
-                       curses.color_pair(Gui.COL3_COLOR))
-            # win.addstr("{:{}s}".format(Gui.draw_string(title, col0_size), col0_size),
-            #            curses.color_pair(Gui.COL1_COLOR))
-            win.addstr("\n")
+
+        for column_name in columns_list:
+            win.addstr("{:{}s}".format(Gui.draw_string(columns[column_name]["val"],
+                                                       columns[column_name]["width"]),
+                                       columns[column_name]["width"]),
+                       curses.color_pair(columns[column_name]["color"]))
+        win.addstr("\n")
 
     def draw_cheatslistbox(self):
         """
@@ -784,6 +789,9 @@ class Gui:
     INFO_CMD_COLOR = 0
     ARG_NAME_COLOR = 5
     loaded_menu = False
+    with_tags = False
+
+    DEFAULT_RATIOS = {"tags": 14, "title": 8, "name": 23, "description": 55}
 
     def __init__(self):
         self.cheats_menu = None
@@ -795,6 +803,27 @@ class Gui:
         curses.use_default_colors()
         for i in range(0, 255):
             curses.init_pair(i + 1, i, -1)
+
+    @classmethod
+    def get_ratios_for_column(cls, columns_in_use):
+            """
+            Calculate the column size from the column to print
+
+            :param columns_in_use: List of the column to print when drawing the
+              cheat
+            :return: The updated ratios size of each columns
+            """
+            missing_ratio = 0
+            for col in cls.DEFAULT_RATIOS.keys():
+                if col not in columns_in_use:
+                    missing_ratio += cls.DEFAULT_RATIOS.get(col)
+            if not missing_ratio:
+                return cls.DEFAULT_RATIOS
+
+            new_ratio = {}
+            for column in columns_in_use:
+                new_ratio[column] = math.floor(cls.DEFAULT_RATIOS[column] + missing_ratio / len(columns_in_use))
+            return new_ratio
 
     @staticmethod
     def draw_string(str_value, max_size):

@@ -49,6 +49,7 @@ class App:
         group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
         group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
         group_out.add_argument('-f', '--prefix', action='store_true', help='command prefix')
+        group_out.add_argument('--no-tags', action='store_false', help='Whether or not to show the tags when drawing the cheats')
         parser.add_argument('-V', '--version', action='version', version='%(prog)s (version {})'.format(__version__))
 
         return parser.parse_args()
@@ -66,6 +67,8 @@ class App:
             self.start(args, cheatsheets)
 
     def start(self, args, cheatsheets):
+        arsenal_gui.Gui.with_tags = args.no_tags
+
         # create gui object
         gui = arsenal_gui.Gui()
         while True:
