@@ -410,12 +410,12 @@ class ArgslistMenu:
         nblines = 0
         multiline = '\n' in Gui.cmd.cmdline
         firstline = True
+        parts = Gui.cmd.get_command_parts()
+        nb_args_todo = len(parts) - 1
         # in case of multiline cmd process each line separately
         # for each line we have to count each char and deduce the
         # number of lines needed to print it
         for line in Gui.cmd.cmdline.split('\n'):
-            parts = Gui.cmd.get_command_parts()
-            nb_args_todo = len(parts) - 1
             nbchar = 0
 
             # for all lines except the first one we have ' >' in addition
