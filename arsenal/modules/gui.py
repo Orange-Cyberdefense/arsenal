@@ -7,7 +7,7 @@ from os.path import commonprefix, exists, isdir
 from os import sep
 import glob
 
-#  local
+# local
 from . import config
 from . import command
 
@@ -85,49 +85,49 @@ class CheatslistMenu:
         prompt = '> '
         max_width = win_width - len(prompt) - len("\n")
 
-
-        col4_size = math.floor(max_width * 14 / 100)
-        col3_size = math.floor(max_width * 8 / 100)
-        col1_size = math.floor(max_width * 23 / 100)
-        col2_size = math.floor(max_width * 55 / 100)
-        #col0_size = math.floor(max_width * 20 / 100)
-
         title = cheat.tags if cheat.tags != '' else cheat.str_title
 
         tags = cheat.get_tags()
 
+        columns_list = ["title", "name", "description"]
+        if Gui.with_tags:
+            columns_list = ["tags"] + columns_list
+
+        def get_col_size(max_width, ratio):
+            """
+            Return the column size from the given ratio
+
+            :param max_width: The width maximal of the screen
+            :param ratio: The ratio of the column
+            """
+            return math.floor((max_width * ratio) / 100)
+
+        ratios = Gui.get_ratios_for_column(columns_list)
+
+        columns = {"tags": {"width": get_col_size(max_width, ratios.get("tags", 0)),
+                            "val": tags,
+                            "color": Gui.COL4_COLOR_SELECT if selected else Gui.COL4_COLOR},
+                   "title": {"width": get_col_size(max_width, ratios.get("title", 0)),
+                             "val": cheat.str_title,
+                             "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL1_COLOR},
+                   "name": {"width": get_col_size(max_width, ratios.get("name", 0)),
+                            "val": cheat.name,
+                            "color": Gui.COL2_COLOR_SELECT if selected else Gui.COL2_COLOR},
+                   "description": {"width": get_col_size(max_width, ratios.get("description", 0)),
+                                   "val": cheat.printable_command,
+                                   "color": Gui.COL3_COLOR_SELECT if selected else Gui.COL3_COLOR}}
+
         if selected:
             win.addstr(prompt, curses.color_pair(Gui.CURSOR_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                       curses.color_pair(Gui.COL4_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
-                       curses.color_pair(Gui.COL3_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
-                       curses.color_pair(Gui.COL2_COLOR_SELECT))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, col2_size), col2_size),
-                       curses.color_pair(Gui.COL3_COLOR_SELECT))
-            # win.addstr("{:{}s}".format(Gui.draw_string(title, col0_size), col0_size),
-            #            curses.color_pair(Gui.COL1_COLOR_SELECT))
-            win.addstr("\n")
         else:
             win.addstr(' ' * len(prompt), curses.color_pair(Gui.BASIC_COLOR))
-            if tags.startswith('[W]'):
-                win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                           curses.color_pair(Gui.COL5_COLOR))
-            else:
-                win.addstr("{:{}s}".format(Gui.draw_string(tags, col4_size), col4_size),
-                           curses.color_pair(Gui.COL4_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.str_title, col3_size), col3_size),
-                       curses.color_pair(Gui.COL1_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.name, col1_size), col1_size),
-                       curses.color_pair(Gui.COL2_COLOR))
-            win.addstr("{:{}s}".format(Gui.draw_string(cheat.printable_command, col2_size), col2_size),
-                       curses.color_pair(Gui.COL3_COLOR))
-            # win.addstr("{:{}s}".format(Gui.draw_string(title, col0_size), col0_size),
-            #            curses.color_pair(Gui.COL1_COLOR))
-            win.addstr("\n")
 
-
+        for column_name in columns_list:
+            win.addstr("{:{}s}".format(Gui.draw_string(columns[column_name]["val"],
+                                                       columns[column_name]["width"]),
+                                       columns[column_name]["width"]),
+                       curses.color_pair(columns[column_name]["color"]))
+        win.addstr("\n")
 
     def draw_cheatslistbox(self):
         """
@@ -177,22 +177,27 @@ class CheatslistMenu:
         :param cheat: cheat to check
         :return: boolean
         """
-        match = True
-
         # if search begin with '>' print only internal CMD
-        if self.input_buffer != '' and self.input_buffer[0] == '>':
-            match = cheat.command[0] == '>'
+        if self.input_buffer.startswith('>') and not cheat.command.startswith('>'):
+            return False
 
         for value in self.input_buffer.lower().split(' '):
-            if value in cheat.str_title.lower() \
-                    or value in cheat.name.lower() \
-                    or value in cheat.tags.lower() \
-                    or value in "".join(cheat.command_tags.values()).lower() \
-                    or value in cheat.command.lower():
-                match = True and match
-            else:
-                match = False
-        return match
+            is_value_excluded = False
+            if value.startswith("!") and len(value) > 1:
+                value = value[1:]
+                is_value_excluded = True
+
+            if (value in cheat.str_title.lower()
+                    or value in cheat.name.lower()
+                    or value in cheat.tags.lower()
+                    or value in "".join(cheat.command_tags.values()).lower()
+                    or value in cheat.command.lower()):
+                if is_value_excluded:
+                    return False
+
+            elif not is_value_excluded:
+                return False
+        return True
 
     def search(self):
         """
@@ -314,7 +319,7 @@ class CheatslistMenu:
                     # if len(Gui.cmd.args) != 0:
                     # args needed -> ask
                     args_menu = ArgslistMenu(self)
-                    args_menu.run(stdscr) 
+                    args_menu.run(stdscr)
                     stdscr.refresh()
                     break
             elif c == curses.KEY_F10 or c == 27:
@@ -405,12 +410,12 @@ class ArgslistMenu:
         nblines = 0
         multiline = '\n' in Gui.cmd.cmdline
         firstline = True
+        parts = Gui.cmd.get_command_parts()
+        nb_args_todo = len(parts) - 1
         # in case of multiline cmd process each line separately
         # for each line we have to count each char and deduce the
         # number of lines needed to print it
         for line in Gui.cmd.cmdline.split('\n'):
-            parts = Gui.cmd.get_command_parts()
-            nb_args_todo = len(parts) - 1
             nbchar = 0
 
             # for all lines except the first one we have ' >' in addition
@@ -490,7 +495,6 @@ class ArgslistMenu:
                 # last line too long -> new line
                 self.prev_lastline_len = 1
                 win.addstr("\n    " + c, color)
-
 
     def draw_selected_arg(self, y_pos):
         """
@@ -656,22 +660,22 @@ class ArgslistMenu:
         """
         Autocomplete the current argument
         """
-        # current argument value
+        # current argument value
         argument = Gui.cmd.args[self.current_arg][1]
-        # look for all files that match the argument in the working directory
+        # look for all files that match the argument in the working directory
         matches = glob.glob('{}*'.format(argument))
 
         if not matches:
             return False
 
-        # init the autocompleted argument
+        # init the autocompleted argument
         autocompleted_argument = ""
-        # autocompleted argument is the longest start common string in all matches
+        # autocompleted argument is the longest start common string in all matches
         for i in range(len(min(matches))):
             if not all(min(matches)[:i + 1] == match[:i + 1] for match in matches):
                 break
             autocompleted_argument = min(matches)[:i + 1]
-        
+
         # add a "/" at the end of the autocompleted argument if it is a directory
         if isdir(autocompleted_argument) and autocompleted_argument[-1] != sep:
             autocompleted_argument = autocompleted_argument + sep
@@ -710,10 +714,10 @@ class ArgslistMenu:
                 self.previous_arg()
             elif c == 9:
                 if Gui.cmd.args:
-                    # autocomplete the current argument
+                    # autocomplete the current argument
                     if Gui.cmd.args[self.current_arg][1]:
                         self.autocomplete_arg()
-                    # go to the next argument
+                    # go to the next argument
                     else:
                         self.next_arg()
             elif c == 20:
@@ -768,21 +772,24 @@ class Gui:
     # colors
     BASIC_COLOR = 0  # output std
     COL1_COLOR = 7
-    COL2_COLOR = 4 # gold
+    COL2_COLOR = 4  # gold
     COL3_COLOR = 14  # purple light 
     COL4_COLOR = 5  # 26  # violet clair: 14  # 4 yellow  # 6 purple # 7 cyan # 9 dark grey
-    COL5_COLOR = 5 # blue
+    COL5_COLOR = 5  # blue
     COL1_COLOR_SELECT = 256  # output std invert
     COL2_COLOR_SELECT = 256
     COL3_COLOR_SELECT = 256
     COL4_COLOR_SELECT = 256
     CURSOR_COLOR_SELECT = 266  # background red
     PROMPT_COLOR = 0
-    INFO_NAME_COLOR = 4 # 5
+    INFO_NAME_COLOR = 4  # 5
     INFO_DESC_COLOR = 0
     INFO_CMD_COLOR = 0
     ARG_NAME_COLOR = 5
     loaded_menu = False
+    with_tags = False
+
+    DEFAULT_RATIOS = {"tags": 14, "title": 8, "name": 23, "description": 55}
 
     def __init__(self):
         self.cheats_menu = None
@@ -794,6 +801,26 @@ class Gui:
         curses.use_default_colors()
         for i in range(0, 255):
             curses.init_pair(i + 1, i, -1)
+
+    @classmethod
+    def get_ratios_for_column(cls, columns_in_use):
+        """
+        Calculate the column size from the column to print
+
+        :param columns_in_use: List of the column to print when drawing
+        :return: The updated ratios size of each columns
+        """
+        missing_ratio = 0
+        for col in cls.DEFAULT_RATIOS.keys():
+            if col not in columns_in_use:
+                missing_ratio += cls.DEFAULT_RATIOS.get(col)
+        if not missing_ratio:
+            return cls.DEFAULT_RATIOS
+
+        new_ratio = {}
+        for column in columns_in_use:
+            new_ratio[column] = math.floor(cls.DEFAULT_RATIOS[column] + missing_ratio / len(columns_in_use))
+        return new_ratio
 
     @staticmethod
     def draw_string(str_value, max_size):
@@ -808,7 +835,12 @@ class Gui:
             result_string = str_value[:max_size - 4] + '...'
         return result_string
 
-    def run(self, cheatsheets):
+    @staticmethod
+    def prefix_cmdline_with_prefix():
+        if config.PREFIX_GLOBALVAR_NAME in Gui.arsenalGlobalVars:
+            Gui.cmd.cmdline = f"{Gui.arsenalGlobalVars[config.PREFIX_GLOBALVAR_NAME]} {Gui.cmd.cmdline}"
+
+    def run(self, cheatsheets, has_prefix):
         """
         Gui entry point
         :param cheatsheets: cheatsheets dictionary
@@ -825,4 +857,6 @@ class Gui:
                 Gui.arsenalGlobalVars = json.load(f)
 
         wrapper(self.cheats_menu.run)
+        if Gui.cmd != None and Gui.cmd.cmdline[0] != '>' and has_prefix:
+            self.prefix_cmdline_with_prefix()
         return Gui.cmd

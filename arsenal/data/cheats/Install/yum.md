@@ -38,7 +38,7 @@ yum check-update
 yum update
 ```
 
-## Update spesific/individual package
+## Update specific/individual package
 ```
 yum update <package-name>
 ```

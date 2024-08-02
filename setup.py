@@ -11,14 +11,14 @@ REQUIREMENTS = (HERE / "requirements.txt").read_text()
 
 setup(
     name='arsenal-cli',
-    version='1.1.1',
+    version='1.2.1',
     packages=find_packages(),
     install_requires=REQUIREMENTS,
     include_package_data=True,
     url='https://github.com/Orange-Cyberdefense/arsenal',
     license='GPL-3.0',
     author='Guillaume Muh, mayfly',
-    author_email='csr-audit.so@orange.com',
+    author_email='no-reply@orange.com',
     description='Arsenal is just a quick inventory, reminder and launcher for pentest commands. ',
     long_description=README,
     long_description_content_type='text/markdown',

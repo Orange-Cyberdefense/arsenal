@@ -22,7 +22,9 @@ messages_error_missing_arguments = 'Error missing arguments'
 os.environ.setdefault('ESCDELAY', '25')
 os.environ['TERM'] = 'xterm-256color'
 
-if os.environ.get('ARSENAL_LOCAL', 'No') == "No":
-    savevarfile = join(HOMEPATH, ".arsenal.json")
-else:
+if os.environ.get('ARSENAL_LOCAL'):
     savevarfile = join(os.getcwd(), ".arsenal.json")
+else:
+    savevarfile = join(HOMEPATH, ".arsenal.json")
+
+PREFIX_GLOBALVAR_NAME = "arsenal_prefix_cmd"
