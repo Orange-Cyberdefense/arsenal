@@ -2,6 +2,7 @@
 .idea/
 __pycache__/
 *.pyc
+.arsenal.json
 arsenal/data/cheats/.obsidian/
 cheats/.obsidian/
 cheats/Arsenal/.obsidian/
