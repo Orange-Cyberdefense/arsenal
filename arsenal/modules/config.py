@@ -15,7 +15,7 @@ CHEATS_PATHS = [
     join(BASEPATH, "my_cheats"),
     join(HOMEPATH, ".cheats"),
     # Add exegol folder
-    "/opt/my-ressources/my-cheats"
+    "/opt/my-resources/my-cheats"
 ]
 
 messages_error_missing_arguments = 'Error missing arguments'
