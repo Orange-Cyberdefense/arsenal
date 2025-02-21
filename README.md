@@ -293,4 +293,4 @@ More information is available in the issue [https://github.com/Orange-Cyberdefen
 #### app web
 - [X] drupwn
 - [X] wpscan
-- [ ] nuclei
+- [x] nuclei
