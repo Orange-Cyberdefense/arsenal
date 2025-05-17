@@ -94,6 +94,21 @@ class App:
                     with open(config.savevarfile, "w") as f:
                         f.write(json.dumps({}))
                     self.run()
+                elif cmd.cmdline.startswith(">clear "):
+                    # load existing globals (or start fresh)
+                    if (os.path.exists(config.savevarfile)):
+                        with open(config.savevarfile, 'r') as f:
+                            arsenalGlobalVars = json.load(f)
+                    else:
+                        arsenalGlobalVars = {}
+                    # extract the key after the space
+                    key_to_clear = cmd.cmdline.split(' ', 1)[1]
+                    # remove it if present, then save
+                    if key_to_clear in arsenalGlobalVars:
+                        arsenalGlobalVars.pop(key_to_clear)
+                        with open(config.savevarfile, 'w') as f:
+                            f.write(json.dumps(arsenalGlobalVars))
+                    self.run()
                 elif re.match(r"^\>set( [^= ]+=[^= ]+)+$", cmd.cmdline):
                     # Load previous global var
                     if (os.path.exists(config.savevarfile)):
