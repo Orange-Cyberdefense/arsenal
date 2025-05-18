@@ -46,7 +46,7 @@ class App:
         group_out.add_argument('-o', '--outfile', action='store', help='Output to file')
         group_out.add_argument('-x', '--copy', action='store_true', help='Output to clipboard')
         group_out.add_argument('-e', '--exec', action='store_true', help='Execute cmd')
-        group_out.add_argument('-t', '--tmux', nargs='?', const='auto', help='Send command to tmux pane; optionally specifying a pane index')
+        group_out.add_argument('-t', '--tmux', nargs='?', const='auto', metavar='PANE', help='Send command to tmux pane; optionally specifying a pane index')
         group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
         group_out.add_argument('-f', '--prefix', action='store_true', help='command prefix')
         group_out.add_argument('--no-tags', action='store_false', help='Whether or not to show the'
