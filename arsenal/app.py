@@ -46,7 +46,7 @@ class App:
         group_out.add_argument('-o', '--outfile', action='store', help='Output to file')
         group_out.add_argument('-x', '--copy', action='store_true', help='Output to clipboard')
         group_out.add_argument('-e', '--exec', action='store_true', help='Execute cmd')
-        group_out.add_argument('-t', '--tmux', action='store_true', help='Send command to tmux panel')
+        group_out.add_argument('-t', '--tmux', nargs='?', const='auto', help='Send command to tmux pane; optionally specifying a pane index')
         group_out.add_argument('-c', '--check', action='store_true', help='Check the existing commands')
         group_out.add_argument('-f', '--prefix', action='store_true', help='command prefix')
         group_out.add_argument('--no-tags', action='store_false', help='Whether or not to show the'
@@ -152,6 +152,11 @@ class App:
                 break
 
             elif args.tmux:
+                pane_args = args.tmux
+                try:
+                    pane_index = int(pane_args)
+                except (TypeError, ValueError):
+                    pane_index = None
                 try:
                     import libtmux
                     try:
@@ -163,6 +168,8 @@ class App:
                             # split window to get more pane
                             pane = window.split_window(attach=False)
                             time.sleep(0.3)
+                        elif pane_index and 0 <= pane_index <= len(panes):
+                            pane = panes[pane_index]
                         else:
                             pane = panes[-1]
                         # send command to other pane and switch pane
