@@ -168,7 +168,7 @@ class App:
                             # split window to get more pane
                             pane = window.split_window(attach=False)
                             time.sleep(0.3)
-                        elif pane_index and 0 <= pane_index <= len(panes):
+                        elif pane_index in range(len(panes)):
                             pane = panes[pane_index]
                         else:
                             pane = panes[-1]
