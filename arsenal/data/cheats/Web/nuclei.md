@@ -43,4 +43,3 @@ nuclei -u <url> -pt <protocol|http> -o <output_file>
 ```
 nuclei -u <url> -headless -o <output_file>
 ```
-
